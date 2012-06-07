@@ -189,7 +189,6 @@
 ;; auto-pair+ - wrap selection in matched pairs
 ;(require 'auto-pair+)
 
-
 ;; more paren stuff
 (load-library "parens-utils.el")
 
@@ -206,8 +205,8 @@
 ;; rsense - autocomplete / type tools for ruby
 ;; NOTE - a software package must be installed and configured for this to work
 ;; @todo - make below setting expand more automagically
-(setq rsense-home "/home/dmartinez/proj/stuff/utils/rsense")
-(require 'rsense)
+;(setq rsense-home "/home/dmartinez/proj/stuff/utils/rsense")
+;(require 'rsense)
 
 ;; findr - search for files breadth-first
 ;; (autoload 'findr "findr" "Find file name." t)
