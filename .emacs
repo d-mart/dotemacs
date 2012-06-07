@@ -75,12 +75,12 @@
 ;(setq color-theme-is-global t)
 ;(setq color-theme-is-cumulative t)
 
-(setq color-theme-is-global nil)
-(setq color-theme-is-cumulative nil)
-(require 'color-theme)
-(color-theme-initialize)
+;(setq color-theme-is-global nil)
+;(setq color-theme-is-cumulative nil)
+;(require 'color-theme)
+;(color-theme-initialize)
 
-(color-theme-almost-monokai-dm)
+;(color-theme-almost-monokai-dm)
 ;(load-library "color-theme-zenburn.el")
 ;(color-theme-zenburn)
 

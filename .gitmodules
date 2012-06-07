@@ -7,3 +7,6 @@
 [submodule ".emacs.d/el-get/el-get"]
 	path = .emacs.d/el-get/el-get
 	url = git://github.com/dimitri/el-get.git
+[submodule ".emacs.d/plugins/icicles"]
+	path = .emacs.d/plugins/icicles
+	url = git://github.com/emacsmirror/icicles.git
