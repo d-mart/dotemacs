@@ -10,3 +10,9 @@
 [submodule ".emacs.d/plugins/icicles"]
 	path = .emacs.d/plugins/icicles
 	url = git://github.com/emacsmirror/icicles.git
+[submodule ".emacs.d/el-get/magit"]
+	path = .emacs.d/el-get/magit
+	url = git://github.com/magit/magit.git
+[submodule ".emacs.d/el-get/yaml-mode"]
+	path = .emacs.d/el-get/yaml-mode
+	url = git://github.com/yoshiki/yaml-mode.git
