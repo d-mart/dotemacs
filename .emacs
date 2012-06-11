@@ -71,18 +71,6 @@
 ;(add-hook 'after-make-frame-functions
 ;  '(lambda (f)
 ;  (with-selected-frame f
-;  (when (window-system f) (color-theme-zenburn)))))
-;(setq color-theme-is-global t)
-;(setq color-theme-is-cumulative t)
-
-;(setq color-theme-is-global nil)
-;(setq color-theme-is-cumulative nil)
-;(require 'color-theme)
-;(color-theme-initialize)
-
-;(color-theme-almost-monokai-dm)
-;(load-library "color-theme-zenburn.el")
-;(color-theme-zenburn)
 
 ;; ido - interactively do stuff - great flex matching for possible completions in input
 (setq ido-enable-flex-matching t)
