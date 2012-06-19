@@ -14,6 +14,9 @@
 (let ((default-directory "~/.emacs.d"))
   (normal-top-level-add-subdirs-to-load-path))
 
+;; set up default location for emacs-themes
+(setq custom-theme-directory "~/.emacs.d/themes")
+
 ;;------------------
 ;; Error handling macro
 ;; From https://curiousprogrammer.wordpress.com/2009/06/08/error-handling-in-emacs-lisp/
@@ -328,21 +331,6 @@
 
 (add-hook 'mouse-leave-buffer-hook 'stop-using-minibuffer)
 
-;; flyspell mode for comments
-;; note: for some versions of emacs/linux (e.g. ubuntu 10.10) a workaround is needed
-;; https://bugs.launchpad.net/ubuntu/+source/dictionaries-common/+bug/619015
-;; rm /usr/share/emacs/site-lisp/dictionaries-common/debian-ispell.el
-;; rm /usr/share/emacs/site-lisp/dictionaries-common/flyspell.el
-;; rm /usr/share/emacs/site-lisp/dictionaries-common/ispell.el
-;; cd /usr/share/emacs23/site-lisp/dictionaries-common
-;; sudo rm *.el *.elc
-;(add-hook 'c-mode-hook     'flyspell-prog-mode)
-;(add-hook 'ruby-mode-hook  'flyspell-prog-mode)
-;(add-hook 'emacs-lisp-mode 'flyspell-prog-mode)
-;; arrange corrections by closeness to word error
-;; rather than alphabetical
-(setq flyspell-sort-corrections nil)
-
 ;; Easy buffer switching by holding down shift and press any arrow key.
 (windmove-default-keybindings 'shift)
 ;; Hook framemove into windmove, i.e. if windmove can't move
@@ -359,13 +347,16 @@
 ;; Delete the selected region when something is typed or with DEL
 (delete-selection-mode nil)
 
+;; When opening a buffer from emacsclient, don't prompt when it is killed
+(remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
+
 ;; -----------------
 ;; TRAMP setup
 ;; -----------------
 (setq tramp-default-method "ssh")
 ;(setq tramp-debug-buffer t)
 (setq tramp-debug-buffer nil)
-; one of these mush match the prompt on remote host... not sure why first one works
+; one of these must match the prompt on remote host... not sure why first one works
 (setq shell-prompt-pattern "$ ")
 (setq tramp-shell-prompt-pattern "0m ")
 ;; - Get a warning on the modeline when editing a file as root
