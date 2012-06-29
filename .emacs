@@ -116,6 +116,9 @@
 ;; icicles - “In case you never heard of it, Icicles is to ‘TAB’ completion what ‘TAB’ completion is to typing things manually every time.”
 (load-library "icicles.el")
 (icy-mode)
+;; a little work around - kill-buffer gets mapped to icicle-kill-buffer.
+;; BUT that calls (in some cases) kill-buffer-and-its-windows, which I fucking hate
+(defalias 'kill-buffer-and-its-windows 'kill-buffer)
 
 ;; enhancements to compile mode
 ;(require 'compile+)
@@ -171,7 +174,7 @@
 (setq auto-indent-on-visit-file nil) ;; t If you want auto-indent on for files
 (setq auto-indent-blank-lines-on-move nil)  ;; this messes up visited-only files
 (require 'auto-indent-mode)
-;(auto-indent-global-mode)
+                                        ;(auto-indent-global-mode)
 
 ;; autopair mode - automatically close quotes, parens, braces, etc
 (require 'autopair)
@@ -317,9 +320,10 @@
 ;;------------------
 ;; start emacs server so you can open files in this session from other shells
 ;; *unless* it's already running
-;(when (and (functionp 'server-running-p) (not (server-running-p)))
-;  (server-start))
-;(server-start)
+(when (and (functionp 'server-running-p) (not (server-running-p)))
+  (server-start)
+  ;; When opening a buffer from emacsclient, don't prompt when it is killed
+  (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
 
 ;; Enable recursive minibuffer
 (setq enable-recursive-minibuffers t)
@@ -344,11 +348,8 @@
 ;; Make C-z stop minimizing frames
 (defun iconify-or-deiconify-frame nil)
 
-;; Delete the selected region when something is typed or with DEL
+;; Delete the selected region when something is typed or with DEL (t => enabled)
 (delete-selection-mode nil)
-
-;; When opening a buffer from emacsclient, don't prompt when it is killed
-(remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
 
 ;; -----------------
 ;; TRAMP setup
@@ -442,6 +443,14 @@
 ;; compilation buffer scrolls with output instead
 ;; of sitting at the top of the output
 (setq compilation-scroll-output t)
+;; to make next-error etc skip anything less important than an error
+;; to show warnings and errors, set to 1
+(setq compilation-skip-threshold 2)
+;; from stackoverflow.com, set line truncation on in compilation buffers
+(defun my-compilation-mode-hook ()
+  (setq truncate-lines nil) ;; automatically becomes buffer local
+  (set (make-local-variable 'truncate-partial-width-windows) nil))
+(add-hook 'compilation-mode-hook 'my-compilation-mode-hook)
 
 ;; disable line wrap
 (setq-default truncate-lines t)
@@ -670,6 +679,7 @@
 (setq-default substatement-open 0)         ;; braces don't indent from if statements etc
 (c-set-offset 'substatement-open 0)
 (c-set-offset 'case-label '+)
+(c-set-offset 'comment-intro 0)
 ;; treat underscore '_' as part of a word in c-mode
 (modify-syntax-entry ?_ "w" c-mode-syntax-table)
 
@@ -851,7 +861,7 @@
 (defalias 'gmw 'gdb-many-windows)
 (defalias 'grw 'gdb-restore-windows)
 (defalias 'bkr 'browse-kill-ring)
-
+(defalias 'dbf 'diff-buffer-with-file)
 ;; -----------------
 ;; Key Bindings
 ;; -----------------
@@ -919,7 +929,7 @@
 (global-set-key (kbd "C-c o")   'icicle-occur)
 ;; kill any directory listing buffers to reduce clutter
 (global-set-key (kbd "C-c C-d") 'kill-all-dired-buffers)
-;; org mode bindings
+;; org interaction bindings
 (global-set-key (kbd "C-c l")   'org-store-link)
 (global-set-key (kbd "C-c a")   'org-agenda)
 ;; insert a timestamp at point
