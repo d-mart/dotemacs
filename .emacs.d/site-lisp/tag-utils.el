@@ -34,7 +34,10 @@
   (eshell-command
     (format "rm -f %s" imod-tags-file))
   (tags-reset-tags-tables)
-  (setq dirs-to-tag '("~/proj/intelliembed/lib/netx"
+  (setq dirs-to-tag '("~/proj/intelliembed/imod/src"
+                      "~/proj/intelliembed/common"
+                      "~/proj/intelliembed/imod/test"
+                      "~/proj/intelliembed/lib/netx"
                       "~/proj/intelliembed/lib/threadx"
                       "~/proj/intelliembed/lib/filex"
                       "~/proj/intelliembed/lib/libstrophe"
@@ -44,9 +47,6 @@
                       "~/proj/intelliembed/lib/cunit/CUnit"
                       "~/proj/intelliembed/lib/broadcom"
                       "~/proj/intelliembed/lib/protocolbuffers"
-                      "~/proj/intelliembed/common"
-                      "~/proj/intelliembed/imod/src"
-                      "~/proj/intelliembed/imod/test"
                       ))
   (setq stored-pref tags-add-tables) ; store off current pref for overwriting tags-tables
   (setq tags-add-tables t)         ; set tags-tables to append
