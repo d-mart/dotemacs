@@ -174,7 +174,7 @@
 (setq auto-indent-on-visit-file nil) ;; t If you want auto-indent on for files
 (setq auto-indent-blank-lines-on-move nil)  ;; this messes up visited-only files
 (require 'auto-indent-mode)
-                                        ;(auto-indent-global-mode)
+(auto-indent-global-mode)
 
 ;; autopair mode - automatically close quotes, parens, braces, etc
 (require 'autopair)
@@ -320,10 +320,10 @@
 ;;------------------
 ;; start emacs server so you can open files in this session from other shells
 ;; *unless* it's already running
-(when (and (functionp 'server-running-p) (not (server-running-p)))
-  (server-start)
-  ;; When opening a buffer from emacsclient, don't prompt when it is killed
-  (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
+(if (not (boundp 'server-process))
+    (server-start)
+    ;; When opening a buffer from emacsclient, don't prompt when it is killed
+    (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
 
 ;; Enable recursive minibuffer
 (setq enable-recursive-minibuffers t)
@@ -943,6 +943,10 @@
 (global-set-key (kbd "<C-S-down>")   'buf-move-down)
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
+;; having to switch to M- (off of C-) for kill-ring-save seems to interrupt my flow alot
+;; move seldomly-used quoted-insert and take its keybinding for kill-ring-save
+(global-set-key (kbd "C-q")     'kill-ring-save)
+(global-set-key (kbd "C-c q")   'quoted-insert)
 ;; iswitchb
 ; using this with autoindent mode now (global-set-key (kbd "<M-RET>") 'iswitchb-buffer)
 ;; hippie-expand
