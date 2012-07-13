@@ -173,6 +173,8 @@
 (setq auto-indent-key-for-end-of-line-insert-char-then-newline "<M-S-return>")
 (setq auto-indent-on-visit-file nil) ;; t If you want auto-indent on for files
 (setq auto-indent-blank-lines-on-move nil)  ;; this messes up visited-only files
+(setq auto-indent-delete-line-char-remove-extra-spaces t) ;; when deleting a line-ending, remove whitespace between newly joined lines
+(setq auto-indent-use-text-boundaries t) ;; if point is before text, kill like point was at BOL
 (require 'auto-indent-mode)
 (auto-indent-global-mode)
 
@@ -451,6 +453,11 @@
   (setq truncate-lines nil) ;; automatically becomes buffer local
   (set (make-local-variable 'truncate-partial-width-windows) nil))
 (add-hook 'compilation-mode-hook 'my-compilation-mode-hook)
+
+;; gdb
+(defun my-gud-mode-hook ()
+  (setq gdb-prompt-name "[gdb] "))
+(add-hook 'gud-mode-hook 'my-gud-mode-hook)
 
 ;; disable line wrap
 (setq-default truncate-lines t)
@@ -862,6 +869,8 @@
 (defalias 'grw 'gdb-restore-windows)
 (defalias 'bkr 'browse-kill-ring)
 (defalias 'dbf 'diff-buffer-with-file)
+(defalias 'dfb 'diff-buffer-with-file)
+
 ;; -----------------
 ;; Key Bindings
 ;; -----------------
@@ -872,8 +881,6 @@
 (global-set-key [end]           'end-of-line)
 (global-set-key [C-home]        'beginning-of-buffer)
 (global-set-key [C-end]         'end-of-buffer)
-(global-set-key [f1]            'find-file)
-(global-set-key [C-f1]          'show-file-name)
 (global-set-key [C-f2]          'bm-toggle)
 (global-set-key [f2]            'bm-next)
 (global-set-key [S-f2]          'bm-previous)
@@ -887,9 +894,8 @@
 (global-set-key [f7]            'next-error)
 (global-set-key [S-f7]          'recompile)
 (global-set-key [C-f7]          'kill-compilation)
-(global-set-key [f8]            'other-window)
-(global-set-key [C-f8]          'grep-find)
-(global-set-key [f9]            'save-buffer)
+
+
 
 (global-set-key [C-pause]       'toggle-window-dedicated)
 ; Describe last function - for when you want to know wtf emacs just did
@@ -904,7 +910,7 @@
 (global-set-key (kbd "M-?")     'etags-select-find-tag-at-point)
 (global-set-key (kbd "M-.")     'etags-select-find-tag)
 (global-set-key (kbd "C->")     'etags-select-goto-tag-other-window)
-; find-file-in-tags
+                                        ; find-file-in-tags
 (global-set-key (kbd "C-x ,")   'find-file-in-tags)
 ;(global-set-key (kbd "C-x C-b")  'electric-buffer-list)
 ; Make Emacs use "newline-and-indent" when you hit the Enter key so
