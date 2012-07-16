@@ -574,9 +574,6 @@
 (add-hook 'c-mode-common-hook #'(lambda () (autopair-mode)))
 (add-hook 'emacs-lisp-mode-hook #'(lambda () (autopair-mode)))
 
-;; electric mode for ruby.  Also closes delimeters
-(add-hook 'ruby-mode-hook 'ruby-electric-mode)
-
 ;; rsense auto-completion for ruby
 (add-hook 'ruby-mode-hook
           (lambda ()
