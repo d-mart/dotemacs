@@ -192,9 +192,6 @@
 ;; key-bindings not set within, see below
 (require 'iflipb)
 
-;; sr-speedbar - speedbar within the frame (oodles more convenient than managing two frames)
-(require 'sr-speedbar)
-
 ;; bookmarks - visible and possibly persistent bookmarks
 (require 'bm)
 
@@ -282,8 +279,8 @@
 (key-chord-define-global "bv" 'iswitchb-buffer)
 (key-chord-define-global "cv" 'reindent-then-newline-and-indent)
 
-;; grep-ed - edit grep results right in the grep buffer and save changes to files
-;(require 'grep-ed)
+; wgrep - edit grep results right in the grep buffer and save changes to files
+(require 'wgrep)
 
 ;; hippie expand settings -
 ;; bound over dabbrev-expand M-/
@@ -828,6 +825,23 @@
 
 
 ;; ----------------
+;; Switch to, bury, or create
+;; an ansi-term buffer depending
+;; on state.
+;; if current buffer is *bash*, bury
+;; if *bash* exists but is not current, switch to
+;; if *bash* doesn't exist, create and switch to
+;; ----------------
+(defun switch-to-or-create-shell ()
+  "Bury, switch to or create ansi-term bash buffer"
+  (interactive)
+  (if (string= (buffer-name (current-buffer)) "*bash*")
+      (bury-buffer)
+      (if (get-buffer "*bash*")
+           (switch-to-buffer "*bash*")
+           (ansi-term "/bin/bash" "bash"))))
+
+;; ----------------
 ;; Kill to start of line
 ;; Same as typing C-u 0 C-k
 ;; So i can make a binding
@@ -882,7 +896,7 @@
 (global-set-key [f2]            'bm-next)
 (global-set-key [S-f2]          'bm-previous)
 (global-set-key [f3]            'search-selected-text)
-(global-set-key [f4]            'ansi-term)
+(global-set-key [f4]            'switch-to-or-create-shell)
 ;; f5 is used by 'Anything'
 (global-set-key [f6]            'revert-buffer-no-confirm)
 (global-set-key [S-f6]          '(lambda () (interactive) (kill-buffer (current-buffer))))
@@ -1029,4 +1043,5 @@
                 ("\\.ahk$"          . ahk-mode)
                 ("\\.proto$"        . protobuf-mode)
                 ("\\.clj$"          . clojure-mode)
+                ("\\.gdb$"          . gdb-script-mode)
                 ) auto-mode-alist))
