@@ -295,16 +295,6 @@
         try-complete-lisp-symbol-partially
         try-complete-lisp-symbol))
 
-;; ------------------
-;;; This was installed by package-install.el.
-;;; This provides support for the package system and
-;;; interfacing with ELPA, the package archive.
-;; ------------------
-;; (when
-;;      (load
-;;       (expand-file-name "~/.emacs.d/elpa/package.el"))
-;;    (package-initialize))
-
 ;; add some more package repositories for ELPA - DM
 (cond
  ((= 24 emacs-major-version)
