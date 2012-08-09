@@ -1,19 +1,4 @@
 ;;; parens-utils.el
-;; utilities for making two paren packaages play nicely together
-;; drawn heavily (totally?) from http://www.emacswiki.org/emacs/HighlightParentheses
-
-
-;; This thing seems to suck
-;; make autopair and highlight-parentheses-mode work together
-;(add-hook 'highlight-parentheses-mode-hook
-;          '(lambda ()
-;             (setq autopair-handle-action-fns
-;                   (append
-;					(if autopair-handle-action-fns
-;						autopair-handle-action-fns
-;					  '(autopair-default-handle-action))
-;					'((lambda (action pair pos-before)
-;						(hl-paren-color-update)))))))
 
 ;; Enable highlight-parentheses minor mode globally in all buffers
 (define-globalized-minor-mode global-highlight-parentheses-mode
@@ -28,8 +13,12 @@
   "Go to the matching parenthesis if on parenthesis AND last command is a movement command, otherwise insert %.
   vi style of % jumping to matching brace."
   (interactive "p")
-  (message "%s" last-command)
+  (message "(last command: %s)" last-command)
   (if (not (memq last-command '(
+                                next-line
+                                previous-line
+                                left-char
+                                right-char
                                 set-mark
                                 cua-set-mark
                                 goto-match-paren

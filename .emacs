@@ -172,6 +172,7 @@
 (setq auto-indent-key-for-end-of-line-then-newline "<M-return>")
 (setq auto-indent-key-for-end-of-line-insert-char-then-newline "<M-S-return>")
 (setq auto-indent-on-visit-file nil) ;; t If you want auto-indent on for files
+(setq auto-indent-on-visit-pretend-nothing-changed nil) ;; don't mess with files when they're opened
 (setq auto-indent-blank-lines-on-move nil)  ;; this messes up visited-only files
 (setq auto-indent-delete-line-char-remove-extra-spaces t) ;; when deleting a line-ending, remove whitespace between newly joined lines
 (setq auto-indent-use-text-boundaries t) ;; if point is before text, kill like point was at BOL
@@ -279,8 +280,12 @@
 (key-chord-define-global "bv" 'iswitchb-buffer)
 (key-chord-define-global "cv" 'reindent-then-newline-and-indent)
 
-; wgrep - edit grep results right in the grep buffer and save changes to files
+;; wgrep - edit grep results right in the grep buffer and save changes to files
 (require 'wgrep)
+
+;; ace-jump-mode - type hotkey and a letter, buffer shows enumerated choice
+;; of which instance of that char to jump to
+(require 'ace-jump-mode)
 
 ;; hippie expand settings -
 ;; bound over dabbrev-expand M-/
@@ -452,9 +457,9 @@
 (add-hook 'compilation-mode-hook 'my-compilation-mode-hook)
 
 ;; gdb
-(defun my-gud-mode-hook ()
+(defun my-gdb-mode-hook ()
   (setq gdb-prompt-name "[gdb] "))
-(add-hook 'gud-mode-hook 'my-gud-mode-hook)
+(add-hook 'gdb-mode-hook 'my-gdb-mode-hook)
 
 ;; disable line wrap
 (setq-default truncate-lines t)
@@ -570,6 +575,7 @@
 ;; auto-pair - automatically insert pairs of delimeters "" () {} [] etc
 (add-hook 'c-mode-common-hook #'(lambda () (autopair-mode)))
 (add-hook 'emacs-lisp-mode-hook #'(lambda () (autopair-mode)))
+(add-hook 'ruby-mode-hook #'(lambda () (autopair-mode)))
 
 ;; rsense auto-completion for ruby
 (add-hook 'ruby-mode-hook
@@ -907,7 +913,9 @@
 (global-set-key [C-f7]          'kill-compilation)
 
 
-
+; ace-jump-mode
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+; make a window stick with a buffer
 (global-set-key [C-pause]       'toggle-window-dedicated)
 ; Describe last function - for when you want to know wtf emacs just did
 (global-set-key (kbd "C-h z")   'describe-last-function)
@@ -918,8 +926,8 @@
 ; bounce back and forth between beginning of line and beginning of text
 (global-set-key (kbd "C-a")     'back-to-indentation-or-beginning)
 ; Use etags-select-find-tag for more functionality (replaces find-tag)
-(global-set-key (kbd "M-?")     'etags-select-find-tag-at-point)
-(global-set-key (kbd "M-.")     'etags-select-find-tag)
+(global-set-key (kbd "M-.")     'etags-select-find-tag-at-point)
+(global-set-key (kbd "M-?")     'etags-select-find-tag)
 (global-set-key (kbd "C->")     'etags-select-goto-tag-other-window)
                                         ; find-file-in-tags
 (global-set-key (kbd "C-x ,")   'find-file-in-tags)
@@ -975,6 +983,9 @@
 ;; lusty
 (global-set-key (kbd "C-c C-f") 'lusty-file-explorer)
 (global-set-key (kbd "C-c C-b") 'lusty-buffer-explorer)
+;; temp - buff-menu is being interfered with by some other package - use ibuffer for now
+(global-set-key (kbd "C-x C-b") 'ibuffer-list-buffers)
+
 ;; insert '%' unless cursor just moved AND next to a paren/brace/bracket
 (global-set-key (kbd "%")       'goto-match-paren)
 ;; iflipb bindings
