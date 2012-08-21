@@ -449,7 +449,7 @@
 ;; gdb
 (defun my-gdb-mode-hook ()
   (setq gdb-prompt-name "[gdb] "))
-(add-hook 'gdb-mode-hook 'my-gdb-mode-hook)
+(add-hook 'gud-mode-hook 'my-gdb-mode-hook)
 
 ;; disable line wrap
 (setq-default truncate-lines t)
@@ -684,6 +684,9 @@
 (defun my-c-mode-keybindings ()
   (define-key c-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region))
 (add-hook 'c-mode-common-hook 'my-c-mode-keybindings)
+
+(add-hook 'c-mode-common-hook (lambda () (setq comment-start "// "
+                                               comment-end   "")))
 
 ;; Ruby-mode keybindings
 (defun my-ruby-mode-keybindings ()
@@ -974,8 +977,8 @@
 (global-set-key (kbd "C-c C-f") 'lusty-file-explorer)
 (global-set-key (kbd "C-c C-b") 'lusty-buffer-explorer)
 ;; temp - buff-menu is being interfered with by some other package - use ibuffer for now
-(global-set-key (kbd "C-x C-b") 'ibuffer-list-buffers)
-
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-c b")   'bury-buffer)
 ;; insert '%' unless cursor just moved AND next to a paren/brace/bracket
 (global-set-key (kbd "%")       'goto-match-paren)
 ;; iflipb bindings
@@ -1032,6 +1035,7 @@
                 ("\\.ota$"          . hexl-mode)
                 ("\\.rb$"           . ruby-mode)
                 ("Rakefile$"        . ruby-mode)
+                ("\\.rake$"         . ruby-mode)
                 ("\\.feature$"      . feature-mode)
                 ("\\.yml$"          . yaml-mode)
                 ("\\.lua$"          . lua-mode)
