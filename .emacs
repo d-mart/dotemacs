@@ -304,9 +304,9 @@
 (cond
  ((= 24 emacs-major-version)
   (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-  (add-to-list 'package-archives '("josh" . "http://josh.github.com/elpa/"))
-  (add-to-list 'package-archives '("sunrise" . "http://joseito.republika.pl/sunrise-commander/"))
-  (add-to-list 'package-archives '("ELPA" . "http://tromey.com/elpa/"))))
+  (add-to-list 'package-archives '("sunrise"   . "http://joseito.republika.pl/sunrise-commander/"))
+  (add-to-list 'package-archives '("ELPA"      . "http://tromey.com/elpa/"))
+  (add-to-list 'package-archives '("melpa"     . "http://melpa.milkbox.net/packages/"))))
 
 
 ;;------------------
