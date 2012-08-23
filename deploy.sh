@@ -46,7 +46,7 @@ fi
 OPTARG=""
 LAUNCH="no"
 # Process arguments
-while getopts "hslct:g:" opt
+while getopts "hxslct:g:" opt
 do
     case $opt in
 	l|s)
@@ -121,10 +121,14 @@ esac
 EMACS=`command -v emacs`
 if [ ! -z "$EMACS" ]
 then
-    EMACS_LAUNCH="$EMACS -l $TARGET_DIR/.emacs &"
+    EMACS_LAUNCH="$EMACS -q -l $TARGET_DIR/.emacs"
     if [ "$LAUNCH" == "yes" ]
     then
-	$EMACS_LAUNCH
+	echo "starting emacs"
+	echo "$EMACS_LAUNCH"
+	pushd $TARGET_DIR >/dev/null
+	$EMACS_LAUNCH &
+	popd $TARGET_DOR >/dev/null
     else
 	echo "You can start emacs with the new config file like this"
 	echo "\$ $EMACS_LAUNCH"

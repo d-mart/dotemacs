@@ -6,16 +6,20 @@
 ;;-(diff-buffer-with-file)
 ;;-smerge to eat diff3 output
 
+;; get directory of this file and append .emacs.d to set up various paths
+(setq my-config-dir (concat (file-name-directory load-file-name) ".emacs.d/"))
+(message (concat "This is what I'll use as top-level config dir: " my-config-dir))
+
 ;; save emacs (customize-xxxx) changes their own file
-(setq custom-file "~/.emacs.d/custom.el")
+(setq custom-file (concat my-config-dir "custom.el"))
 (load custom-file 'noerror)
 
 ;; look under .emacs.d for packages
-(let ((default-directory "~/.emacs.d"))
+(let ((default-directory my-config-dir))
   (normal-top-level-add-subdirs-to-load-path))
 
 ;; set up default location for emacs-themes
-(setq custom-theme-directory "~/.emacs.d/themes")
+(setq custom-theme-directory (concat my-config-dir "themes"))
 
 ;;------------------
 ;; Error handling macro
@@ -143,7 +147,7 @@
 (require 'auto-complete-etags)
 (setq ac-stop-words '("/" "//"))  ; don't autocomplete C comments
 
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-1.4.20110207/dict")
+(add-to-list 'ac-dictionary-directories (concat my-config-dir "elpa/auto-complete-1.4.20110207/dict"))
 (ac-config-default)
 
 ;; Browse kill ring - see list of text that has been killed
@@ -258,7 +262,7 @@
 ;; yasnippet - Yet Another Snippet module
 (require 'yasnippet)
 (yas/initialize)
-(yas/load-directory "~/.emacs.d/plugins/yasnippet/snippets")
+(yas/load-directory (concat my-config-dir "plugins/yasnippet/snippets"))
 
 ;; etags-select - look thru list of matching tags before jumping
 (require 'etags-select)
