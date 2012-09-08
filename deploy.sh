@@ -43,8 +43,9 @@ then
     exit 255
 fi
 
-OPTARG=""
-LAUNCH="no"
+local OPTARG=""
+local LAUNCH="no"
+local SHA=""
 # Process arguments
 while getopts "hxslct:g:" opt
 do
@@ -100,7 +101,7 @@ fi
 case $MODE in
     copy)
 	#cp -R "$SRC_DIR" "$TARGET_DIR"
-	pushd $SRC_DIR >/dev/null
+	pushd $SRC_DIR > /dev/null
 	tar cf - . | (cd $TARGET_DIR; tar xfp -)
 	popd >/dev/null
 	;;
@@ -115,6 +116,18 @@ case $MODE in
 	echo "You must specify at least -s or -c"
 	;;
 esac
+
+## Recompile .el files... sometimes they include hard-coded paths
+pushd $TARGET_DIR/.emacs.d > /dev/null
+# remove all compiled elisp files (*.elc)
+find . -type f -name "*.elc" | xargs rm;
+# find all elisp files and add them to a a script
+find . -type f -name "*.el" | awk '{print "(byte-compile-file \"" $1 "\")";}' > ../runme.el
+# run emacs in batch mode to compile all the files
+#emacs -batch -l ../runme.el -kill
+# remove the temporary script
+rm ../runme.el
+popd > /dev/null
 
 # Create run string using new .emacs. 
 # Then either display or run
