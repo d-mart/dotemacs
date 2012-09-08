@@ -81,7 +81,7 @@
 
 ;; ido - interactively do stuff - great flex matching for possible completions in input
 (setq ido-enable-flex-matching t)
-;(ido-mode)
+(ido-mode t)
 ; from http://chopmo.blogspot.com/2008/09/quickly-jumping-to-symbols.html
 (defun ido-goto-symbol ()
   "Will update the imenu index and then use ido to select a
@@ -415,6 +415,10 @@
 ;; No scrollbar
 (scroll-bar-mode -1)
 
+;; Show indicators of buffer boundaries in fringe
+(setq indicate-buffer-boundaries 'left
+      default-indicate-empty-lines t)
+
 ;; prevent find and grep folders from changing automatically
 ;;(add-hook 'find-file-hook
 ;;          (lambda ()
@@ -463,6 +467,9 @@
 
 ;; Changes all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
+
+;; ask for conf when opening mega-large files
+(setq large-file-warning-threshold 200000000)
 
 ;; Scroll down with the cursor,move down the buffer one
 ;; line at a time, instead of in larger amounts.
@@ -648,7 +655,7 @@
   "Return a new file path of a given file path.
    If the new path's directories does not exist, create them."
   (let (backup-root bpath)
-    (setq backup-root "~/.emacs.d/emacs-backup")
+    (setq backup-root (concat my-config-dir "emacs-backup"))
     (setq bpath (concat backup-root fpath "~"))
     (make-directory (file-name-directory bpath) bpath)
     bpath
@@ -982,6 +989,9 @@
 (global-set-key (kbd "C-c C-b") 'lusty-buffer-explorer)
 ;; temp - buff-menu is being interfered with by some other package - use ibuffer for now
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+;; temp - iswitchb bombs if an SGML HTML buffer is open
+(global-set-key (kbd "C-x b")   'ido-switch-buffer)
+
 (global-set-key (kbd "C-c b")   'bury-buffer)
 ;; insert '%' unless cursor just moved AND next to a paren/brace/bracket
 (global-set-key (kbd "%")       'goto-match-paren)
@@ -1007,6 +1017,40 @@
    (interactive)
    (if (y-or-n-p-with-timeout "Do you really want to exit Emacs? " 4 nil)
        (save-buffers-kill-emacs))))
+
+;; When trying to kill a dirty buffer, prompt
+;; to save, diff, or kill
+;; from http://stackoverflow.com/questions/331569/diff-save-or-kill-when-killing-buffers-in-emacs/334600#334600
+(defadvice kill-buffer (around my-kill-buffer-check activate)
+  "Prompt when a buffer is about to be killed."
+  (let* ((buffer-file-name (buffer-file-name))
+         backup-file)
+    ;; see 'backup-buffer
+    (if (and (buffer-modified-p)
+             buffer-file-name
+             (file-exists-p buffer-file-name)
+             (setq backup-file (car (find-backup-file-name buffer-file-name))))
+        (let ((answer (completing-read (format "Buffer modified %s, (d)iff, (s)ave, (k)ill? " (buffer-name))
+                                       '("d" "s" "k") nil t)))
+          (cond ((equal answer "d")
+                 (set-buffer-modified-p nil)
+                 (let ((orig-buffer (current-buffer))
+                       (file-to-diff (if (file-newer-than-file-p buffer-file-name backup-file)
+                                         buffer-file-name
+                                       backup-file)))
+                   (set-buffer (get-buffer-create (format "%s last-revision" (file-name-nondirectory file-to-diff))))
+                   (buffer-disable-undo)
+                   (insert-file-contents file-to-diff nil nil nil t)
+                   (set-buffer-modified-p nil)
+                   (setq buffer-read-only t)
+                   (ediff-buffers (current-buffer) orig-buffer)))
+                ((equal answer "k")
+                 (set-buffer-modified-p nil)
+                 ad-do-it)
+                (t
+                 (save-buffer)
+                 ad-do-it)))
+      ad-do-it)))
 
 ;; @todo WIP not working -
 ;;       <menu> is bound to M-x by default, but clearing the menu key
