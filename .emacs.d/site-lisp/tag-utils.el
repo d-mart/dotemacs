@@ -24,7 +24,27 @@
   (eshell-command
    (format "find %s -type f -name \"*.[ch]\" | etags --recurse=yes --append=yes --if0=no -f %s -L - && echo \"TAGS created\"" dir-name tags-file)))
 
+(defun append-rtags-to-tagfile (dir-name tags-file)
+  (message "tagging %s to TAGS file %s" dir-name tags-file)
+  (eshell-command
+   (format "find %s -type f -regextype posix-extended -regex '.*\.(rb|feature|rake)' | etags --recurse=yes --append=yes --if0=no -f %s -L - && echo \"TAGS created\"" dir-name tags-file)))
 
+(defun sg-tags-load ()
+  (interactive)
+  (message "Building intelliSOURCE tags")
+  (setq sg-tags-file "~/proj/intelliSOURCE/TAGS")
+  (eshell-command
+    (format "rm -f %s" sg-tags-file))
+  (tags-reset-tags-tables)
+  (setq dirs-to-tag '("~/proj/intelliSOURCE"))
+  (setq stored-pref tags-add-tables) ; store off current pref for overwriting tags-tables
+  (setq tags-add-tables t)         ; set tags-tables to append
+  (loop for i in dirs-to-tag do (append-rtags-to-tagfile i sg-tags-file))
+  (setq tags-add-tables stored-pref)
+  (visit-tags-table sg-tags-file)
+  (file-cache-clear-cache)
+  (file-cache-add-directory-using-find "~/proj/intelliSOURCE")
+  (message "Loaded intelliSOURCE tags"))
 
 
 (defun imod-tags-load ()
