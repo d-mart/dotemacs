@@ -117,6 +117,10 @@
 ;; buffer-move - great way to move buffers in windows easily
 (load-library "buffer-move")
 
+;; textmate mode - lots of the joys of textmate with less textmate
+(require 'textmate)
+(textmate-mode)
+
 ;; icicles - “In case you never heard of it, Icicles is to ‘TAB’ completion what ‘TAB’ completion is to typing things manually every time.”
 (load-library "icicles.el")
 (icy-mode)
@@ -180,8 +184,10 @@
 (setq auto-indent-blank-lines-on-move nil)  ;; this messes up visited-only files
 (setq auto-indent-delete-line-char-remove-extra-spaces t) ;; when deleting a line-ending, remove whitespace between newly joined lines
 (setq auto-indent-use-text-boundaries t) ;; if point is before text, kill like point was at BOL
+(auto-indent-backward-delete-char-behavior (quote hungry))
+(auto-indent-blank-lines-on-move nil)
 (require 'auto-indent-mode)
-(auto-indent-global-mode)
+;(auto-indent-global-mode)
 
 ;; autopair mode - automatically close quotes, parens, braces, etc
 (require 'autopair)
@@ -400,6 +406,12 @@
 ;; Show column number in status bar
 (setq column-number-mode t)
 
+;; show line numbers in fringe
+(global-linum-mode t)
+
+;; show a visual indicator of view's position of buffer in the modeline
+;(sml-modeline-mode)
+
 ;; C-k kills whole line and newline if at beginning of line
 (setq kill-whole-line t)
 
@@ -416,7 +428,7 @@
 (scroll-bar-mode -1)
 
 ;; Show indicators of buffer boundaries in fringe
-(setq indicate-buffer-boundaries 'left
+(setq-default indicate-buffer-boundaries 'left
       default-indicate-empty-lines t)
 
 ;; prevent find and grep folders from changing automatically
@@ -556,9 +568,9 @@
 (add-hook 'c-mode-hook          'cwarn-mode)
 
 ;; add a hook to hilite current word to several programming modes
-(add-hook 'emacs-lisp-mode-hook 'idle-highlight)
-(add-hook 'ruby-mode-hook       'idle-highlight)
-(add-hook 'c-mode-hook          'idle-highlight)
+;(add-hook 'emacs-lisp-mode-hook 'idle-highlight)
+;(add-hook 'ruby-mode-hook       'idle-highlight)
+;(add-hook 'c-mode-hook          'idle-highlight)
 
 ;; add a hook to show trailing whitespace in programming modes
 ;(add-hook 'emacs-lisp-mode-hook 'show-ws-toggle-show-trailing-whitespace)
@@ -933,7 +945,10 @@
 (global-set-key (kbd "M-.")     'etags-select-find-tag-at-point)
 (global-set-key (kbd "M-?")     'etags-select-find-tag)
 (global-set-key (kbd "C->")     'etags-select-goto-tag-other-window)
-                                        ; find-file-in-tags
+;; regexp search by default
+(global-set-key (kbd "C-r")     'isearch-backward-regexp)
+(global-set-key (kbd "C-s")     'isearch-forward-regexp)
+
 (global-set-key (kbd "C-x ,")   'find-file-in-tags)
 ;(global-set-key (kbd "C-x C-b")  'electric-buffer-list)
 ; Make Emacs use "newline-and-indent" when you hit the Enter key so
@@ -944,8 +959,9 @@
 ;; toggle back and forth between speedbar
 (global-set-key (kbd "C-c s")   'speedbar-get-focus)
 ;; get speedbar focus using Super Key
-;;(global-set-key (kbd "s-s")     'speedbar-get-focus)
-(global-set-key (kbd "s-s")     'sr-speedbar-toggle)
+(global-set-key (kbd "s-s")     'speedbar-get-focus)
+(global-set-key (kbd "s-b")     'speedbar-get-focus)
+;;(global-set-key (kbd "s-s")     'sr-speedbar-toggle)
 ;; rgrep - friendly recursive grep function
 (global-set-key (kbd "C-c g")   'rgrep)
 ;; find files containing a regex.  Send list of files to a dired buffer
@@ -1083,9 +1099,13 @@
                 ("\\.ota$"          . hexl-mode)
                 ("\\.rb$"           . ruby-mode)
                 ("Rakefile$"        . ruby-mode)
+                ("Guardfile$"       . ruby-mode)
+                ("Capfile"          . ruby-mode)
+                ("Gemfile"          . ruby-mode)
                 ("\\.rake$"         . ruby-mode)
                 ("\\.feature$"      . feature-mode)
                 ("\\.yml$"          . yaml-mode)
+                ("\\.erl$"          . erlang-mode)
                 ("\\.lua$"          . lua-mode)
                 ("\\.org$"          . org-mode)
                 ("\\.xml$"          . html-mode)

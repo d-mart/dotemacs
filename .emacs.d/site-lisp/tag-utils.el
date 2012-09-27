@@ -29,7 +29,7 @@
   (eshell-command
    (format "find %s -type f -regextype posix-extended -regex '.*\.(rb|feature|rake)' | etags --recurse=yes --append=yes --if0=no -f %s -L - && echo \"TAGS created\"" dir-name tags-file)))
 
-(defun sg-tags-load ()
+(defun is-tags-load ()
   (interactive)
   (message "Building intelliSOURCE tags")
   (setq sg-tags-file "~/proj/intelliSOURCE/TAGS")
