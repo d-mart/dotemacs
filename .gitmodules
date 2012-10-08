@@ -16,3 +16,6 @@
 [submodule ".emacs.d/el-get/yaml-mode"]
 	path = .emacs.d/el-get/yaml-mode
 	url = git://github.com/yoshiki/yaml-mode.git
+[submodule ".emacs.d/plugins/rhtml"]
+	path = .emacs.d/plugins/rhtml
+	url = git://github.com/eschulte/rhtml.git
