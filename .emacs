@@ -7,7 +7,7 @@
 ;;-smerge to eat diff3 output
 
 ;; get directory of this file and append .emacs.d to set up various paths
-(setq my-config-dir (concat (file-name-directory load-file-name) ".emacs.d/"))
+(defconst my-config-dir (concat (file-name-directory load-file-name) ".emacs.d/"))
 (message (concat "This is what I'll use as top-level config dir: " my-config-dir))
 
 ;; save emacs (customize-xxxx) changes their own file
@@ -20,6 +20,14 @@
 
 ;; set up default location for emacs-themes
 (setq custom-theme-directory (concat my-config-dir "themes"))
+
+(if (eq system-type 'darwin)
+    ;;something for OS X if true
+    ; workaround for having trouble with colors on OSX
+    (setq x-colors (ns-list-colors))
+
+   ;; optional something if not
+)
 
 ;;------------------
 ;; Error handling macro
@@ -35,7 +43,6 @@
             (setq retval (cons 'exception (list ex)))))
          retval)
      ,@clean-up))
-
 
 ;;------------------
 ;; Load modules
@@ -57,16 +64,10 @@
 (require 'protobuf-mode)
 ;(autoload 'protobuf-mode "protobuf"
 ;          "Google Protocol Buffers syntax hilighting" t)
-(autoload 'magit-status "magit"
-          "Magit emacs git interface" t)
 (autoload 'yaml-mode "yaml-mode"
           "YAML syntax highlighting")
 (autoload 'clojure-mode "clojure-mode"
           "Clojure syntax highlighting")
-(autoload 'feature-mode "feature-mode"
-          "Cucumber feature mode for emacs" t)
-(autoload 'git-commit-mode "git-commit-mode"
-          "git commit message editing mode" t)
 (autoload 'ahk-mode "ahk-mode"
           "major mode for AutoHotKey" t)
 
@@ -118,12 +119,12 @@
 (load-library "buffer-move")
 
 ;; textmate mode - lots of the joys of textmate with less textmate
-(require 'textmate)
-(textmate-mode)
+;(require 'textmate)
+;(textmate-mode)
 
 ;; icicles - “In case you never heard of it, Icicles is to ‘TAB’ completion what ‘TAB’ completion is to typing things manually every time.”
 (load-library "icicles.el")
-(icy-mode)
+;(icy-mode)
 ;; a little work around - kill-buffer gets mapped to icicle-kill-buffer.
 ;; BUT that calls (in some cases) kill-buffer-and-its-windows, which I fucking hate
 (defalias 'kill-buffer-and-its-windows 'kill-buffer)
@@ -138,9 +139,6 @@
 (setq uniquify-separator "/")
 (setq uniquify-after-kill-buffer-p t) ; rename after killing uniquified
 (setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
-
-;; dired+ - Lots of improvements to dir listing buffers
-(require 'dired+)
 
 ;; buffer-menu+ - Lots of improvements to buffer list
 ; require doesn't work - load instead (require 'buff-menu+)
@@ -164,7 +162,7 @@
 
 ;; Highlight the parens cursor is within
 (require 'highlight-parentheses)
-(highlight-parentheses-mode)
+;(highlight-parentheses-mode 'nil)
 
 ;; autoindent mode -
 ;;  (1) Return automatically indents the code appropriately (if enabled)
@@ -184,9 +182,9 @@
 (setq auto-indent-blank-lines-on-move nil)  ;; this messes up visited-only files
 (setq auto-indent-delete-line-char-remove-extra-spaces t) ;; when deleting a line-ending, remove whitespace between newly joined lines
 (setq auto-indent-use-text-boundaries t) ;; if point is before text, kill like point was at BOL
-(auto-indent-backward-delete-char-behavior (quote hungry))
-(auto-indent-blank-lines-on-move nil)
-(require 'auto-indent-mode)
+(setq auto-indent-backward-delete-char-behavior (quote hungry))
+(setq auto-indent-blank-lines-on-move nil)
+;(require 'auto-indent-mode)
 ;(auto-indent-global-mode)
 
 ;; autopair mode - automatically close quotes, parens, braces, etc
@@ -202,15 +200,9 @@
 ;; make a stack of buffers a la alt-tab
 ;; key-bindings not set within, see below
 (require 'iflipb)
-
+	
 ;; bookmarks - visible and possibly persistent bookmarks
 (require 'bm)
-
-;; rsense - autocomplete / type tools for ruby
-;; NOTE - a software package must be installed and configured for this to work
-;; @todo - make below setting expand more automagically
-;(setq rsense-home "/home/dmartinez/proj/stuff/utils/rsense")
-;(require 'rsense)
 
 ;; findr - search for files breadth-first
 ;; (autoload 'findr "findr" "Find file name." t)
@@ -377,7 +369,7 @@
 ;; Look and Feel
 ;; -----------------
 ;; Set font.  To see what's at cursor, C-u C-x =
-(defvar myFont "-unknown-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-*-0-iso10646-1")
+(defvar myFont "-unknown-DejaVu Sans Mono-normal-normal-normal-*-12-*-*-*-*-0-iso10646-1")
 ;(defvar myFont "-unknown-Ubuntu Mono-bold-normal-normal-*-15-*-*-*-m-0-iso10646-1")
 ;(defvar myFont "-monotype-Andale Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
 ;(defvar myFont "-monotype-Andale Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")
@@ -428,8 +420,8 @@
 (scroll-bar-mode -1)
 
 ;; Show indicators of buffer boundaries in fringe
-(setq-default indicate-buffer-boundaries 'left
-      default-indicate-empty-lines t)
+;(setq-default indicate-buffer-boundaries 'left
+;      default-indicate-empty-lines t)
 
 ;; prevent find and grep folders from changing automatically
 ;;(add-hook 'find-file-hook
@@ -508,15 +500,12 @@
 (defadvice split-window-vertically
   (after my-window-splitting-advice first () activate)
   (set-window-buffer (next-window) (other-buffer)))
-
-;; ediff setup
-(custom-set-variables
- ; ignore whitespace
- '(ediff-diff-options "-w")
- ; diff side-by-side isntead of over-and-under
- '(ediff-split-window-function (quote split-window-horizontally))
- ; hide little popup window
- '(ediff-window-setup-function (quote ediff-setup-windows-plain)))
+(defadvice split-window-right
+  (after my-window-splitting-advice first () activate)
+  (set-window-buffer (next-window) (other-buffer)))
+(defadvice split-window-below
+  (after my-window-splitting-advice first () activate)
+  (set-window-buffer (next-window) (other-buffer)))
 
 ;; cua mode (rectangle only)
 (setq cua-enable-cua-keys nil)
@@ -553,106 +542,20 @@
 (font-lock-add-keywords 'c-mode
     '(("\\<[\\+-]?[0-9]+\\(.[0-9A-Fa-f]+\\)?\\>" 0 'font-lock-digit-face)))
 
-
 ;; add special keyword hilighting
 (add-hook 'emacs-lisp-mode-hook 'fontify-at-todo)
 (add-hook 'ruby-mode-hook       'fontify-at-todo)
-(add-hook 'c-mode-hook          'fontify-at-todo)
-;(add-hook 'c-mode-hook          'fontify-punctuation)
-;(add-hook 'c-mode-hook          'fontify-numbers)
-
-;; doxymacs mode - assistance with doxygen comments
-;(add-hook 'c-mode-hook          'doxymacs-mode)
-
-;; cwarn mode - hilite suspicious c operations, .e.g. if(cond);
-(add-hook 'c-mode-hook          'cwarn-mode)
 
 ;; add a hook to hilite current word to several programming modes
 ;(add-hook 'emacs-lisp-mode-hook 'idle-highlight)
 ;(add-hook 'ruby-mode-hook       'idle-highlight)
-;(add-hook 'c-mode-hook          'idle-highlight)
 
 ;; add a hook to show trailing whitespace in programming modes
 ;(add-hook 'emacs-lisp-mode-hook 'show-ws-toggle-show-trailing-whitespace)
-;(add-hook 'ruby-mode-hook       'show-ws-toggle-show-trailing-whitespace)
-;(add-hook 'c-mode-hook          'show-ws-toggle-show-trailing-whitespace)
-
-;; add hook to navigate camelCase correctly.  wordBoundariesAtEmbeddedCapitalLetters
-(add-hook 'c-mode-hook           'subword-mode)
-
-;; add imenu to programming buffers
-(add-hook 'emacs-lisp-mode-hook 'imenu-add-menubar-index)
-(add-hook 'ruby-mode-hook       'imenu-add-menubar-index)
-(add-hook 'c-mode-hook          'imenu-add-menubar-index)
 
 ;; auto-pair - automatically insert pairs of delimeters "" () {} [] etc
-(add-hook 'c-mode-common-hook #'(lambda () (autopair-mode)))
 (add-hook 'emacs-lisp-mode-hook #'(lambda () (autopair-mode)))
-(add-hook 'ruby-mode-hook #'(lambda () (autopair-mode)))
-
-;; rsense auto-completion for ruby
-(add-hook 'ruby-mode-hook
-          (lambda ()
-            (add-to-list 'ac-sources 'ac-source-rsense-method)
-            (add-to-list 'ac-sources 'ac-source-rsense-constant)))
-
-;; ------------------
-;; Shell / Terminal
-;; ------------------
-;; Add color to a shell running in emacs ‘M-x shell’
-(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-
-;; set maximum-buffer size for shell-mode
-;;(setq comint-buffer-maximum-size 10240)
-;; truncate shell buffer to comint-buffer-maximum-size
-(add-hook 'comint-output-filter-functions
-          'comint-truncate-buffer)
-
-;; dont show passwords in clear text
-(add-hook 'comint-output-filter-functions
-          'comint-watch-for-password-prompt)
-
-;; remove ctrl-m from shell output
-(add-hook 'comint-output-filter-functions
-          'comint-strip-ctrl-m)
-
-(add-hook 'shell-mode-hook
-          '(lambda ()
-             (local-set-key [home]        ; move to beginning of line, after prompt
-                            'comint-bol)
-             (local-set-key [up]          ; cycle backward through command history
-                            '(lambda () (interactive)
-                               (if (comint-after-pmark-p)
-                                   (comint-previous-input 1)
-                                 (previous-line 1))))
-             (local-set-key [down]        ; cycle forward through command history
-                            '(lambda () (interactive)
-                               (if (comint-after-pmark-p)
-                                   (comint-next-input 1)
-                                 (forward-line 1))))
-             ))
-
-;; ------------------
-;; Org Mode!
-;; ------------------
-(require 'org-install)
-(setq org-log-done t)
-
-;; enable running snippets of code from org mode docs
-;; see http://emacs-fu.blogspot.com/search/label/org-mode for more
-;; org-babel-do-load-languages
-;;  'org-babel-load-languages
-;;   '( (perl . t)
-;;      (ruby . t)
-;;      (sh . t)
-;;      (python . t)
-;;      (emacs-lisp . t)
-;;    ))
-
-;; @todo: see if there is a way to reference file locations
-;; from top of git repo
-;;(add-to-list 'org-agenda-files "~/proj/stuff/org")
+;(add-hook 'ruby-mode-hook #'(lambda () (autopair-mode)))
 
 
 ;; do not make backup files
@@ -691,35 +594,6 @@
    (if mark-active (list (region-beginning) (region-end))
      (list (line-beginning-position)
            (line-beginning-position 2)))))
-
-;; C mode
-(setq c-basic-offset 4)
-(setq c-default-style "linux"
-      c-basic-offset 4)
-(setq-default substatement-open 0)         ;; braces don't indent from if statements etc
-(c-set-offset 'substatement-open 0)
-(c-set-offset 'case-label '+)
-(c-set-offset 'comment-intro 0)
-;; treat underscore '_' as part of a word in c-mode
-(modify-syntax-entry ?_ "w" c-mode-syntax-table)
-
-;; C-mode keybindings
-(defun my-c-mode-keybindings ()
-  (define-key c-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region))
-(add-hook 'c-mode-common-hook 'my-c-mode-keybindings)
-
-(add-hook 'c-mode-common-hook (lambda () (setq comment-start "// "
-                                               comment-end   "")))
-
-;; Ruby-mode keybindings
-(defun my-ruby-mode-keybindings ()
-  (define-key ruby-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
-  (define-key ruby-mode-map (kbd "C-c #")   'comment-or-uncomment-region)
-  (define-key ruby-mode-map (kbd "C-c t")   'ruby-compilation-this-buffer)
-  (define-key ruby-mode-map (kbd "C-c r")   'ruby-compilation-run)
-  (define-key ruby-mode-map (kbd "C-c C-r") 'ruby-compilation-rake)
-  (define-key ruby-mode-map (kbd "C-c .")   'rsense-complete))
-(add-hook 'ruby-mode-hook 'my-ruby-mode-keybindings)
 
 ;; ----------------
 ;; Toggle Window Dedication
@@ -847,23 +721,6 @@
 
 
 ;; ----------------
-;; Switch to, bury, or create
-;; an ansi-term buffer depending
-;; on state.
-;; if current buffer is *bash*, bury
-;; if *bash* exists but is not current, switch to
-;; if *bash* doesn't exist, create and switch to
-;; ----------------
-(defun switch-to-or-create-shell ()
-  "Bury, switch to or create ansi-term bash buffer"
-  (interactive)
-  (if (string= (buffer-name (current-buffer)) "*bash*")
-      (bury-buffer)
-      (if (get-buffer "*bash*")
-           (switch-to-buffer "*bash*")
-           (ansi-term "/bin/bash" "bash"))))
-
-;; ----------------
 ;; Kill to start of line
 ;; Same as typing C-u 0 C-k
 ;; So i can make a binding
@@ -903,141 +760,12 @@
 (defalias 'bkr 'browse-kill-ring)
 (defalias 'dbf 'diff-buffer-with-file)
 (defalias 'dfb 'diff-buffer-with-file)
-
-;; -----------------
-;; Key Bindings
-;; -----------------
-(global-set-key [C-tab]         'other-window)
-(global-set-key [C-delete]      'kill-word)
-(global-set-key [C-backspace]   'backward-kill-word)
-(global-set-key [home]          'beginning-of-line)
-(global-set-key [end]           'end-of-line)
-(global-set-key [C-home]        'beginning-of-buffer)
-(global-set-key [C-end]         'end-of-buffer)
-(global-set-key [C-f2]          'bm-toggle)
-(global-set-key [f2]            'bm-next)
-(global-set-key [S-f2]          'bm-previous)
-(global-set-key [f3]            'search-selected-text)
-(global-set-key [f4]            'switch-to-or-create-shell)
-;; f5 is used by 'Anything'
-(global-set-key [f6]            'revert-buffer-no-confirm)
-(global-set-key [S-f6]          '(lambda () (interactive) (kill-buffer (current-buffer))))
-(global-set-key [C-f6]          'revert-all-buffers)
-(global-set-key [s-f6]          'nuke-all-buffers)     ;; Win-F6 - kill all buffers
-(global-set-key [f7]            'next-error)
-(global-set-key [S-f7]          'recompile)
-(global-set-key [C-f7]          'kill-compilation)
-
-
-; ace-jump-mode
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-; make a window stick with a buffer
-(global-set-key [C-pause]       'toggle-window-dedicated)
-; Describe last function - for when you want to know wtf emacs just did
-(global-set-key (kbd "C-h z")   'describe-last-function)
-; Kill from point to beginning of line - (this binding replaces kill-sentence which I don't use)
-(global-set-key (kbd "M-k")     'kill-start-of-line)
-; kill word to left of point
-(global-set-key (kbd "M-D")     'backward-kill-word)
-; bounce back and forth between beginning of line and beginning of text
-(global-set-key (kbd "C-a")     'back-to-indentation-or-beginning)
-; Use etags-select-find-tag for more functionality (replaces find-tag)
-(global-set-key (kbd "M-.")     'etags-select-find-tag-at-point)
-(global-set-key (kbd "M-?")     'etags-select-find-tag)
-(global-set-key (kbd "C->")     'etags-select-goto-tag-other-window)
-;; regexp search by default
-(global-set-key (kbd "C-r")     'isearch-backward-regexp)
-(global-set-key (kbd "C-s")     'isearch-forward-regexp)
-
-(global-set-key (kbd "C-x ,")   'find-file-in-tags)
-;(global-set-key (kbd "C-x C-b")  'electric-buffer-list)
-; Make Emacs use "newline-and-indent" when you hit the Enter key so
-; that you don't need to keep using TAB to align yourself when coding.
-(global-set-key (kbd "C-m")     'newline-and-indent)
-; fill paragraph - wrap lines to a column width including inside comments
-(global-set-key (kbd "M-p")     'fill-paragraph)
-;; toggle back and forth between speedbar
-(global-set-key (kbd "C-c s")   'speedbar-get-focus)
-;; get speedbar focus using Super Key
-(global-set-key (kbd "s-s")     'speedbar-get-focus)
-(global-set-key (kbd "s-b")     'speedbar-get-focus)
-;;(global-set-key (kbd "s-s")     'sr-speedbar-toggle)
-;; rgrep - friendly recursive grep function
-(global-set-key (kbd "C-c g")   'rgrep)
-;; find files containing a regex.  Send list of files to a dired buffer
-(global-set-key (kbd "C-c G")   'find-grep-dired)
-;; find file names by regexp and send results to dired buffer
-(global-set-key (kbd "C-c f")   'find-name-dired)
-;; delete all trailing whitespace in a buffer
-(global-set-key (kbd "C-c d")   'delete-trailing-whitespace)
-;; run icicles-occur - show lines in buffer matching regex
-(global-set-key (kbd "C-c o")   'icicle-occur)
-;; kill any directory listing buffers to reduce clutter
-(global-set-key (kbd "C-c C-d") 'kill-all-dired-buffers)
-;; org interaction bindings
-(global-set-key (kbd "C-c l")   'org-store-link)
-(global-set-key (kbd "C-c a")   'org-agenda)
-;; insert a timestamp at point
-(global-set-key (kbd "C-c t")   'insert-time-string)
-;; eval region (I seem to use it a lot)
-(global-set-key (kbd "C-c C-e") 'eval-region)
-;; another binding for transpose lines (gnome steals C-M-t for launch terminal)
-(global-set-key (kbd "C-S-t")   'transpose-lines)
-;; buffer-move bindings
-(global-set-key (kbd "<C-S-up>")     'buf-move-up)
-(global-set-key (kbd "<C-S-down>")   'buf-move-down)
-(global-set-key (kbd "<C-S-left>")   'buf-move-left)
-(global-set-key (kbd "<C-S-right>")  'buf-move-right)
-;; having to switch to M- (off of C-) for kill-ring-save seems to interrupt my flow alot
-;; move seldomly-used quoted-insert and take its keybinding for kill-ring-save
-(global-set-key (kbd "C-q")     'kill-ring-save)
-(global-set-key (kbd "C-c q")   'quoted-insert)
-;; iswitchb
-; using this with autoindent mode now (global-set-key (kbd "<M-RET>") 'iswitchb-buffer)
-;; hippie-expand
-(global-set-key (kbd "M-/")     'hippie-expand)
-;; backwards zap to char
-(global-set-key (kbd "C-M-z")   'backwards-zap-to-char)
-;; see list of killed text
-(global-set-key (kbd "C-c k")   'browse-kill-ring)
-;; lusty
-(global-set-key (kbd "C-c C-f") 'lusty-file-explorer)
-(global-set-key (kbd "C-c C-b") 'lusty-buffer-explorer)
-;; temp - buff-menu is being interfered with by some other package - use ibuffer for now
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-;; temp - iswitchb bombs if an SGML HTML buffer is open
-(global-set-key (kbd "C-x b")   'ido-switch-buffer)
-
-(global-set-key (kbd "C-c b")   'bury-buffer)
-;; insert '%' unless cursor just moved AND next to a paren/brace/bracket
-(global-set-key (kbd "%")       'goto-match-paren)
-;; iflipb bindings
-(global-set-key (kbd "<C-tab>") 'iflipb-next-buffer)
-(global-set-key
- (if (featurep 'xemacs) (kbd "<C-iso-left-tab>") (kbd "<C-S-iso-lefttab>"))
-  'iflipb-previous-buffer)
-
-;; add occur mode to isearch-forward:
-;; switch to occur from a search, e.g.
-;; C-s foo C-o
-(define-key isearch-mode-map (kbd "C-o")
-  (lambda ()
-    (interactive)
-    (let ((case-fold-search isearch-case-fold-search))
-      (occur (if isearch-regexp isearch-string
-               (regexp-quote isearch-string))))))
-
-;; A safer exit keybind.
-(global-set-key (kbd "C-x C-c")
-  (lambda ()
-   (interactive)
-   (if (y-or-n-p-with-timeout "Do you really want to exit Emacs? " 4 nil)
-       (save-buffers-kill-emacs))))
+(defalias 'ar  'align-regexp)
 
 ;; When trying to kill a dirty buffer, prompt
 ;; to save, diff, or kill
 ;; from http://stackoverflow.com/questions/331569/diff-save-or-kill-when-killing-buffers-in-emacs/334600#334600
-(defadvice kill-buffer (around my-kill-buffer-check activate)
+(defadvice kill-buffer (around my-kill-buffer-check disable) ;; change disable->activate once this is modified to only work on file-buffers
   "Prompt when a buffer is about to be killed."
   (let* ((buffer-file-name (buffer-file-name))
          backup-file)
@@ -1081,40 +809,45 @@
 ;; Major Modes for filename patterns
 ;; -----------------
 (setq auto-mode-alist
-      (append '(("\\.[Cc][Xx][Xx]$" . c++-mode)
-                ("\\.[Cc][Pp][Pp]$" . c++-mode)
-                ("\\.[Hh][Xx][Xx]$" . c++-mode)
-                ("\\.[Tt][Cc][Cc]$" . c++-mode)
-                ("\\.i$"            . c++-mode)    ; SWIG
-                ("\\.h$"            . c-mode)
-                ("\\.mm?$"          . objc-mode)
-                ("_emacs"           . lisp-mode)
-                ("\\.el\\.gz$"      . lisp-mode)
-                ("\\.mak$"          . makefile-mode)
-                ("Doxyfile.tmpl$"   . makefile-mode)
-                ("Doxyfile$"        . makefile-mode)
+      (append '(("\\.mm?$"          . objc-mode)
                 ("\\.conf$"         . conf-mode)
                 ("\\.uncompressed$" . hexl-mode)
                 ("\\.bin$"          . hexl-mode)
                 ("\\.ota$"          . hexl-mode)
                 ("\\.rb$"           . ruby-mode)
-                ("Rakefile$"        . ruby-mode)
-                ("Guardfile$"       . ruby-mode)
-                ("Capfile"          . ruby-mode)
-                ("Gemfile"          . ruby-mode)
-                ("\\.rake$"         . ruby-mode)
-                ("\\.feature$"      . feature-mode)
-                ("\\.yml$"          . yaml-mode)
-                ("\\.erl$"          . erlang-mode)
                 ("\\.lua$"          . lua-mode)
-                ("\\.org$"          . org-mode)
                 ("\\.xml$"          . html-mode)
                 ("\\.scons$"        . python-mode)
                 ("SCons\\(cript\\|truct\\)" . python-mode)
                 ("\\.gclient$"      . python-mode)
-                ("COMMIT_EDITMSG$"  . git-commit-mode)
                 ("\\.ahk$"          . ahk-mode)
                 ("\\.proto$"        . protobuf-mode)
-                ("\\.clj$"          . clojure-mode)
                 ("\\.gdb$"          . gdb-script-mode)
                 ) auto-mode-alist))
+
+;;------------------
+;; Load a config sub-file from my config dir.
+;; Adapted from http://stackoverflow.com/questions/2079095/how-to-modularize-an-emacs-configuration
+;;------------------
+(defun load-user-file (file)
+  (interactive "f")
+  "Load a file in current user's configuration directory"
+  (load-file (expand-file-name file my-config-dir)))
+
+(load-user-file "faces-setup.el")
+(load-user-file "ruby-setup.el")
+(load-user-file "c-setup.el")
+(load-user-file "elisp-setup.el")
+(load-user-file "javascript-setup.el")
+(load-user-file "org-setup.el")
+(load-user-file "term-setup.el")
+(load-user-file "erlang-setup.el")
+(load-user-file "go-setup.el")
+(load-user-file "rust-setup.el")
+(load-user-file "clojure-setup.el")
+(load-user-file "git-setup.el")
+(load-user-file "css-setup.el")
+(load-user-file "coffee-setup.el")
+(load-user-file "ediff-setup.el")
+(load-user-file "dired-setup.el")
+(load-user-file "global-keybindings-setup.el")
