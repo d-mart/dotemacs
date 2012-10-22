@@ -1,11 +1,16 @@
 ;; Utilities for making and working with tags
 
+
+;;; @todo brew installs exuberant ctags as ctags
+;;;       gnu  installs exuberant ctags as etags
+;;;       check os version and change accordingly
+
 (defun create-tags (dir-name)
   "Create tags file."
   (interactive "DDirectory: ")
   (message "tagging %s" dir-name)
   (eshell-command
-   (format "find %s -type f -name \"*.[ch]\" | etags -R -f %s/TAGS -L - && echo \"TAGS created\"" dir-name dir-name))
+   (format "find %s -type f -name \"*.[ch]\" | ctags -R -f %s/TAGS -L - && echo \"TAGS created\"" dir-name dir-name))
   (visit-tags-table dir-name))
 
 (defun create-rtags (dir-name)
@@ -13,7 +18,7 @@
   (interactive "DDirectory: ")
   (message "tagging %s" dir-name)
   (eshell-command
-   (format "find %s -type f | egrep \"\.(rb|feature)$\" | etags -f %s/TAGS -L - && echo \"OK\"" dir-name dir-name))
+   (format "find %s -type f | egrep \"\.(rb|feature)$\" | ctags -f %s/TAGS -L - && echo \"OK\"" dir-name dir-name))
   (visit-tags-table dir-name))
 
 ;; this version is non-interactive and tags a TAGS file path as an arg
@@ -22,12 +27,14 @@
 (defun append-tags-to-tagfile (dir-name tags-file)
   (message "tagging %s to TAGS file %s" dir-name tags-file)
   (eshell-command
-   (format "find %s -type f -name \"*.[ch]\" | etags --recurse=yes --append=yes --if0=no -f %s -L - && echo \"TAGS created\"" dir-name tags-file)))
+   (format "find %s -type f -name \"*.[ch]\" | ctags --recurse=yes --append=yes --if0=no -f %s -L - && echo \"TAGS created\"" dir-name tags-file)))
 
 (defun append-rtags-to-tagfile (dir-name tags-file)
   (message "tagging %s to TAGS file %s" dir-name tags-file)
   (eshell-command
-   (format "find %s -type f -regextype posix-extended -regex '.*\.(rb|feature|rake)' | etags --recurse=yes --append=yes --if0=no -f %s -L - && echo \"TAGS created\"" dir-name tags-file)))
+   ;(format "find %s -type f -regextype posix-extended -regex '.*\.(rb|feature|rake)' | ctags --recurse=yes --append=yes --if0=no -f %s -L - && echo \"TAGS created\"" dir-name tags-file)))
+   ; ctags-exuberant -a -e -f TAGS --tag-relative -R .
+   (format "find %s -type f -regex '.*\.(rb|feature|rake)' | ctags --recurse=yes --append=yes --if0=no -f %s -L - && echo \"TAGS created\"" dir-name tags-file)))
 
 (defun is-tags-load ()
   (interactive)
