@@ -4,4 +4,6 @@ ac-comphist.dat
 auto-save-list/
 emacs-backup/
 .emacs.d/elpa/archives
+.emacs.d/url/.emacs.d/eshell/
+.emacs.d/tramp
 .emacs.d/url/
