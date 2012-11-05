@@ -1,4 +1,3 @@
-
 ;; NOTES
 ;;-To byte-compile all elisp files in current directory and below:
 ;;   C-u 0 M-x byte-recompile-directory
@@ -64,10 +63,6 @@
 (require 'protobuf-mode)
 ;(autoload 'protobuf-mode "protobuf"
 ;          "Google Protocol Buffers syntax hilighting" t)
-(autoload 'yaml-mode "yaml-mode"
-          "YAML syntax highlighting")
-(autoload 'clojure-mode "clojure-mode"
-          "Clojure syntax highlighting")
 (autoload 'ahk-mode "ahk-mode"
           "major mode for AutoHotKey" t)
 
@@ -494,7 +489,27 @@
 (mouse-avoidance-mode 'animate)
 
 ;; cursor is a line instead of block
-(setq-default cursor-type '(bar . 1))
+(setq-default cursor-type  '(bar . 1))
+(setq-default cursor-color "#ffffff")
+
+;; change cursor color at each blink
+(defvar blink-cursor-colors (list  "#92c48f" "#6785c5" "#be369c" "#d9ca65")
+  "On each blink the cursor will cycle to the next color in this list.")
+
+(setq blink-cursor-count 0)
+(defun blink-cursor-timer-function ()
+  "Zarza wrote this cyberpunk variant of timer `blink-cursor-timer'. 
+Warning: overwrites original version in `frame.el'.
+
+This one changes the cursor color on each blink. Define colors in `blink-cursor-colors'."
+  (when (not (internal-show-cursor-p))
+    (when (>= blink-cursor-count (length blink-cursor-colors))
+      (setq blink-cursor-count 0))
+    (set-cursor-color (nth blink-cursor-count blink-cursor-colors))
+    (setq blink-cursor-count (+ 1 blink-cursor-count))
+    )
+  (internal-show-cursor nil (not (internal-show-cursor-p))))
+
 
 ;; make split-window-vertically put next buffer in new window
 (defadvice split-window-vertically
@@ -751,6 +766,7 @@
 ;; Aliases
 ;; -----------------
 (defalias 'gf  'grep-find)
+(defalias 'rb  'rename-buffer)
 (defalias 'hlp 'highlight-parentheses-mode)
 (defalias 'rab 'revert-all-buffers)
 (defalias 'sws 'toggle-show-trailing-whitespace-show-ws)
@@ -761,6 +777,7 @@
 (defalias 'dbf 'diff-buffer-with-file)
 (defalias 'dfb 'diff-buffer-with-file)
 (defalias 'ar  'align-regexp)
+(defalias 'cr  'comment-or-uncomment-region)
 
 ;; When trying to kill a dirty buffer, prompt
 ;; to save, diff, or kill
@@ -838,6 +855,7 @@
 (load-user-file "ruby-setup.el")
 (load-user-file "c-setup.el")
 (load-user-file "elisp-setup.el")
+(load-user-file "yaml-setup.el")
 (load-user-file "javascript-setup.el")
 (load-user-file "org-setup.el")
 (load-user-file "term-setup.el")
@@ -850,4 +868,5 @@
 (load-user-file "coffee-setup.el")
 (load-user-file "ediff-setup.el")
 (load-user-file "dired-setup.el")
+(load-user-file "irc-setup.el")
 (load-user-file "global-keybindings-setup.el")

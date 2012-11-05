@@ -9,6 +9,7 @@
 (autoload 'git-commit-mode "git-commit-mode"
           "git commit message editing mode" t)
 
+(defalias 'mgb 'magit-blame-mode)
 
 (append '(("COMMIT_EDITMSG$"  . git-commit-mode)
-        auto-mode-alist)
+        auto-mode-alist))

@@ -2,7 +2,11 @@
 ;;; Javascript setup
 ;;; ----------------------
 
-(js-indent-level 2)
+(defun my-js-settings ()
+  (js-indent-level 2))
 
-;(append '(
-;        auto-mode-alist)
+(add-hook 'js-mode 'my-js-settings)
+
+(setq auto-mode-alist
+      (append auto-mode-alist
+              '(("\\.js$" . javascript-mode))))

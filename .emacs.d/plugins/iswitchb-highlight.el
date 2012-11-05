@@ -75,7 +75,7 @@
 	("Makefile"    . 2)
     ("Fundamental" . 3)
     ("Completions" . 3)
-    ("Emacs-Lisp"  . 4)
+    ("Ruby"        . 4)
     ("^C.*"        . 5)
     ("Org"         . 6)
     ("nXML"        . 7)

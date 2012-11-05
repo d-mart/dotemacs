@@ -34,15 +34,15 @@
 (add-hook 'c-mode-hook          'imenu-add-menubar-index)
 (add-hook 'c-mode-common-hook #'(lambda () (autopair-mode)))
 
-(append '(("\\.[Cc][Xx][Xx]$"  . c++-mode)
-          ("\\.[Cc][Pp][Pp]$"  . c++-mode)
-          ("\\.[Hh][Xx][Xx]$"  . c++-mode)
-          ("\s\.[Tt][Cc][Cc]$" . c++-mode)
-          ("\\.i$"             . c++-mode)
-          ("\\.h$"             . c-mode)
-          ("\\.mak$"           . makefile-mode)
-          ("Doxyfile.tmpl$"    . makefile-mode)
-          ("Doxyfile$"         . makefile-mode))
-        auto-mode-alist)
+(setq auto-mode-alist
+      (append '(("\\.[Cc][Xx][Xx]$"  . c++-mode)
+                ("\\.[Cc][Pp][Pp]$"  . c++-mode)
+                ("\\.[Hh][Xx][Xx]$"  . c++-mode)
+                ("\s\.[Tt][Cc][Cc]$" . c++-mode)
+                ("\\.i$"             . c++-mode)
+                ("\\.h$"             . c-mode)
+                ("\\.mak$"           . makefile-mode)
+                ("Doxyfile.tmpl$"    . makefile-mode)
+                ("Doxyfile$"         . makefile-mode))
+              auto-mode-alist))
 
-      

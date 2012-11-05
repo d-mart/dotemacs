@@ -9,6 +9,7 @@
 (add-hook 'emacs-lisp-mode-hook 'my-elisp-mode-keybindings)
 
 ;; file modes
-(append '(("_emacs"           . lisp-mode)
-          ("\\.el\\.gz$"      . lisp-mode))
-        auto-mode-alist)
+(setq auto-mode-alist
+      (append '(("_emacs"           . lisp-mode)
+                ("\\.el\\.gz$"      . lisp-mode))
+              auto-mode-alist))

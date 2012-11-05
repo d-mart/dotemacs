@@ -101,6 +101,7 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 ;; temp - iswitchb bombs if an SGML HTML buffer is open
 (global-set-key (kbd "C-x b")   'ido-switch-buffer)
+(global-set-key (kbd "C-x C-f") 'ido-find-file)
 
 (global-set-key (kbd "C-c b")   'bury-buffer)
 ;; insert '%' unless cursor just moved AND next to a paren/brace/bracket

@@ -2,5 +2,6 @@
 ;;; Erlang
 ;;; ----------------------
 
-(append '(("\\.erl$"      . erlang-mode))
-        auto-mode-alist)
+(setq auto-mode-alist
+      (append auto-mode-alist
+              '(("\\.erl$" . erlang-mode))))
