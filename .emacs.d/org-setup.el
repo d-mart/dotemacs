@@ -1,7 +1,7 @@
 ;; ------------------
 ;; Org Mode!
 ;; ------------------
-(require 'org-install)
+(require 'org)
 (setq org-log-done t)
 
 ;; enable running snippets of code from org mode docs
