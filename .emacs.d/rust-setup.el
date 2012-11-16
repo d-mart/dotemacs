@@ -2,5 +2,4 @@
 ;;; Rust
 ;;; ----------------------
 
-(append '(("\\.rust$"      . rust-mode))
-        auto-mode-alist)
+(add-to-list 'auto-mode-alist '("\\.rust$" . rust-mode))

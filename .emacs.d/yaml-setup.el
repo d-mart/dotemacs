@@ -14,6 +14,5 @@
 (add-hook 'yaml-mode-hook 'my-yaml-mode-keybindings)
 
 ;; Open files matching these 
-(setq auto-mode-list
-      (append auto-mode-alist
-              '(("\\.yml$"                . yaml-mode))))
+(add-to-list 'auto-mode-alist '("\\.yml$"  . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))

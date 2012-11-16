@@ -42,6 +42,9 @@
 ;; regexp search by default
 (global-set-key (kbd "C-r")     'isearch-backward-regexp)
 (global-set-key (kbd "C-s")     'isearch-forward-regexp)
+;; move by paragraph - useful when region-ing a block of codez - don't take hands of regular area
+(global-set-key (kbd "C-S-n")   'forward-paragraph)
+(global-set-key (kbd "C-S-p")   'backward-paragraph)
 
 (global-set-key (kbd "C-x ,")   'find-file-in-tags)
 ;(global-set-key (kbd "C-x C-b")  'electric-buffer-list)
@@ -129,3 +132,10 @@
    (if (y-or-n-p-with-timeout "Do you really want to exit Emacs? " 4 nil)
        (save-buffers-kill-emacs))))
 
+;;; Keybindings for mac
+;; make super-c, super-v, super-x do copy, paste, cut
+(if (eq system-type 'darwin)
+    (progn
+      (global-set-key (kbd "s-c") 'kill-ring-save)
+      (global-set-key (kbd "s-v") 'cua-paste)
+      (global-set-key (kbd "s-x") 'kill-region)))

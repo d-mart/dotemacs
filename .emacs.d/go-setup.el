@@ -2,5 +2,4 @@
 ;;; Go
 ;;; ----------------------
 
-(append '(("\\.go$"      . go-mode))
-        auto-mode-alist)
+(add-to-list 'auto-mode-alist '("\\.go$" . go-mode))

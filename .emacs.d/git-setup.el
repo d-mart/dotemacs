@@ -1,3 +1,4 @@
+
 ;;; ----------------------
 ;;; Git setup
 ;;; ----------------------
@@ -9,7 +10,10 @@
 (autoload 'git-commit-mode "git-commit-mode"
           "git commit message editing mode" t)
 
+(defalias 'mag 'magit-status)
 (defalias 'mgb 'magit-blame-mode)
+(defalias 'gg  'vc-git-grep)
 
-(append '(("COMMIT_EDITMSG$"  . git-commit-mode)
-        auto-mode-alist))
+(setq auto-mode-alist
+      (append '(("COMMIT_EDITMSG$"  . git-commit-mode))
+              auto-mode-alist))

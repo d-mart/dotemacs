@@ -54,13 +54,12 @@
                           ("^[[:space:]]*private\\b"                   0 'font-lock-keyword-face)
                           ("^[[:space:]]*protected\\b"                 0 'font-lock-keyword-face)))
 
-;; Open files matching these 
-(setq auto-mode-list
-      (append '(("Rakefile$"              . ruby-mode)
-                ("Guardfile$"             . ruby-mode)
-                ("Capfile"                . ruby-mode)
-                ("Gemfile\\(\\ .lock\])?" . ruby-mode)
-                ("\\.rake$"               . ruby-mode)
-                ("\\.feature$"            . feature-mode)
-                ("\\.html.erb"            . rhtml-mode))
-               auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.feature"             . feature-mode))
+(add-to-list 'auto-mode-alist '("Rakefile$"              . ruby-mode))
+(add-to-list 'auto-mode-alist '("Guardfile$"             . ruby-mode))
+(add-to-list 'auto-mode-alist '("Capfile"                . ruby-mode))
+;(add-to-list 'auto-mode-alist '("Gemfile\\(\\ .lock\])?" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile$"               . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rake$"               . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.feature$"            . feature-mode))
+(add-to-list 'auto-mode-alist '("\\.html.erb"            . rhtml-mode))

@@ -6,7 +6,8 @@
 ;;-smerge to eat diff3 output
 
 ;; get directory of this file and append .emacs.d to set up various paths
-(defconst my-config-dir (concat (file-name-directory load-file-name) ".emacs.d/"))
+;(defconst my-config-dir (concat (file-name-directory load-file-name) ".emacs.d/"))
+(defconst my-config-dir (file-name-directory load-file-name))
 (message (concat "This is what I'll use as top-level config dir: " my-config-dir))
 
 ;; save emacs (customize-xxxx) changes their own file
@@ -20,7 +21,8 @@
 ;; set up default location for emacs-themes
 (setq custom-theme-directory (concat my-config-dir "themes"))
 
-(if (eq system-type 'darwin)
+;;(if (eq system-type 'darwin)
+(if (eq window-system 'ns) 
     ;;something for OS X if true
     ; workaround for having trouble with colors on OSX
     (setq x-colors (ns-list-colors))
@@ -63,8 +65,6 @@
 (require 'protobuf-mode)
 ;(autoload 'protobuf-mode "protobuf"
 ;          "Google Protocol Buffers syntax hilighting" t)
-(autoload 'ahk-mode "ahk-mode"
-          "major mode for AutoHotKey" t)
 
 ;; functions and settings for working with tags
 ;; (specific to projects I'm working on)
@@ -837,7 +837,6 @@ This one changes the cursor color on each blink. Define colors in `blink-cursor-
                 ("\\.scons$"        . python-mode)
                 ("SCons\\(cript\\|truct\\)" . python-mode)
                 ("\\.gclient$"      . python-mode)
-                ("\\.ahk$"          . ahk-mode)
                 ("\\.proto$"        . protobuf-mode)
                 ("\\.gdb$"          . gdb-script-mode)
                 ) auto-mode-alist))
@@ -870,3 +869,6 @@ This one changes the cursor color on each blink. Define colors in `blink-cursor-
 (load-user-file "dired-setup.el")
 (load-user-file "irc-setup.el")
 (load-user-file "global-keybindings-setup.el")
+(load-user-file "my-misc-utils.el")
+
+(message "All set.")

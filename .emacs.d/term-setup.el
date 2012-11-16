@@ -32,8 +32,19 @@
                             '(lambda () (interactive)
                                (if (comint-after-pmark-p)
                                    (comint-next-input 1)
-                                 (forward-line 1))))
-             ))
+                                 (forward-line 1))))))
+
+
+;; ----------------
+;; Insert the filename of the active buffer just
+;; before the minibuffer was activated.  Useful for running
+;; shell-command and inserting the buffer name to operate on
+;; ----------------
+(define-key minibuffer-local-map [f3]
+  (lambda() (interactive)
+    (let ((bfn (buffer-file-name (nth 1 (buffer-list)))))
+      (when bfn (insert bfn)))))
+
 
 ;; ----------------
 ;; Switch to, bury, or create
