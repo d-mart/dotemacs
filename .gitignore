@@ -7,3 +7,4 @@ emacs-backup/
 .emacs.d/url/.emacs.d/eshell/
 .emacs.d/tramp
 .emacs.d/url/
+.emacs.d/eshell/
