@@ -22,7 +22,7 @@
 (setq custom-theme-directory (concat my-config-dir "themes"))
 
 ;;(if (eq system-type 'darwin)
-(if (eq window-system 'ns) 
+(if (eq window-system 'ns)
     ;;something for OS X if true
     ; workaround for having trouble with colors on OSX
     (setq x-colors (ns-list-colors))
@@ -48,19 +48,6 @@
 ;;------------------
 ;; Load modules
 ;;------------------
-
-;; el-get - fetch emacs addons and keep them up to date
-;;(if (= emacs-major-version 24)
-;  (unless (require 'el-get nil t)
-;    (url-retrieve
-;     "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-;     (lambda (s)
-;       (end-of-buffer)
-;       (eval-print-last-sexp))))
-;
-;(el-get 'sync)
-(require 'el-get)
-
 
 (require 'protobuf-mode)
 ;(autoload 'protobuf-mode "protobuf"
@@ -135,10 +122,6 @@
 (setq uniquify-after-kill-buffer-p t) ; rename after killing uniquified
 (setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
 
-;; buffer-menu+ - Lots of improvements to buffer list
-; require doesn't work - load instead (require 'buff-menu+)
-(load-library "buff-menu+.el")
-
 ;; autocomplete - learning, completion-showing extension
 (require 'auto-complete-config)
 (require 'auto-complete-etags)
@@ -195,7 +178,7 @@
 ;; make a stack of buffers a la alt-tab
 ;; key-bindings not set within, see below
 (require 'iflipb)
-	
+
 ;; bookmarks - visible and possibly persistent bookmarks
 (require 'bm)
 
@@ -298,6 +281,7 @@
         try-complete-lisp-symbol))
 
 ;; add some more package repositories for ELPA - DM
+(require 'package)
 (cond
  ((= 24 emacs-major-version)
   (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
@@ -325,6 +309,9 @@
     (abort-recursive-edit)))
 
 (add-hook 'mouse-leave-buffer-hook 'stop-using-minibuffer)
+
+;; Remove trailing whitespace when a file is saved
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Easy buffer switching by holding down shift and press any arrow key.
 (windmove-default-keybindings 'shift)
@@ -498,7 +485,7 @@
 
 (setq blink-cursor-count 0)
 (defun blink-cursor-timer-function ()
-  "Zarza wrote this cyberpunk variant of timer `blink-cursor-timer'. 
+  "Zarza wrote this cyberpunk variant of timer `blink-cursor-timer'.
 Warning: overwrites original version in `frame.el'.
 
 This one changes the cursor color on each blink. Define colors in `blink-cursor-colors'."
