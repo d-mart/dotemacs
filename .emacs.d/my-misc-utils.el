@@ -20,3 +20,11 @@
     (setq pt (point))
     (skip-chars-forward "-_A-Za-z0-9")
     (set-mark pt)))
+
+(defun iwb ()
+  ;; from http://emacsblog.org/2007/01/17/indent-whole-buffer/
+  "indent whole buffer"
+  (interactive)
+  (delete-trailing-whitespace)
+  (indent-region (point-min) (point-max) nil)
+  (untabify (point-min) (point-max)))
