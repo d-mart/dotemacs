@@ -61,5 +61,6 @@
 ;(add-to-list 'auto-mode-alist '("Gemfile\\(\\ .lock\])?" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Gemfile$"               . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.rake$"               . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.i*rbrc"              . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.feature$"            . feature-mode))
 (add-to-list 'auto-mode-alist '("\\.html.erb"            . rhtml-mode))
