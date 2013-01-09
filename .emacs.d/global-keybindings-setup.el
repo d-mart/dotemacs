@@ -14,7 +14,7 @@
 (global-set-key [f3]            'search-selected-text)
 (global-set-key [f4]            'switch-to-or-create-shell)
 ;; f5 is used by 'Anything'
-(global-set-key [f6]            'revert-buffer-no-confirm)
+(global-set-key [f6]            '(lambda ()  (interactive) (revert-buffer t t) (message "Reverted."))) ;; lifted from dadams 'revert-buffer-no-confirm
 (global-set-key [S-f6]          '(lambda () (interactive) (kill-buffer (current-buffer))))
 (global-set-key [C-f6]          'revert-all-buffers)
 (global-set-key [s-f6]          'nuke-all-buffers)     ;; Win-F6 - kill all buffers
@@ -22,6 +22,13 @@
 (global-set-key [S-f7]          'recompile)
 (global-set-key [C-f7]          'kill-compilation)
 
+; smex - ido-stuff on M-x
+(if (featurep 'smex)
+    (progn
+      (global-set-key (kbd "M-x")         'smex)
+      (global-set-key (kbd "M-X")         'smex-major-mode-commands)
+      (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; original M-x.
+      ))
 
 ; ace-jump-mode
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
@@ -94,7 +101,7 @@
 ;; hippie-expand
 (global-set-key (kbd "M-/")     'hippie-expand)
 ;; backwards zap to char
-(global-set-key (kbd "C-M-z")   'backwards-zap-to-char)
+(global-set-key (kbd "C-S-z")   'backward-zap-to-char)
 ;; see list of killed text
 (global-set-key (kbd "C-c k")   'browse-kill-ring)
 ;; lusty

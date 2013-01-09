@@ -21,7 +21,15 @@
 ;; set up default location for emacs-themes
 (setq custom-theme-directory (concat my-config-dir "themes"))
 
-;;(if (eq system-type 'darwin)
+
+;; TODO - move this mac stuff to mac specific setup file
+
+(if (eq system-type 'darwin)
+    (progn
+      (setq ns-function-modifier 'hyper)
+      (setq mac-command-modifier 'super)
+      (setq mac-option-modifier  'meta)))
+
 (if (eq window-system 'ns)
     ;;something for OS X if true
     ; workaround for having trouble with colors on OSX
@@ -446,6 +454,7 @@
 (add-hook 'gud-mode-hook 'my-gdb-mode-hook)
 
 ;; disable line wrap
+;; switch back and forth with e.g. 'M-x toggle <RET> truncate-lines'
 (setq-default truncate-lines t)
 
 ;; disable annoying emacs splash screen
@@ -736,7 +745,7 @@ This one changes the cursor color on each blink. Define colors in `blink-cursor-
 ;; backwards zap to char
 ;; ------------------
 ;; save a few keystrokes by passing a negative number to zap-to-char
-(defun backwards-zap-to-char (arg char)
+(defun backward-zap-to-char (arg char)
   (interactive "p\ncZap to char: ") (zap-to-char (- arg) char))
 
 ;; ------------------
@@ -857,5 +866,6 @@ This one changes the cursor color on each blink. Define colors in `blink-cursor-
 (load-user-file "irc-setup.el")
 (load-user-file "global-keybindings-setup.el")
 (load-user-file "my-misc-utils.el")
+(load-user-file "my-misc-advice.el")
 
 (message "All set.")
