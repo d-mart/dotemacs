@@ -81,8 +81,10 @@
 ;; org interaction bindings
 (global-set-key (kbd "C-c l")   'org-store-link)
 (global-set-key (kbd "C-c a")   'org-agenda)
+;; toggle truncate lines (aka line-wrap)
+(global-set-key (kbd "C-c t")   'toggle-truncate-lines)
 ;; insert a timestamp at point
-(global-set-key (kbd "C-c t")   'insert-time-string)
+(global-set-key (kbd "C-S-c t") 'insert-time-string)
 ;; eval region (I seem to use it a lot)
 (global-set-key (kbd "C-c C-e") 'eval-region)
 ;; another binding for transpose lines (gnome steals C-M-t for launch terminal)
