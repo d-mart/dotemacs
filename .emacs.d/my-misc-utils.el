@@ -29,19 +29,11 @@
                   (line-beginning-position (+ 1 arg)))
   (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
 
-;; The built-in (open-line) will split the middle of the line
-;; and doesn't indent the line that is moved down.
-(defun dm-open-line (arg)
-  "open-line the right way"
-  (interactive "p")
-  (beginning-of-line)
-  )
 
 ;; Occur across open buffers - TODO - make a wrapper for this
 ;; C-u M-x multi-occur-in-matching-buffers
 ;; - don't prompt for buffer (use regex '.*')
 ;; - prompt for occur regex
-
 (defun ruby-class-to-file (prefix-arg-code)
   "Convert CamelCase word at point to camel_case. Optionally append '.rb'"
   (interactive "P")
@@ -94,3 +86,11 @@
   (let ((x 6))
     (message "The value of x is %s" x))
   (message "The value of x is %s" x))
+
+(defun iwb ()
+  ;; from http://emacsblog.org/2007/01/17/indent-whole-buffer/
+  "indent whole buffer"
+  (interactive)
+  (delete-trailing-whitespace)
+  (indent-region (point-min) (point-max) nil)
+  (untabify (point-min) (point-max)))
