@@ -389,7 +389,9 @@
 (setq column-number-mode t)
 
 ;; show line numbers in fringe
-(global-linum-mode t)
+;; (global-linum-mode t)
+(add-hook 'find-file-hook (lambda () (linum-mode 1)))
+(setq linum-format "%d|")
 
 ;; show a visual indicator of view's position of buffer in the modeline
 ;(sml-modeline-mode)
