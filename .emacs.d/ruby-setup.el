@@ -6,9 +6,18 @@
 ;; Cucumber testing framework
 (autoload 'feature-mode "feature-mode"
           "Cucumber feature mode for emacs" t)
+
 ;; rhtml mode for editing erb files
 (autoload 'rhtml-mode "rhtml-mode"
           "RHTML embedded ruby editing mode" t)
+
+;; rvm.el - make various ruby packages use correct version
+;;          ruby according to rvm
+(require 'rvm)
+
+;; make rspec-mode use rvm, but not use rake
+(setq rspec-use-rvm t)
+(setq rspec-use-rake-flag nil)
 
 ;; Ruby-mode keybindings
 (defun my-ruby-mode-keybindings ()
