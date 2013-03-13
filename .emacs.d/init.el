@@ -359,7 +359,8 @@
 ;; Look and Feel
 ;; -----------------
 ;; Set font.  To see what's at cursor, C-u C-x =
-(defvar myFont "-unknown-DejaVu Sans Mono-normal-normal-normal-*-12-*-*-*-*-0-iso10646-1")
+;(defvar myFont "-unknown-DejaVu Sans Mono-normal-normal-normal-*-12-*-*-*-*-0-iso10646-1")
+(defvar myFont "-unknown-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-*-0-iso10646-1")
 ;(defvar myFont "-unknown-Ubuntu Mono-bold-normal-normal-*-15-*-*-*-m-0-iso10646-1")
 ;(defvar myFont "-monotype-Andale Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
 ;(defvar myFont "-monotype-Andale Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")
@@ -457,7 +458,7 @@
 
 ;; disable line wrap
 ;; switch back and forth with e.g. 'M-x toggle <RET> truncate-lines'
-(setq-default truncate-lines t)
+(setq-default truncate-lines nil)
 
 ;; disable annoying emacs splash screen
 (setq inhibit-splash-screen t)
@@ -487,7 +488,7 @@
 (mouse-avoidance-mode 'animate)
 
 ;; cursor is a line instead of block
-(setq-default cursor-type  '(bar . 1))
+(setq-default cursor-type  '(bar . 3))
 (setq-default cursor-color "#ffffff")
 
 ;; change cursor color at each blink
