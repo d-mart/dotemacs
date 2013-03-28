@@ -141,11 +141,6 @@
 ;; Browse kill ring - see list of text that has been killed
 (require 'browse-kill-ring)
 
-; anything - search different types of data (e.g. command names, files, stuff in buffers)
-;(require 'anything)
-;(require 'anything-dired-history)
-;(require 'anything-etags+)
-
 ;; Highlight the parens cursor is within
 (require 'highlight-parentheses)
 ;(highlight-parentheses-mode 'nil)
@@ -340,20 +335,22 @@
 ;; -----------------
 ;; TRAMP setup
 ;; -----------------
-(setq tramp-default-method "ssh")
+;(setq tramp-default-method "ssh")
+;; set tramp debug verbosity (0-10)
+;(setq tramp-verbose 8)
 ;(setq tramp-debug-buffer t)
-(setq tramp-debug-buffer nil)
-; one of these must match the prompt on remote host... not sure why first one works
-(setq shell-prompt-pattern "$ ")
-(setq tramp-shell-prompt-pattern "0m ")
-;; - Get a warning on the modeline when editing a file as root
-(defun my-mode-line-function ()
-  (when (string-match "^/su\\(do\\)?:" default-directory)
-    (setq mode-line-format
-          (format-mode-line mode-line-format 'font-lock-warning-face))))
-(add-hook 'find-file-hooks 'my-mode-line-function)
-(add-hook 'dired-mode-hook 'my-mode-line-function)
+; (setq tramp-debug-buffer nil)
 
+;; one of these must match the prompt on remote host.
+;(setq shell-prompt-pattern "- \\^\\[\\[0m")
+;(setq tramp-shell-prompt-pattern " 0m")
+;; default values for shell patterns:
+;;(setq shell-prompt-pattern "^[^#$%>\n]*[#$%>] *")
+;;(setq tramp-shell-prompt-pattern "\\(?:^\\|\\)[^#$%>\n]*#?[#$%>] *\\(\\[[0-9;]*[a-zA-Z] *\\)*")
+;;(setq tramp-shell-prompt-pattern "$")
+;;
+;; (set-default 'tramp-default-proxies-alist (quote ((".*" "\\`root\\'" "/ssh:%h:"))))
+;; now you can --> C-x C-f /sudo:root@host[#port]:/path/to/file
 
 ;; -----------------
 ;; Look and Feel
@@ -377,10 +374,10 @@
 
 ; highlight the cursor line
 ; M-x list-colors-display
-(defface hl-line '((t (:background "#1A1A1A")))
-  "Face to use for `hl-line-face'." :group 'hl-line)
-(setq hl-line-face 'hl-line)
-(global-hl-line-mode nil)
+;; (defface hl-line '((t (:background "#1A1A1A")))
+;;   "Face to use for `hl-line-face'." :group 'hl-line)
+;; (setq hl-line-face 'hl-line)
+;; (global-hl-line-mode nil)
 
 ;; display date and time always
 (setq display-time-day-and-date t)
@@ -645,21 +642,6 @@ This one changes the cursor color on each blink. Define colors in `blink-cursor-
     (search-forward word)))
 
 ;; -----------------
-;; kill all dired buffers
-;; -----------------
-(defun kill-all-dired-buffers()
-      "Kill all dired buffers."
-      (interactive)
-      (save-excursion
-        (let((count 0))
-          (dolist(buffer (buffer-list))
-            (set-buffer buffer)
-            (when (equal major-mode 'dired-mode)
-              (setq count (1+ count))
-              (kill-buffer buffer)))
-          (message "Killed %i dired buffer(s)." count ))))
-
-;; -----------------
 ;; Reload all open files.  I.e. revert a
 ;; all buffers visiting a file
 ;; -----------------
@@ -777,6 +759,15 @@ This one changes the cursor color on each blink. Define colors in `blink-cursor-
 (defalias 'dfb 'diff-buffer-with-file)
 (defalias 'ar  'align-regexp)
 (defalias 'cr  'comment-or-uncomment-region)
+(defalias 'wd  'wdired-change-to-wdired-mode)
+
+;; -----------------
+;; Predefined Registers
+;; -----------------
+(set-register ?e '(file . "~/.emacs/init.el"))
+(set-register ?o '(file . "~/misc.org"))
+(set-register ?r '(file . "/tmp/temp.rb"))
+(set-register ?l '(file . "/tmp/temp.erl"))
 
 ;; When trying to kill a dirty buffer, prompt
 ;; to save, diff, or kill
