@@ -6,10 +6,17 @@
   (setq erlang-indent-level 2)
   (setq tab-width 2))
 
-(add-hook 'erlang-mode-hook 'my-erlang-settings)
+(require 'distel)
+(distel-setup)
+(setq inferior-erlang-machine-options '("-sname" "distel"))
 
-(add-to-list 'auto-mode-alist '("\\.hrl$" . erlang-mode))
+(add-hook 'erlang-mode-hook 'my-erlang-settings)
+(add-hook 'erlang-mode-hook 'autopair-mode)
+
 (add-to-list 'auto-mode-alist '("\\.erl$" . erlang-mode))
+(add-to-list 'auto-mode-alist '("\\.hrl$" . erlang-mode))
+(add-to-list 'auto-mode-alist '("\\.xrl$" . erlang-mode))
+(add-to-list 'auto-mode-alist '("\\.yrl$" . erlang-mode))
 
 (defun erlang-indent-command (&optional whole-exp)
   "Indent current line as Erlang code.
