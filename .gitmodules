@@ -1,21 +1,6 @@
-[submodule ".emacs.d/icicles"]
-	path = .emacs.d/icicles
-	url = git://github.com/emacsmirror/icicles.git
-[submodule ".emacs.d/el-get/clojure-mode"]
-	path = .emacs.d/el-get/clojure-mode
-	url = git://github.com/technomancy/clojure-mode.git
-[submodule ".emacs.d/el-get/el-get"]
-	path = .emacs.d/el-get/el-get
-	url = git://github.com/dimitri/el-get.git
 [submodule ".emacs.d/plugins/icicles"]
 	path = .emacs.d/plugins/icicles
 	url = git://github.com/emacsmirror/icicles.git
-[submodule ".emacs.d/el-get/magit"]
-	path = .emacs.d/el-get/magit
-	url = git://github.com/magit/magit.git
-[submodule ".emacs.d/el-get/yaml-mode"]
-	path = .emacs.d/el-get/yaml-mode
-	url = git://github.com/yoshiki/yaml-mode.git
 [submodule ".emacs.d/plugins/rhtml"]
 	path = .emacs.d/plugins/rhtml
 	url = git://github.com/eschulte/rhtml.git
