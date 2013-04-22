@@ -298,7 +298,8 @@
 ;;------------------
 ;; start emacs server so you can open files in this session from other shells
 ;; *unless* it's already running
-(if (not (boundp 'server-process))
+(load "server")
+(unless (server-running-p)
     (server-start)
     ;; When opening a buffer from emacsclient, don't prompt when it is killed
     (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
@@ -335,22 +336,15 @@
 ;; -----------------
 ;; TRAMP setup
 ;; -----------------
-;(setq tramp-default-method "ssh")
-;; set tramp debug verbosity (0-10)
-;(setq tramp-verbose 8)
-;(setq tramp-debug-buffer t)
-; (setq tramp-debug-buffer nil)
-
-;; one of these must match the prompt on remote host.
-;(setq shell-prompt-pattern "- \\^\\[\\[0m")
-;(setq tramp-shell-prompt-pattern " 0m")
-;; default values for shell patterns:
-;;(setq shell-prompt-pattern "^[^#$%>\n]*[#$%>] *")
-;;(setq tramp-shell-prompt-pattern "\\(?:^\\|\\)[^#$%>\n]*#?[#$%>] *\\(\\[[0-9;]*[a-zA-Z] *\\)*")
-;;(setq tramp-shell-prompt-pattern "$")
-;;
-;; (set-default 'tramp-default-proxies-alist (quote ((".*" "\\`root\\'" "/ssh:%h:"))))
-;; now you can --> C-x C-f /sudo:root@host[#port]:/path/to/file
+;; (require 'tramp)
+;; (setq tramp-debug-buffer t)
+;; (setq tramp-verbose 9)
+;; (setq tramp-default-method "ssh")
+;; (setq tramp-password-prompt-regexp ".*[Pp]assword: *$")
+;; (setq shell-prompt-pattern "^[^#$%>\n]*[#$%>] *")
+;; ;(setq tramp-shell-prompt-pattern "^[^;$#>]*[;$#>] *")
+;; (setq tramp-shell-prompt-pattern "^.*$.*")
+;; (setq password-cache-expiry nil)
 
 ;; -----------------
 ;; Look and Feel
@@ -760,11 +754,14 @@ This one changes the cursor color on each blink. Define colors in `blink-cursor-
 (defalias 'ar  'align-regexp)
 (defalias 'cr  'comment-or-uncomment-region)
 (defalias 'wd  'wdired-change-to-wdired-mode)
+(defalias 'reb 're-builder)
+(defalias 'tde 'toggle-debug-on-error)
+(defalias 'lm  'linum-mode)
 
 ;; -----------------
 ;; Predefined Registers
 ;; -----------------
-(set-register ?e '(file . "~/.emacs/init.el"))
+(set-register ?e '(file . "~/.emacs.d/init.el"))
 (set-register ?o '(file . "~/misc.org"))
 (set-register ?r '(file . "/tmp/temp.rb"))
 (set-register ?l '(file . "/tmp/temp.erl"))
@@ -829,6 +826,8 @@ This one changes the cursor color on each blink. Define colors in `blink-cursor-
                 ("\\.gclient$"      . python-mode)
                 ("\\.proto$"        . protobuf-mode)
                 ("\\.gdb$"          . gdb-script-mode)
+                ("\\.md$"           . markdown-mode)
+                ("diary"            . diary-mode)
                 ) auto-mode-alist))
 
 ;;------------------
@@ -859,6 +858,7 @@ This one changes the cursor color on each blink. Define colors in `blink-cursor-
 (load-user-file "dired-setup.el")
 (load-user-file "irc-setup.el")
 (load-user-file "global-keybindings-setup.el")
+(load-user-file "misc-utils.el")
 (load-user-file "my-misc-utils.el")
 (load-user-file "my-misc-advice.el")
 

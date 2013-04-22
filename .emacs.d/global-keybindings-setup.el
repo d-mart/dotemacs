@@ -11,7 +11,7 @@
 (global-set-key [C-f2]          'bm-toggle)
 (global-set-key [f2]            'bm-next)
 (global-set-key [S-f2]          'bm-previous)
-(global-set-key [f3]            'search-selected-text)
+(global-set-key [f3]            'generalized-shell-command)
 (global-set-key [f4]            'switch-to-or-create-shell)
 ;; f5 is used by 'Anything'
 (global-set-key [f6]            '(lambda ()  (interactive) (revert-buffer t t) (message "Reverted."))) ;; lifted from dadams 'revert-buffer-no-confirm
@@ -36,6 +36,8 @@
 (global-set-key [C-pause]       'toggle-window-dedicated)
 ; Describe last function - for when you want to know wtf emacs just did
 (global-set-key (kbd "C-h z")   'describe-last-function)
+; Jump to definition of function
+(global-set-key (kbd "C-h C-f") 'find-function)
 ; Kill from point to beginning of line - (this binding replaces kill-sentence which I don't use)
 (global-set-key (kbd "M-k")     'kill-start-of-line)
 ; kill word to left of point
