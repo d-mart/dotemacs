@@ -28,7 +28,8 @@
     (progn
       (setq ns-function-modifier 'hyper)
       (setq mac-command-modifier 'super)
-      (setq mac-option-modifier  'meta)))
+      (setq mac-option-modifier  'meta)
+      (toggle-menu-bar-mode-from-frame)))
 
 (if (eq window-system 'ns)
     ;;something for OS X if true
@@ -298,11 +299,11 @@
 ;;------------------
 ;; start emacs server so you can open files in this session from other shells
 ;; *unless* it's already running
-(load "server")
-(unless (server-running-p)
-    (server-start)
-    ;; When opening a buffer from emacsclient, don't prompt when it is killed
-    (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
+;; (load "server")
+;; (unless (server-running-p)
+;;     (server-start)
+;;     ;; When opening a buffer from emacsclient, don't prompt when it is killed
+;;     (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
 
 ;; Enable recursive minibuffer
 (setq enable-recursive-minibuffers t)
