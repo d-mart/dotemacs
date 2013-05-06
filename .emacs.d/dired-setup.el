@@ -5,6 +5,10 @@
 ;; dired+ - Lots of improvements to dir listing buffers
 (require 'dired+)
 
+;; dired-details - (Optionally) hide mode, owner, date, size
+(require 'dired-details)
+(dired-details-install)
+
 ;; from emacswiki - show dired buffers with directories listed first
 (defun mydired-sort ()
   "Sort dired listings with directories first."
