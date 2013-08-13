@@ -6,7 +6,6 @@
 ;;-smerge to eat diff3 output
 
 ;; get directory of this file and append .emacs.d to set up various paths
-;(defconst my-config-dir (concat (file-name-directory load-file-name) ".emacs.d/"))
 (defconst my-config-dir (file-name-directory load-file-name))
 (message (concat "This is what I'll use as top-level config dir: " my-config-dir))
 
@@ -18,12 +17,14 @@
 (let ((default-directory my-config-dir))
   (normal-top-level-add-subdirs-to-load-path))
 
+;; Use pallet and cask to manage ELPA elisp packages
+(require 'pallet)
+
 ;; set up default location for emacs-themes
 (setq custom-theme-directory (concat my-config-dir "themes"))
 
 
 ;; TODO - move this mac stuff to mac specific setup file
-
 (if (eq system-type 'darwin)
     (progn
       (setq ns-function-modifier 'hyper)

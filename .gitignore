@@ -8,4 +8,5 @@ emacs-backup/
 .emacs.d/tramp
 .emacs.d/url/
 .emacs.d/eshell/
+.emacs.d/elpa/
 *-readme.txt
