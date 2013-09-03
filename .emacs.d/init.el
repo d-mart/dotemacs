@@ -529,16 +529,6 @@ This one changes the cursor color on each blink. Define colors in `blink-cursor-
 (cua-mode)
 
 ;;; ------------
-;;; Don't display ^M in buffers that have
-;;; mixed line endings
-;;; ------------
-(defun remove-dos-eol ()
-  "Do not show ^M in files containing mixed UNIX and DOS line endings."
-  (interactive)
-  (setq buffer-display-table (make-display-table))
-  (aset buffer-display-table ?\^M []))
-
-;;; ------------
 ;;; Programming major mode hooks
 ;;; ------------
 ; fontify some keywords: '@todo' 'FIXME' 'XXX'
@@ -562,18 +552,6 @@ This one changes the cursor color on each blink. Define colors in `blink-cursor-
 ;; add special keyword hilighting
 (add-hook 'emacs-lisp-mode-hook 'fontify-at-todo)
 (add-hook 'ruby-mode-hook       'fontify-at-todo)
-
-;; add a hook to hilite current word to several programming modes
-;(add-hook 'emacs-lisp-mode-hook 'idle-highlight)
-;(add-hook 'ruby-mode-hook       'idle-highlight)
-
-;; add a hook to show trailing whitespace in programming modes
-;(add-hook 'emacs-lisp-mode-hook 'show-ws-toggle-show-trailing-whitespace)
-
-;; auto-pair - automatically insert pairs of delimeters "" () {} [] etc
-(add-hook 'emacs-lisp-mode-hook #'(lambda () (autopair-mode)))
-;(add-hook 'ruby-mode-hook #'(lambda () (autopair-mode)))
-
 
 ;; do not make backup files
 ;;(setq make-backup-files nil)
@@ -612,163 +590,30 @@ This one changes the cursor color on each blink. Define colors in `blink-cursor-
      (list (line-beginning-position)
            (line-beginning-position 2)))))
 
-;; ----------------
-;; Toggle Window Dedication
-;; ----------------
-(defun toggle-window-dedicated ()
-  "Toggle whether the current active window is dedicated or not"
-  (interactive)
-  (message
-   (if (let (window (get-buffer-window (current-buffer)))
-         (set-window-dedicated-p window
-                                 (not (window-dedicated-p window))))
-     "Window '%s' is dedicated"
-     "Window '%s' is normal")
-   (current-buffer)))
-
-;; -----------------
-;; Get info on the last function run
-;; -----------------
-(defun describe-last-function()
-  (interactive)
-  (describe-function last-command))
-
-;; -----------------
-;; Hilite some text.  Search for same
-;; -----------------
-(defun search-selected-text()
-  "Performs a nonincremental-search-forward. The text in the current region is what search for."
-  (interactive)
-  (let* (
-         (start (min (point) (mark)))
-         (end (max (point) (mark)))
-         (word (buffer-substring start end))
-         )
-    (deactivate-mark)  ;; @todo - need to reselect mark for search result
-    (search-forward word)))
-
-;; -----------------
-;; Reload all open files.  I.e. revert a
-;; all buffers visiting a file
-;; -----------------
-(defun revert-all-buffers ()
-    "Refreshes all open buffers from their respective files."
-    (interactive)
-    (dolist (buf (buffer-list))
-      (with-current-buffer buf
-        (when (and (buffer-file-name) (not (buffer-modified-p)))
-          (revert-buffer t t t) )))
-    (message "Refreshed open files.") )
-
-;; -----------------
-;; Kill all buffers
-;; good when doing lots of git'ing.  (Could also revert)
-;; -----------------
-(defun nuke-all-buffers ()
-  "Kill all buffers, leaving *scratch* only."
-  (interactive)
-  (mapcar (lambda (x) (kill-buffer x)) (buffer-list)) (delete-other-windows))
-
-;; ------------------
-;; Show full path of buffer
-;; Useful if editing different files
-;; with same name
-;; ------------------
-(defun show-file-name ()
-  "Show the full path file name in the minibuffer."
-  (interactive)
-  (message (buffer-file-name)))
-
-;; -----------------
-;; Insert Date stamp
-;; -----------------
-; ----------------- insertion macros --------------------
-; insert current date/time
-;   %m   month in [01..12]
-;   %b   abbrev month name
-;   %d   day in [01..31]
-;   %y   year in [00..99]
-;   %Y   full year
-;   %H   hour in [00..23]
-;   %M   minute in [00..59]
-; see format-time-string for more info on formatting options
-(defun my-time-string ()
-  (format-time-string "%Y-%b-%d")) ; %H:%M
-(defun insert-time-string ()
-  "Insert time and date at cursor."
-  (interactive)
-  (insert (my-time-string)))
-
-
-
-;; -----------------
-;; Replace symbol at point.
-;; from: http://scottmcpeak.com/elisp/scott.emacs.el
-;; -----------------
-(defun get-sym-at-cursor ()
-  "Return the symbol name starting at the cursor"
-  (save-excursion
-    (re-search-forward "[_A-Za-z]\\([_A-Za-z0-9]\\)*")
-    (match-string 0)
-  ))
-
-(defun replace-sym-at-cursor (replacement)
-  "Replace symbol at cursor with argument, throughout buffer to end"
-  (interactive "sReplacement: ")
-  (save-excursion
-    (let ((orig (get-sym-at-cursor)))
-      (while (re-search-forward orig nil t)
-        (replace-match replacement nil nil))
-    )))
-
-
-;; ----------------
-;; Kill to start of line
-;; Same as typing C-u 0 C-k
-;; So i can make a binding
-;; -----------------
-(defun kill-start-of-line ()
-  "kill from point to start of line"
-  (interactive)
-  (kill-line 0))
-
-;; ------------------
-;; backwards zap to char
-;; ------------------
-;; save a few keystrokes by passing a negative number to zap-to-char
-(defun backward-zap-to-char (arg char)
-  (interactive "p\ncZap to char: ") (zap-to-char (- arg) char))
-
-;; ------------------
-;; bounce back and forth
-;; btwn beginning of line
-;; and beginning of code
-;; ------------------
-;; similar to function beginning-or-indentation from misc-cmds.el
-(defun back-to-indentation-or-beginning () (interactive)
-  (if (= (point) (progn (back-to-indentation) (point)))
-      (beginning-of-line)))
 
 ;; -----------------
 ;; Aliases
 ;; -----------------
-(defalias 'gf  'grep-find)
-(defalias 'rb  'rename-buffer)
-(defalias 'hlp 'highlight-parentheses-mode)
-(defalias 'rab 'revert-all-buffers)
-(defalias 'sws 'toggle-show-trailing-whitespace-show-ws)
-(defalias 'vtt 'visit-tags-table)
-(defalias 'gmw 'gdb-many-windows)
-(defalias 'grw 'gdb-restore-windows)
-(defalias 'bkr 'browse-kill-ring)
-(defalias 'dbf 'diff-buffer-with-file)
-(defalias 'dfb 'diff-buffer-with-file)
-(defalias 'ar  'align-regexp)
-(defalias 'cr  'comment-or-uncomment-region)
-(defalias 'wd  'wdired-change-to-wdired-mode)
-(defalias 'reb 're-builder)
-(defalias 'tde 'toggle-debug-on-error)
-(defalias 'lm  'linum-mode)
+(defalias 'gf   'grep-find)
+(defalias 'rb   'rename-buffer)
+(defalias 'hlp  'highlight-parentheses-mode)
+(defalias 'rab  'revert-all-buffers)
+(defalias 'sws  'toggle-show-trailing-whitespace-show-ws)
+(defalias 'vtt  'visit-tags-table)
+(defalias 'gmw  'gdb-many-windows)
+(defalias 'grw  'gdb-restore-windows)
+(defalias 'bkr  'browse-kill-ring)
+(defalias 'dbf  'diff-buffer-with-file)
+(defalias 'dfb  'diff-buffer-with-file)
+(defalias 'ar   'align-regexp)
+(defalias 'cr   'comment-or-uncomment-region)
+(defalias 'wd   'wdired-change-to-wdired-mode)
+(defalias 'reb  're-builder)
+(defalias 'tde  'toggle-debug-on-error)
+(defalias 'lm   'linum-mode)
+(defalias 'ttl  'toggle-truncate-lines)
+(defalias 'ww   'toggle-truncate-lines)
+(defalias 'tail 'auto-revert-tail-mode)
 
 ;; -----------------
 ;; Predefined Registers
@@ -811,15 +656,6 @@ This one changes the cursor color on each blink. Define colors in `blink-cursor-
                  (save-buffer)
                  ad-do-it)))
       ad-do-it)))
-
-;; @todo WIP not working -
-;;       <menu> is bound to M-x by default, but clearing the menu key
-;;       bindings makes the shortcut not work
-;; unset the menu key (aka Hyper)
-;(global-unset-key (kbd "<menu>"))
-;; get speedbar focus using Hyper Key (aka right-menu)
-;(global-set-key (kbd "H-s")   'speedbar-get-focus)
-
 
 ;; -----------------
 ;; Major Modes for filename patterns
