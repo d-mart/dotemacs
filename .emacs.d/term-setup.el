@@ -34,6 +34,34 @@
                                    (comint-next-input 1)
                                  (forward-line 1))))))
 
+;; use UTF-8 in shells
+(defun my-term-use-utf8 ()
+  (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
+(add-hook 'term-exec-hook 'my-term-use-utf8)
+
+;; clickable addresses in term buffers
+(add-hook 'term-mode-hook 'goto-address-mode)
+
+;; ----------------
+;; Improvements from http://emacs-journey.blogspot.com/2012/06/improving-ansi-term.html
+;; Close term window after shell process exits
+;; ----------------
+(defadvice term-sentinel (around my-advice-term-sentinel (proc msg))
+  (if (memq (process-status proc) '(signal exit))
+      (let ((buffer (process-buffer proc)))
+        ad-do-it
+        (kill-buffer buffer))
+    ad-do-it))
+(ad-activate 'term-sentinel)
+
+;; ----------------
+;; Yank in term-char-mode is just a dumb paste (no-kill-ring)
+;; but better than switching back and forth to line-mode
+;; ----------------
+(defun my-term-hook ()
+  (goto-address-mode)
+  (define-key term-raw-map "\C-y" 'term-paste))
+
 
 ;; ----------------
 ;; Insert the filename of the active buffer just
@@ -45,6 +73,16 @@
     (let ((bfn (buffer-file-name (nth 1 (buffer-list)))))
       (when bfn (insert bfn)))))
 
+
+;; ----------------
+;; Launch a shell command with its output
+;; funnelled to its own buffer
+;; ----------------
+(defun m-shell-command ()
+  "Launch a shell command."
+  (interactive)
+  (let ((command (read-string "Command: ")))
+    (shell-command (concat command " &") (concat "*" command "*"))))
 
 ;; ----------------
 ;; Switch to, bury, or create
