@@ -85,3 +85,11 @@ user."
   (kill-ring-save (line-beginning-position)
                   (line-beginning-position (+ 1 arg)))
   (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
+
+; ======================================================================
+; Previous window (move in opposite direction than C-x o)
+(defun select-previous-window ()
+    "Switch to the previous window"
+      (interactive)
+        (select-window (previous-window)))
+(global-set-key (kbd "C-x p") 'select-previous-window)
