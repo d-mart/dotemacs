@@ -18,6 +18,17 @@
       (append '(("COMMIT_EDITMSG$"  . git-commit-mode))
               auto-mode-alist))
 
+;; git-gutter-fringe - git diff bitmap markers in margin
+;(require 'git-gutter-fringe)
+;(setq-default git-gutter-fr:side 'left-fringe)
+;(setq-default left-fringe-width 8)
+;(set-face-foreground 'git-gutter-fr:added    "green")
+;(set-face-foreground 'git-gutter-fr:modified "yellow")
+;(set-face-foreground 'git-gutter-fr:deleted   "red")
+;(defalias 'ggm 'git-gutter:toggle)
+;(defun my-git-gutter-hook () (git-gutter))
+;(add-hook 'find-file-hook 'my-git-gutter-hook)
+
 ;; from https://gist.github.com/4169777
 ;; look at diff when writing a commit message
 ;; (defun magit-log-show-diff ()
