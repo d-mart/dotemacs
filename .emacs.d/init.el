@@ -285,11 +285,17 @@
         try-complete-lisp-symbol-partially
         try-complete-lisp-symbol))
 
+;; abbrev-mode - use it to correct common typos (e.g. flase -> false)
+(setq-default abbrev-mode t)
+(setq abbrev-file-name "~/.emacs.d/abbrev_defs")
+(setq save-abbrevs t)
+
 ;; add some more package repositories for ELPA - DM
 (require 'package)
 (cond
  ((= 24 emacs-major-version)
   (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+  (add-to-list 'package-archives '("org"       . "http://orgmode.org/elpa/") t)
   (add-to-list 'package-archives '("sunrise"   . "http://joseito.republika.pl/sunrise-commander/"))
   (add-to-list 'package-archives '("ELPA"      . "http://tromey.com/elpa/"))
   (add-to-list 'package-archives '("melpa"     . "http://melpa.milkbox.net/packages/"))))
