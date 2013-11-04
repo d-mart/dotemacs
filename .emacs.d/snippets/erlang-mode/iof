@@ -1,0 +1,4 @@
+# name: io:format("~n", []),
+# key: iof
+# --
+$>io:format("${1:format}~n", [${2:Vars}])$0

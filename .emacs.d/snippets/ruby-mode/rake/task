@@ -1,0 +1,7 @@
+# name: task "" do end
+# key: task
+# --
+desc '${2:description}'
+task :${1:task_name} do
+  $0
+end

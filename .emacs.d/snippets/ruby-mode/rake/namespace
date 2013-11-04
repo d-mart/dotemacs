@@ -1,0 +1,6 @@
+# name: task "" do end
+# key: namespace
+# --
+namespace :{$1:namespace} do
+  $0
+end
