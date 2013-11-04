@@ -13,16 +13,38 @@
 (setq custom-file (concat my-config-dir "custom.el"))
 (load custom-file 'noerror)
 
+;; Use pallet and cask to manage ELPA elisp packages
+;(require 'cask "~/.emacs.d/.cask/cask.el")
+;(cask-initialize)
+
 ;; look under .emacs.d for packages
 (let ((default-directory my-config-dir))
   (normal-top-level-add-subdirs-to-load-path))
 
-;; Use pallet and cask to manage ELPA elisp packages
-(require 'pallet)
+;(require 'cask)
+;(cask-initialize)
+;(require 'pallet)
+
+(require 'cl)
+(defun load-files-matching-pattern (init-dir init-file-regex)
+  "Load all files in <dir> matching <file-regex>
+   e.g.
+   (load-files-matching-regex '/path/to/elisp/files' '.*el$') "
+  (loop for init-file in
+        (directory-files init-dir nil init-file-regex)
+        do (progn
+             (load init-file)
+             (message (concat "Loaded this file: " init-file)))))
+
+;; load all files in init.d.
+;; files in init.d are sorted before loading
+;; files in init.d beginning with and underscore are ignored
+(defconst my-el-initd (concat my-config-dir "init.d"))
+(setq my-el-init-file-regex "^[^_].*.el$")
+(load-files-matching-pattern my-el-initd my-el-init-file-regex)
 
 ;; set up default location for emacs-themes
 (setq custom-theme-directory (concat my-config-dir "themes"))
-
 
 ;; TODO - move this mac stuff to mac specific setup file
 (if (eq system-type 'darwin)
@@ -114,6 +136,15 @@
 ;(require 'textmate)
 ;(textmate-mode)
 
+;; smex - ido fuzzy matching for M-x
+(require 'smex)
+(smex-initialize)
+
+;; helm - find files, buffers, etc
+;(require 'helm-config)
+;(require 'helm-ls-git)
+;(require 'helm-git-grep)
+
 ;; icicles - “In case you never heard of it, Icicles is to ‘TAB’ completion what ‘TAB’ completion is to typing things manually every time.”
 (load-library "icicles.el")
 ;(icy-mode)
@@ -133,18 +164,18 @@
 (setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
 
 ;; autocomplete - learning, completion-showing extension
-(require 'auto-complete-config)
-(require 'auto-complete-etags)
+;(require 'auto-complete-config)
+;(require 'auto-complete-etags)
 (setq ac-stop-words '("/" "//"))  ; don't autocomplete C comments
 
-(add-to-list 'ac-dictionary-directories (concat my-config-dir "elpa/auto-complete-1.4.20110207/dict"))
-(ac-config-default)
+;(add-to-list 'ac-dictionary-directories (concat my-config-dir "elpa/auto-complete-1.4.20110207/dict"))
+;(ac-config-default)
 
 ;; Browse kill ring - see list of text that has been killed
 (require 'browse-kill-ring)
 
 ;; Highlight the parens cursor is within
-(require 'highlight-parentheses)
+;(require 'highlight-parentheses)
 ;(highlight-parentheses-mode 'nil)
 
 ;; autoindent mode -
@@ -170,15 +201,10 @@
 ;(require 'auto-indent-mode)
 ;(auto-indent-global-mode)
 
-;; autopair mode - automatically close quotes, parens, braces, etc
-(require 'autopair)
-(setq autopair-autowrap 't)
-
-;; auto-pair+ - wrap selection in matched pairs
-;(require 'auto-pair+)
+;; (require 'smartparens-config)
 
 ;; more paren stuff
-(load-library "parens-utils.el")
+; (load-library "parens-utils.el")
 
 ;; make a stack of buffers a la alt-tab
 ;; key-bindings not set within, see below
@@ -240,11 +266,6 @@
 ;; based on their modes
 (require 'iswitchb-highlight)
 
-;; yasnippet - Yet Another Snippet module
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory (concat my-config-dir "plugins/yasnippet/snippets"))
-
 ;; etags-select - look thru list of matching tags before jumping
 (require 'etags-select)
 ; keybindings below
@@ -253,9 +274,6 @@
 ;; that exists in tags file, and voila - visited.
 (require 'find-file-in-tags)
 ; keybindings below
-
-;; lusty-explorer - file/buffer browser that's mo better
-(require 'lusty-explorer)
 
 ;; key-chord - two keys pressed simultaneously cause a function to be called
 (require 'key-chord)
@@ -338,9 +356,6 @@
 ;; Make C-z stop minimizing frames
 (defun iconify-or-deiconify-frame nil)
 
-;; Delete the selected region when something is typed or with DEL (t => enabled)
-(delete-selection-mode nil)
-
 ;; session saving
 (require 'desktop)
 (desktop-save-mode 1)
@@ -363,13 +378,15 @@
 ;; ;(setq tramp-shell-prompt-pattern "^[^;$#>]*[;$#>] *")
 ;; (setq tramp-shell-prompt-pattern "^.*$.*")
 ;; (setq password-cache-expiry nil)
+; allow sudo on remote host C-x C-f /sudo:root@host[#port]:/path/to/file
+(set-default 'tramp-default-proxies-alist (quote ((".*" "\\`root\\'" "/ssh:%h:"))))
 
 ;; -----------------
 ;; Look and Feel
 ;; -----------------
 ;; Set font.  To see what's at cursor, C-u C-x =
 ;(defvar myFont "-unknown-DejaVu Sans Mono-normal-normal-normal-*-12-*-*-*-*-0-iso10646-1")
-(defvar myFont "-unknown-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-*-0-iso10646-1")
+;(defvar myFont "-unknown-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-*-0-iso10646-1")
 ;(defvar myFont "-unknown-Ubuntu Mono-bold-normal-normal-*-15-*-*-*-m-0-iso10646-1")
 ;(defvar myFont "-monotype-Andale Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
 ;(defvar myFont "-monotype-Andale Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")
@@ -391,6 +408,9 @@
 ;; (setq hl-line-face 'hl-line)
 ;; (global-hl-line-mode nil)
 
+;; If region is active and text is inserted, kill region
+(delete-selection-mode +1)
+
 ;; display date and time always
 (setq display-time-day-and-date t)
 (display-time)
@@ -401,7 +421,11 @@
 ;; show line numbers in fringe
 ;; (global-linum-mode t)
 (add-hook 'find-file-hook (lambda () (linum-mode 1)))
+(add-hook 'find-file-hook (lambda () (hlinum-activate)))
 (setq linum-format "%d|")
+
+;; show current function name in mode-line
+(add-hook 'find-file-hook (lambda () (which-function-mode 1)))
 
 ;; show a visual indicator of view's position of buffer in the modeline
 ;(sml-modeline-mode)
@@ -416,10 +440,10 @@
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
-;; Scrollbar on the right
-;(set-scroll-bar-mode 'right)
 ;; No scrollbar
-(scroll-bar-mode -1)
+(if (fboundp 'scroll-bar-mode)
+    (scroll-bar-mode -1)               ;; graphical emacs, no scroll-bar
+    (toggle-menu-bar-mode-from-frame)) ;; probably text emacs, turn off menu-bar
 
 ;; Show indicators of buffer boundaries in fringe
 ;(setq-default indicate-buffer-boundaries 'left
@@ -487,14 +511,14 @@
 ;; default size and location
 (add-to-list 'default-frame-alist '(left . 0))
 (add-to-list 'default-frame-alist '(top . 0))
-(add-to-list 'default-frame-alist '(height . 60))
-(add-to-list 'default-frame-alist '(width . 155))
+;(add-to-list 'default-frame-alist '(height . 60))
+;(add-to-list 'default-frame-alist '(width . 155))
 
 ;; titlebar = buffer unless filename
 (setq frame-title-format '(buffer-file-name "emacs - %f" ("emacs - %b")))
 
 ;; Drive out the mouse when it's too near to the cursor.
-(mouse-avoidance-mode 'animate)
+;(mouse-avoidance-mode 'animate)
 
 ;; cursor is a line instead of block
 (setq-default cursor-type  '(bar . 3))
@@ -504,19 +528,19 @@
 (defvar blink-cursor-colors (list  "#92c48f" "#6785c5" "#be369c" "#d9ca65")
   "On each blink the cursor will cycle to the next color in this list.")
 
-(setq blink-cursor-count 0)
-(defun blink-cursor-timer-function ()
-  "Zarza wrote this cyberpunk variant of timer `blink-cursor-timer'.
-Warning: overwrites original version in `frame.el'.
+;; (setq blink-cursor-count 0)
+;; (defun blink-cursor-timer-function ()
+;;   "Zarza wrote this cyberpunk variant of timer `blink-cursor-timer'.
+;; Warning: overwrites original version in `frame.el'.
 
-This one changes the cursor color on each blink. Define colors in `blink-cursor-colors'."
-  (when (not (internal-show-cursor-p))
-    (when (>= blink-cursor-count (length blink-cursor-colors))
-      (setq blink-cursor-count 0))
-    (set-cursor-color (nth blink-cursor-count blink-cursor-colors))
-    (setq blink-cursor-count (+ 1 blink-cursor-count))
-    )
-  (internal-show-cursor nil (not (internal-show-cursor-p))))
+;; This one changes the cursor color on each blink. Define colors in `blink-cursor-colors'."
+;;   (when (not (internal-show-cursor-p))
+;;     (when (>= blink-cursor-count (length blink-cursor-colors))
+;;       (setq blink-cursor-count 0))
+;;     (set-cursor-color (nth blink-cursor-count blink-cursor-colors))
+;;     (setq blink-cursor-count (+ 1 blink-cursor-count))
+;;     )
+;;   (internal-show-cursor nil (not (internal-show-cursor-p))))
 
 
 ;; make split-window-vertically put next buffer in new window
@@ -627,7 +651,12 @@ This one changes the cursor color on each blink. Define colors in `blink-cursor-
 (set-register ?e '(file . "~/.emacs.d/init.el"))
 (set-register ?o '(file . "~/misc.org"))
 (set-register ?r '(file . "/tmp/temp.rb"))
-(set-register ?l '(file . "/tmp/temp.erl"))
+(set-register ?l '(file . "~/.emacs.d/.cask/24.3.50.1/elpa"))
+(set-register ?s '(file . "~/.emacs.d/snippets"))
+
+(require 'epa-file)
+(setq epa-file-cache-passphrase-for-symmetric-encryption t)
+
 
 ;; When trying to kill a dirty buffer, prompt
 ;; to save, diff, or kill
@@ -717,3 +746,4 @@ This one changes the cursor color on each blink. Define colors in `blink-cursor-
 (load-user-file "my-misc-advice.el")
 
 (message "All set.")
+(put 'erase-buffer 'disabled nil)
