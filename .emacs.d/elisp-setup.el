@@ -10,6 +10,7 @@
 
 ;; file modes
 (add-to-list 'auto-mode-alist '("\\.el\\.gz$" . emacs-lisp-mode))
+(add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
 
 ;; Elisp go-to-definition with M-. and back again with M-,
 (autoload 'elisp-slime-nav-mode "elisp-slime-nav")

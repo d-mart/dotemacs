@@ -23,6 +23,11 @@
   "Sort dired listings with directories first before adding marks."
   (mydired-sort))
 
+(defun my-dired-mode-keybindings ()
+  (define-key dired-mode-map (kbd "C-c w") 'wdired-change-to-wdired-mode))
+
+;;;; (add-hook 'dired-mode-hook my-dired-mode-keybindings)
+
 ;; -----------------
 ;; kill all dired buffers
 ;; -----------------

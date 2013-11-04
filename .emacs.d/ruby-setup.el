@@ -17,7 +17,11 @@
 
 ;; make rspec-mode use rvm, but not use rake
 (setq rspec-use-rvm t)
-(setq rspec-use-rake-flag nil)
+(setq rspec-use-rake-when-possible nil)
+(setq rspec-use-opts-file-when-available nil)
+
+;; yari - make an alias for quick yari-ing
+(defalias 'y 'yari-helm)
 
 ;; Ruby-mode keybindings
 (defun my-ruby-mode-keybindings ()
@@ -28,18 +32,35 @@
   (define-key ruby-mode-map (kbd "C-c C-r") 'ruby-compilation-rake))
 
 (add-hook 'ruby-mode-hook 'my-ruby-mode-keybindings)
+
 ;(add-hook 'ruby-mode-hook 'ruby-electric-mode)
+
+(require 'ruby-interpolation)
 (add-hook 'ruby-mode-hook 'ruby-interpolation-mode)
 
+(add-hook 'ruby-mode-hook 'rspec-mode)
+
 ;; add imenu to programming buffers
-(add-hook 'ruby-mode-hook       'imenu-add-menubar-index)
+(add-hook 'ruby-mode-hook 'imenu-add-menubar-index)
+
+;; robe - code navigation and doc for ruby
+;; (add-hook 'ruby-mode-hook 'robe-mode)
+;; (remove-hook 'robe-mode 'ruby-mode-hook)
+
+
+;; Note to self:
+;; use M-x rvm-activate-corresponding-ruby to activate rvm version for use with Rinari
+;; cycle thru rails environments: development, test, production
+;(defun rails-cycle-rinari-mode)
+
 
 ;; Feature-mode bindings
-(defun my-feature-mode-keybindings ()
+(defun my-ruby-mode-keybindings ()
   (define-key ruby-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
   (define-key ruby-mode-map (kbd "C-c #")   'comment-or-uncomment-region))
 
-(add-hook 'feature-mode-hook 'my-feature-mode-keybindings)
+(add-hook 'ruby-mode-hook 'my-feature-mode-keybindings)
+;(add-hook 'feature-mode-hook 'my-feature-mode-keybindings)
 
 ;; colorize punctuation
 ;(font-lock-add-keywords 'ruby-mode
@@ -68,9 +89,9 @@
 (add-to-list 'auto-mode-alist '("Guardfile$"             . ruby-mode))
 (add-to-list 'auto-mode-alist '("Capfile"                . ruby-mode))
 (add-to-list 'auto-mode-alist '("Vagrantfile"            . ruby-mode))
-;(add-to-list 'auto-mode-alist '("Gemfile\\(\\ .lock\])?" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Gemfile$"               . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.rake$"               . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.i*rbrc"              . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.cap$"                . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.feature$"            . feature-mode))
 (add-to-list 'auto-mode-alist '("\\.html.erb"            . rhtml-mode))
