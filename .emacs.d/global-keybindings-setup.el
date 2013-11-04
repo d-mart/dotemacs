@@ -22,6 +22,9 @@
 (global-set-key [S-f7]          'recompile)
 (global-set-key [C-f7]          'kill-compilation)
 
+; fiplr - fuzzy find in project (e.g. git repo)
+(global-set-key (kbd "C-x f")   'fiplr-find-file)
+
 ; smex - ido-stuff on M-x
 (if (featurep 'smex)
     (progn
@@ -30,8 +33,19 @@
       (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; original M-x.
       ))
 
+; helm - incrementally search files, buffers, and more
+(global-set-key (kbd "s-h") 'helm-mini)
+
+; a few more version-control bindings
+(global-set-key (kbd "C-x v e") 'ediff-revision)
+(global-set-key (kbd "C-x v f") 'vc-git-grep)
+
+;; Hide and show lines matching regex
+(global-set-key (kbd "C-c h")   'hide-lines)
+(global-set-key (kbd "C-c H")   'show-all-invisible)
+
 ; ace-jump-mode
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 ; make a window stick with a buffer
 (global-set-key [C-pause]       'toggle-window-dedicated)
 ; Describe last function - for when you want to know wtf emacs just did
@@ -66,8 +80,8 @@
 (global-set-key (kbd "C-c s")   'speedbar-get-focus)
 ;; get speedbar focus using Super Key
 (global-set-key (kbd "s-s")     'speedbar-get-focus)
-(global-set-key (kbd "s-b")     'speedbar-get-focus)
-;;(global-set-key (kbd "s-s")     'sr-speedbar-toggle)
+;; ace-jump-buffer
+(global-set-key (kbd "s-b")     'ace-jump-buffer)
 ;; rgrep - friendly recursive grep function
 (global-set-key (kbd "C-c g")   'rgrep)
 ;; find files containing a regex.  Send list of files to a dired buffer
@@ -105,7 +119,7 @@
 ;; hippie-expand
 (global-set-key (kbd "M-/")     'hippie-expand)
 ;; backwards zap to char
-(global-set-key (kbd "C-S-z")   'backward-zap-to-char)
+(global-set-key (kbd "M-Z")     'backward-zap-to-char)
 ;; see list of killed text
 (global-set-key (kbd "C-c k")   'browse-kill-ring)
 ;; lusty
@@ -125,6 +139,23 @@
 (global-set-key
  (if (featurep 'xemacs) (kbd "<C-iso-left-tab>") (kbd "<C-S-iso-lefttab>"))
   'iflipb-previous-buffer)
+
+;; Turn Control-z into another keymap.  The previous binding becomes
+;; `Control-z Control-z'.
+(defvar ctrl-z-map (make-sparse-keymap))
+;; (let ((orig-ctrl-z-binding (lookup-key (current-global-map) [(control ?z)])))
+;;     (global-set-key [(control ?z)] ctrl-z-map)
+;;       (global-set-key [(control ?z) (control ?z)] orig-ctrl-z-binding))
+;; (global-set-key [(control ?z) (control ?g)] 'keyboard-quit)
+(let ((orig-ctrl-z-binding (lookup-key (current-global-map) (kbd "C-z"))))
+    (global-set-key (kbd "C-z") ctrl-z-map)
+      (global-set-key (kbd "C-z C-z") orig-ctrl-z-binding))
+(global-set-key (kbd "C-z C-g") 'keyboard-quit)
+
+(global-set-key (kbd "C-z h")   'buf-move-left)
+(global-set-key (kbd "C-z j")   'buf-move-down)
+(global-set-key (kbd "C-z k")   'buf-move-up)
+(global-set-key (kbd "C-z l")   'buf-move-right)
 
 ;; add occur mode to isearch-forward:
 ;; switch to occur from a search, e.g.
