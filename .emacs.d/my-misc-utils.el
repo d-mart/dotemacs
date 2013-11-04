@@ -193,6 +193,9 @@
 (fset 'commit-msg-insert-story-number
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([19 98 114 97 110 99 104 32 91 48 45 57 93 13 2 67108896 134217830 17 134217788 91 35 25 93 32] 0 "%d")) arg)))
 
+(require 'git-commit-mode) ;; TODO put some wrapping around this two lines
+(define-key git-commit-mode-map (kbd "C-c m") 'commit-msg-insert-story-number)
+
 ;; ------------------
 ;; Replace ':' with '\n'
 ;; ------------------
