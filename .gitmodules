@@ -1,6 +1,3 @@
-[submodule ".emacs.d/plugins/icicles"]
-	path = .emacs.d/plugins/icicles
-	url = git://github.com/emacsmirror/icicles.git
 [submodule ".emacs.d/plugins/rhtml"]
 	path = .emacs.d/plugins/rhtml
 	url = git://github.com/eschulte/rhtml.git
