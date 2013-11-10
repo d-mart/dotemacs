@@ -46,7 +46,7 @@
  '(flx-highlight-face ((t (:inherit font-lock-variable-name-face :foreground "deep sky blue" :underline t :weight semi-bold))))
  '(font-lock-punctuation ((t (:inherit diff-changed :foreground "plum1"))) t)
  '(fringe ((t (:background "#393939"))))
- '(hl-line ((t (:inherit nil :background "black"))))
+ '(hl-line ((t (:inherit nil :background "gray24"))))
  '(linum-highlight-face ((t (:inherit default :foreground "yellow1"))))
  '(magit-diff-file-header ((t (:inherit diff-file-header :foreground "sienna2"))))
  '(magit-header ((t (:inherit header-line :foreground "VioletRed2"))))

@@ -88,6 +88,8 @@
 (global-set-key (kbd "C-c G")   'find-grep-dired)
 ;; find file names by regexp and send results to dired buffer
 (global-set-key (kbd "C-c f")   'find-name-dired)
+;; silversurfer (ag) in project
+(global-set-key (kbd "C-h g")   'ag-project)
 ;; delete all trailing whitespace in a buffer
 (global-set-key (kbd "C-c d")   'delete-trailing-whitespace)
 ;; run icicles-occur - show lines in buffer matching regex
