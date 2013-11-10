@@ -47,20 +47,10 @@
 ;; (add-hook 'ruby-mode-hook 'robe-mode)
 ;; (remove-hook 'robe-mode 'ruby-mode-hook)
 
-
 ;; Note to self:
 ;; use M-x rvm-activate-corresponding-ruby to activate rvm version for use with Rinari
 ;; cycle thru rails environments: development, test, production
 ;(defun rails-cycle-rinari-mode)
-
-
-;; Feature-mode bindings
-(defun my-ruby-mode-keybindings ()
-  (define-key ruby-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
-  (define-key ruby-mode-map (kbd "C-c #")   'comment-or-uncomment-region))
-
-(add-hook 'ruby-mode-hook 'my-feature-mode-keybindings)
-;(add-hook 'feature-mode-hook 'my-feature-mode-keybindings)
 
 ;; colorize punctuation
 ;(font-lock-add-keywords 'ruby-mode
