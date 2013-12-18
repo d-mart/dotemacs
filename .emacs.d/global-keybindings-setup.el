@@ -135,7 +135,7 @@
 
 (global-set-key (kbd "C-c b")   'bury-buffer)
 ;; insert '%' unless cursor just moved AND next to a paren/brace/bracket
-(global-set-key (kbd "%")       'goto-match-paren)
+;;; -br0ken (global-set-key (kbd "%")       'goto-match-paren)
 ;; iflipb bindings
 (global-set-key (kbd "<C-tab>") 'iflipb-next-buffer)
 (global-set-key
