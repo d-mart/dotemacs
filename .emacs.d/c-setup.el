@@ -32,7 +32,6 @@
 (add-hook 'c-mode-hook           'subword-mode)
 
 (add-hook 'c-mode-hook          'imenu-add-menubar-index)
-(add-hook 'c-mode-common-hook   'smartparens-mode)
 
 (add-to-list 'auto-mode-alist '("\\.[Cc][Xx][Xx]$"  . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.[Cc][Pp][Pp]$"  . c++-mode))
