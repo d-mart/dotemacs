@@ -181,6 +181,45 @@
     (require 'ansi-color)
     (ansi-color-apply-on-region (point-min) (point-max))))
 
+;; ------------------
+;; increment the last integer on a line
+;; ------------------
+(defun inc-integer (p m)
+  "Increment the last integer on current line or the last integer on each line of a region"
+  (interactive "r")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region p m)
+      (goto-char (point-min))
+      (forward-line)
+      (let ((counter 1))
+        (while (not (eq (point)
+                        (point-max)))
+          (goto-char (point-at-eol))
+          (search-backward-regexp "[^0-9][0-9]+" (point-at-bol) t)
+          (let* ((this-num (string-to-number (match-string 0)))
+                 (new-num-str (number-to-string (+ this-num
+                                                   counter))))
+            (replace-match new-num-str)
+            (incf counter)
+            (forward-line)))))))
+
+;; ------------------
+;; Empty boiler-plate
+;; ------------------
+(defun boiler-plate (p m)
+  "testing"
+  (interactive "r")
+  (save-excursion
+    (save-restriction
+      (if (region-active-p)
+          (message "Point is: %d  mark is: %d" p m)
+          (message "Point is: %d" (point))
+        ))))
+
+
+
+
 ;;;
 ;;; Keyboard macros
 ;;;

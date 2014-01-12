@@ -44,6 +44,8 @@
 (global-set-key (kbd "C-c h")   'hide-lines)
 (global-set-key (kbd "C-c H")   'show-all-invisible)
 
+; toggle two windows between being split horizontally and vertically
+(global-set-key (kbd "C-|")     'toggle-window-split)
 ; ace-jump-mode
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 ; make a window stick with a buffer
