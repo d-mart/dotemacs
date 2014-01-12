@@ -21,9 +21,9 @@
 (let ((default-directory my-config-dir))
   (normal-top-level-add-subdirs-to-load-path))
 
-;(require 'cask)
-;(cask-initialize)
-;(require 'pallet)
+(require 'cask "~/.cask/cask.el")
+(cask-initialize)
+(require 'pallet)
 
 (require 'cl)
 (defun load-files-matching-pattern (init-dir init-file-regex)
@@ -578,10 +578,6 @@
 
 (font-lock-add-keywords 'c-mode
     '(("\\<[\\+-]?[0-9]+\\(.[0-9A-Fa-f]+\\)?\\>" 0 'font-lock-digit-face)))
-
-;; add special keyword hilighting
-(add-hook 'emacs-lisp-mode-hook 'fontify-at-todo)
-(add-hook 'ruby-mode-hook       'fontify-at-todo)
 
 ;; do not make backup files
 ;;(setq make-backup-files nil)
