@@ -7,6 +7,7 @@
   (define-key emacs-lisp-mode-map (kbd "C-c #")   'comment-or-uncomment-region))
 
 (add-hook 'emacs-lisp-mode-hook 'my-elisp-mode-keybindings)
+(add-hook 'emacs-lisp-mode-hook 'fontify-at-todo)
 
 ;; file modes
 (add-to-list 'auto-mode-alist '("\\.el\\.gz$" . emacs-lisp-mode))

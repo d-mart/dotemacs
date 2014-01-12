@@ -32,8 +32,7 @@
   (define-key ruby-mode-map (kbd "C-c C-r") 'ruby-compilation-rake))
 
 (add-hook 'ruby-mode-hook 'my-ruby-mode-keybindings)
-
-;(add-hook 'ruby-mode-hook 'ruby-electric-mode)
+(add-hook 'ruby-mode-hook 'fontify-at-todo)
 
 (require 'ruby-interpolation)
 (add-hook 'ruby-mode-hook 'ruby-interpolation-mode)
@@ -74,14 +73,14 @@
                           ("^[[:space:]]*private\\b"                   0 'font-lock-keyword-face)
                           ("^[[:space:]]*protected\\b"                 0 'font-lock-keyword-face)))
 
-(add-to-list 'auto-mode-alist '("\\.feature"             . feature-mode))
 (add-to-list 'auto-mode-alist '("Rakefile$"              . ruby-mode))
 (add-to-list 'auto-mode-alist '("Guardfile$"             . ruby-mode))
 (add-to-list 'auto-mode-alist '("Capfile"                . ruby-mode))
 (add-to-list 'auto-mode-alist '("Vagrantfile"            . ruby-mode))
-(add-to-list 'auto-mode-alist '("Gemfile$"               . ruby-mode))
+(add-to-list 'auto-mode-alist '("^Gemfile"               . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.rake$"               . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.i*rbrc"              . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.pryrc"               . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.cap$"                . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.feature$"            . feature-mode))
 (add-to-list 'auto-mode-alist '("\\.html.erb"            . rhtml-mode))

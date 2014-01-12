@@ -11,6 +11,7 @@
 (setq inferior-erlang-machine-options '("-sname" "distel"))
 
 (add-hook 'erlang-mode-hook 'my-erlang-settings)
+(add-hook 'erlang-mode-hook 'fontify-at-todo)
 
 (add-to-list 'auto-mode-alist '("\\.erl$" . erlang-mode))
 (add-to-list 'auto-mode-alist '("\\.hrl$" . erlang-mode))
