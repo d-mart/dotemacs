@@ -14,16 +14,21 @@
 (load custom-file 'noerror)
 
 ;; Use pallet and cask to manage ELPA elisp packages
-;(require 'cask "~/.emacs.d/.cask/cask.el")
-;(cask-initialize)
+;; To set up cask:
+;; 1.) git clone https://github.com/cask/cask ~/.cask
+;; 2.) ln -s ~/.cask/bin/cask ~/bin # or otherwise add cask to the path
+(require 'cask "~/.cask/cask.el")
+(setq cask-file "~/.emacs.d/Cask")
+(cask-initialize)
+;(cask-install)
+
+(require 'pallet)
+
+(require 'use-package)
 
 ;; look under .emacs.d for packages
 (let ((default-directory my-config-dir))
   (normal-top-level-add-subdirs-to-load-path))
-
-(require 'cask "~/.cask/cask.el")
-(cask-initialize)
-(require 'pallet)
 
 (require 'cl)
 (defun load-files-matching-pattern (init-dir init-file-regex)
@@ -81,10 +86,6 @@
 ;; Load modules
 ;;------------------
 
-(require 'protobuf-mode)
-;(autoload 'protobuf-mode "protobuf"
-;          "Google Protocol Buffers syntax hilighting" t)
-
 ;; functions and settings for working with tags
 ;; (specific to projects I'm working on)
 (load-library "tag-utils.el")
@@ -140,16 +141,9 @@
 (require 'smex)
 (smex-initialize)
 
-;; helm - find files, buffers, etc
-;(require 'helm-config)
-;(require 'helm-ls-git)
-;(require 'helm-git-grep)
-
-;; icicles - “In case you never heard of it, Icicles is to ‘TAB’ completion what ‘TAB’ completion is to typing things manually every time.”
-(load-library "icicles.el")
-;(icy-mode)
-;; a little work around - kill-buffer gets mapped to icicle-kill-buffer.
-;; BUT that calls (in some cases) kill-buffer-and-its-windows, which I fucking hate
+;; a little work around for icicles - kill-buffer gets mapped to
+;; icicle-kill-buffer.  BUT that calls (in some cases)
+;; kill-buffer-and-its-windows, which I fucking hate
 (defalias 'kill-buffer-and-its-windows 'kill-buffer)
 
 ;; enhancements to compile mode
@@ -201,8 +195,6 @@
 ;(require 'auto-indent-mode)
 ;(auto-indent-global-mode)
 
-;; (require 'smartparens-config)
-
 ;; more paren stuff
 ; (load-library "parens-utils.el")
 
@@ -212,59 +204,6 @@
 
 ;; bookmarks - visible and possibly persistent bookmarks
 (require 'bm)
-
-;; findr - search for files breadth-first
-;; (autoload 'findr "findr" "Find file name." t)
-;; (define-key global-map [(meta control S)] 'findr)
-
-;; (autoload 'findr-search "findr" "Find text in files." t)
-;; (define-key global-map [(meta control s)] 'findr-search)
-
-;; (autoload 'findr-query-replace "findr" "Replace text in files." t)
-;; (define-key global-map [(meta control r)] 'findr-query-replace)
-
-;; iswitchb mode - easily and quickly switch between buffers
-(iswitchb-mode)
-;; set iswitchb to show whatever buffer i switch to in the current window
-(setq iswitchb-default-method 'samewindow)
-;;(iswitchb-default-keybindings)
-(defun iswitchb-local-keys ()
-      (mapc (lambda (K)
-	      (let* ((key (car K)) (fun (cdr K)))
-    	        (define-key iswitchb-mode-map (edmacro-parse-keys key) fun)))
-	    '(("<right>" . iswitchb-next-match)
-	      ("<left>"  . iswitchb-prev-match)
-	      ("<up>"    . iswitchb-next-match)
-	      ("<down>"  . iswitchb-prev-match))))
-(add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
-;; The next two functions are to make iswitchb rescan the buffer
-;; names when a buffer is killed.  When two files with the same
-;; name are opened, unquify adjusts the buffer names.  When one
-;; of those is subsequently closed, uniquify changes the remaining
-;; buffer name back to just the file name.  iswitchb must be
-;; made aware of that
-(defadvice iswitchb-kill-buffer (after rescan-after-kill activate)
-  "*Regenerate the list of matching buffer names after a kill.
-    Necessary if using `uniquify' with `uniquify-after-kill-buffer-p'
-    set to non-nil."
-  (setq iswitchb-buflist iswitchb-matches)
-  (iswitchb-rescan))
-(defun iswitchb-rescan ()
-  "*Regenerate the list of matching buffer names."
-  (interactive)
-  (iswitchb-make-buflist iswitchb-default)
-  (setq iswitchb-rescan t))
-;; ignore these buffer names in the iswitchb list
-(add-to-list 'iswitchb-buffer-ignore "^ ")
-(add-to-list 'iswitchb-buffer-ignore "*Messages*")
-(add-to-list 'iswitchb-buffer-ignore "*ECB")
-(add-to-list 'iswitchb-buffer-ignore "*Buffer")
-(add-to-list 'iswitchb-buffer-ignore "*Completions")
-(add-to-list 'iswitchb-buffer-ignore "^[tT][aA][gG][sS]")
-(add-to-list 'iswitchb-buffer-ignore "*scratch")
-;; iswitchb-highlight - colorize buffer names in iswitchb list
-;; based on their modes
-(require 'iswitchb-highlight)
 
 ;; etags-select - look thru list of matching tags before jumping
 (require 'etags-select)
@@ -285,10 +224,6 @@
 
 ;; wgrep - edit grep results right in the grep buffer and save changes to files
 (require 'wgrep)
-
-;; ace-jump-mode - type hotkey and a letter, buffer shows enumerated choice
-;; of which instance of that char to jump to
-(require 'ace-jump-mode)
 
 ;; hippie expand settings -
 ;; bound over dabbrev-expand M-/
@@ -449,11 +384,6 @@
 ;(setq-default indicate-buffer-boundaries 'left
 ;      default-indicate-empty-lines t)
 
-;; prevent find and grep folders from changing automatically
-;;(add-hook 'find-file-hook
-;;          (lambda ()
-;;            (setq default-directory command-line-default-directory)))
-
 ;; automatically follow symlinks into version-controlled files instead of asking
 (setq vc-follow-symlinks t)
 
@@ -511,8 +441,6 @@
 ;; default size and location
 (add-to-list 'default-frame-alist '(left . 0))
 (add-to-list 'default-frame-alist '(top . 0))
-;(add-to-list 'default-frame-alist '(height . 60))
-;(add-to-list 'default-frame-alist '(width . 155))
 
 ;; titlebar = buffer unless filename
 (setq frame-title-format '(buffer-file-name "emacs - %f" ("emacs - %b")))
@@ -600,7 +528,6 @@
 
 (setq make-backup-file-name-function 'my-backup-file-name)
 
-
 ;; -----------------
 ;; Language and general indentation setup
 ;; -----------------
@@ -637,8 +564,6 @@
 (defalias 'reb  're-builder)
 (defalias 'tde  'toggle-debug-on-error)
 (defalias 'lm   'linum-mode)
-(defalias 'ttl  'toggle-truncate-lines)
-(defalias 'ww   'toggle-truncate-lines)
 (defalias 'tail 'auto-revert-tail-mode)
 
 ;; -----------------
@@ -703,7 +628,6 @@
                 ("\\.scons$"        . python-mode)
                 ("SCons\\(cript\\|truct\\)" . python-mode)
                 ("\\.gclient$"      . python-mode)
-                ("\\.proto$"        . protobuf-mode)
                 ("\\.gdb$"          . gdb-script-mode)
                 ("\\.md$"           . markdown-mode)
                 ("diary"            . diary-mode)
@@ -719,6 +643,7 @@
   (load-file (expand-file-name file my-config-dir)))
 
 (load-user-file "faces-setup.el")
+(load-user-file "programming-setup.el")
 (load-user-file "ruby-setup.el")
 (load-user-file "c-setup.el")
 (load-user-file "elisp-setup.el")
