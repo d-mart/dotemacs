@@ -93,7 +93,9 @@
 (defun nuke-all-buffers ()
   "Kill all buffers, leaving *scratch* only."
   (interactive)
-  (mapcar (lambda (x) (kill-buffer x)) (buffer-list)) (delete-other-windows))
+  (mapcar (lambda (x) (kill-buffer x)) (buffer-list)) ; kill all buffers
+  (delete-other-windows)  ; kill all other windows
+  (switch-to-buffer "*scratch*")) ; create new *scratch* buffer
 
 ;; ------------------
 ;; Show full path of buffer
