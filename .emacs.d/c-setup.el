@@ -7,7 +7,9 @@
 (c-set-offset 'case-label '+)
 (c-set-offset 'comment-intro 0)
 ;; treat underscore '_' as part of a word in c-mode
-(modify-syntax-entry ?_ "w" c-mode-syntax-table)
+;;(modify-syntax-entry ?_ "w" c-mode-syntax-table)
+
+(add-hook 'c-mode-common-hook 'my-programming-mode-hook)
 
 ;; C-mode keybindings
 (defun my-c-mode-keybindings ()
@@ -29,7 +31,7 @@
 ;(add-hook 'c-mode-hook          'idle-highlight)
 ;(add-hook 'c-mode-hook          'show-ws-toggle-show-trailing-whitespace)
 ;; add hook to navigate camelCase correctly.  wordBoundariesAtEmbeddedCapitalLetters
-(add-hook 'c-mode-hook           'subword-mode)
+(add-hook 'c-mode-hook          'subword-mode)
 
 (add-hook 'c-mode-hook          'imenu-add-menubar-index)
 

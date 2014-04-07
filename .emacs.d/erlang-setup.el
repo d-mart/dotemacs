@@ -10,6 +10,7 @@
 (distel-setup)
 (setq inferior-erlang-machine-options '("-sname" "distel"))
 
+(add-hook 'erlang-mode-hook 'my-programming-mode-hook)
 (add-hook 'erlang-mode-hook 'my-erlang-settings)
 (add-hook 'erlang-mode-hook 'fontify-at-todo)
 
