@@ -17,10 +17,10 @@
 ;; To set up cask:
 ;; 1.) git clone https://github.com/cask/cask ~/.cask
 ;; 2.) ln -s ~/.cask/bin/cask ~/bin # or otherwise add cask to the path
+;; 3.) cd ~/.emacs.d && cask install
 (require 'cask "~/.cask/cask.el")
 (setq cask-file "~/.emacs.d/Cask")
 (cask-initialize)
-;(cask-install)
 
 (require 'pallet)
 
@@ -658,6 +658,8 @@
 (load-user-file "git-setup.el")
 (load-user-file "css-setup.el")
 (load-user-file "coffee-setup.el")
+(load-user-file "lua-setup.el")
+(load-user-file "java-setup.el")
 (load-user-file "ediff-setup.el")
 (load-user-file "dired-setup.el")
 (load-user-file "irc-setup.el")
