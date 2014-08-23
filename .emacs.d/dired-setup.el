@@ -49,3 +49,13 @@
 
 ;; Auto-refresh dired on file change
 (add-hook 'dired-mode-hook 'auto-revert-mode)
+
+;; This is a minor mode that can be enabled from a dired buffer.
+;; Once enabled it will show the file from point in the other window.
+;; Moving to the other file within the dired buffer with <down>/<up> or
+;; C-n/C-p will display different file.
+;; Hitting <SPC> will scroll the peeped file down, whereas
+;; C-<SPC> and <backspace> will scroll it up.
+(use-package peep-dired
+  :config
+  (define-key dired-mode-map (kbd "C-c C-p") 'peep-dired))
