@@ -10,3 +10,5 @@
   ; giving smart-parens another shot (electric-pair-mode 1)
   (highlight-parentheses-mode 1)
   (fontify-at-todo))
+
+; (projectile-on)
