@@ -28,8 +28,9 @@
   (define-key ruby-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
   (define-key ruby-mode-map (kbd "C-c #")   'comment-or-uncomment-region)
   (define-key ruby-mode-map (kbd "C-c t")   'ruby-compilation-this-buffer)
-  (define-key ruby-mode-map (kbd "C-c r")   'ruby-compilation-run)
-  (define-key ruby-mode-map (kbd "C-c C-r") 'ruby-compilation-rake))
+  (define-key ruby-mode-map (kbd "C-c r c") 'ruby-compilation-run)
+  (define-key ruby-mode-map (kbd "C-c C-r") 'ruby-compilation-rake)
+  (define-key ruby-mode-map (kbd "C-c C-d") 'dm-ruby-insert-debugger))
 
 (add-hook 'ruby-mode-hook 'my-programming-mode-hook)
 (add-hook 'ruby-mode-hook 'my-ruby-mode-keybindings)
@@ -61,6 +62,12 @@
 
 ;; highlight dangling whitespace
 ;(add-hook 'ruby-mode-hook       'show-ws-toggle-show-trailing-whitespace)
+
+(defun dm-ruby-insert-debugger ()
+  (interactive)
+  (beginning-of-line)
+  (open-line 1)
+  (insert "require 'byebug'; byebug"))
 
 ;; @todo - improve regexen so they only match as first no-
 ;;         whitespace chars on line
