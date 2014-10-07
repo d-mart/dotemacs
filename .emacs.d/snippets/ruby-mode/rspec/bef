@@ -1,0 +1,4 @@
+# name: before(:each) {}
+# key: bef
+# --
+before(:each) { $0 }
