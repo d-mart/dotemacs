@@ -184,3 +184,31 @@ user."
           (set-window-buffer (next-window) next-win-buffer)
           (select-window first-win)
           (if this-win-2nd (other-window 1))))))
+
+; ====================================================================
+; https://www.reddit.com/r/emacs/comments/30b67j/how_can_you_reset_emacs_to_the_default_theme/
+(defun switch-theme (theme)
+  ;; This interactive call is taken from `load-theme'
+  (interactive
+   (list
+    (intern (completing-read "Load custom theme: "
+                             (mapcar 'symbol-name
+                                     (custom-available-themes))))))
+  (mapcar #'disable-theme custom-enabled-themes)
+  (load-theme theme t)
+)
+
+; =====================================================================
+; list all non-interactive functions
+; http://stackoverflow.com/questions/605785/how-do-i-get-a-list-of-emacs-lisp-non-interactive-functions
+(defun list-functions
+    (flet ((first-line (text)
+                       (if text
+                           (substring text 0 (string-match "\n" text))
+                         "")))
+      (mapatoms
+       (lambda (x)
+         (and (fboundp x)                          ; does x name a function?
+              (not (commandp (symbol-function x))) ; is it non-interactive?
+              (subrp (symbol-function x))          ; is it built-in?
+              (insert (symbol-name x) " - " (first-line (documentation x)) "\n"))))))

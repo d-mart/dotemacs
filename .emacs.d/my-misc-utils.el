@@ -219,6 +219,22 @@
           (message "Point is: %d" (point))
         ))))
 
+;; -----------------
+;; until i have something smarter -
+;; don't have to remember this for new frames
+;; -----------------
+(defun fix-frame-font ()
+  (interactive)
+  (set-frame-font ":-*-Monaco-bold-normal-normal-*-13-*-*-*-m-0-iso10646-1"))
+
+;; -----------------
+;; print mode-map
+;; e.g. (print-keymap 'isearch-mode-map)
+;; -----------------
+(defun print-keymap (keymap)
+  (interactive)
+  (princ (substitute-command-keys (format "\\{%s}" keymap)))
+  t)
 
 
 
@@ -254,3 +270,8 @@
 ;; -----------------
 (fset 'remove-debuggers
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("\274^ *debugger *$" 0 "%d")) arg)))
+
+;; for chef, change e.g. node[:foo][:bar] to node['foo']['bar']
+;; Not smart, no error/context checking
+(fset 'symbol-to-quote-hashes
+   [?\C-s ?: return backspace ?\C-  ?\C-s ?\] return ?\C-b ?\'])
