@@ -6,7 +6,8 @@
   (setq js-indent-level 2))
 
 (defun my-js-mode-keybindings ()
-  (define-key javascript-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region))
+  ;(define-key javascript-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
+)
 
 (custom-set-variables
  '(js2-basic-offset 2)
