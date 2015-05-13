@@ -8,12 +8,16 @@
 
 (add-hook 'erlang-mode-hook 'my-programming-mode-hook)
 (add-hook 'erlang-mode-hook 'my-erlang-settings)
-(add-hook 'erlang-mode-hook 'fontify-at-todo)
 
 (add-to-list 'auto-mode-alist '("\\.erl$" . erlang-mode))
 (add-to-list 'auto-mode-alist '("\\.hrl$" . erlang-mode))
 (add-to-list 'auto-mode-alist '("\\.xrl$" . erlang-mode))
 (add-to-list 'auto-mode-alist '("\\.yrl$" . erlang-mode))
+
+;; Erlang Development Tool Suite
+(defun my-edts-start ()
+  (interactive "P")
+  (require 'edts-start) )
 
 (defun erlang-indent-command (&optional whole-exp)
   "Indent current line as Erlang code.
