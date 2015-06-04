@@ -49,6 +49,8 @@
 
 ;; Auto-refresh dired on file change
 (add-hook 'dired-mode-hook 'auto-revert-mode)
+;; but don't be chatty about it
+(setq auto-revert-verbose nil)
 
 ;; This is a minor mode that can be enabled from a dired buffer.
 ;; Once enabled it will show the file from point in the other window.
