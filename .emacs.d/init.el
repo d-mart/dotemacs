@@ -26,6 +26,8 @@
 
 (require 'use-package)
 
+(server-start)
+
 ;; look under .emacs.d for packages
 (let ((default-directory my-config-dir))
   (normal-top-level-add-subdirs-to-load-path))
@@ -246,11 +248,11 @@
 ;; add some more package repositories for ELPA - DM
 (require 'package)
 (cond
- ((= 24 emacs-major-version)
+ ((> emacs-major-version 23)
   (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
   (add-to-list 'package-archives '("org"       . "http://orgmode.org/elpa/") t)
   (add-to-list 'package-archives '("sunrise"   . "http://joseito.republika.pl/sunrise-commander/"))
-  (add-to-list 'package-archives '("ELPA"      . "http://tromey.com/elpa/"))
+  (add-to-list 'package-archives '("ELPA"      . "http://elpa.gnu.org/packages/"))
   (add-to-list 'package-archives '("melpa"     . "http://melpa.milkbox.net/packages/"))))
 
 
@@ -315,6 +317,9 @@
 ;; (setq password-cache-expiry nil)
 ; allow sudo on remote host C-x C-f /sudo:root@host[#port]:/path/to/file
 (set-default 'tramp-default-proxies-alist (quote ((".*" "\\`root\\'" "/ssh:%h:"))))
+;; note: this works now:
+; /ssh:bird@bastion|ssh:you@remotehost:/path
+; /ssh:you@remotehost|sudo:them@remotehost:/path/to/file
 
 ;; -----------------
 ;; Look and Feel
@@ -622,8 +627,6 @@
                 ("\\.uncompressed$" . hexl-mode)
                 ("\\.bin$"          . hexl-mode)
                 ("\\.ota$"          . hexl-mode)
-                ("\\.rb$"           . ruby-mode)
-                ("\\.lua$"          . lua-mode)
                 ("\\.xml$"          . html-mode)
                 ("\\.scons$"        . python-mode)
                 ("SCons\\(cript\\|truct\\)" . python-mode)
@@ -650,7 +653,6 @@
 (load-user-file "yaml-setup.el")
 (load-user-file "javascript-setup.el")
 (load-user-file "org-setup.el")
-(load-user-file "term-setup.el")
 (load-user-file "erlang-setup.el")
 (load-user-file "go-setup.el")
 (load-user-file "rust-setup.el")
