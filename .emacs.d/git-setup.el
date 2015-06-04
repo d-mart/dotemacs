@@ -14,6 +14,8 @@
 (defalias 'mgb 'magit-blame-mode)
 (defalias 'gg  'vc-git-grep)
 
+(setq magit-last-seen-setup-instructions "1.4.0")
+
 (setq auto-mode-alist
       (append '(("COMMIT_EDITMSG$"  . git-commit-mode))
               auto-mode-alist))
