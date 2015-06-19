@@ -44,6 +44,7 @@
  '(bm-fringe-face ((t (:box (:line-width 2 :color "DeepSkyBlue1" :style released-button)))))
  '(flx-highlight-face ((t (:inherit font-lock-variable-name-face :foreground "deep sky blue" :underline t :weight semi-bold))))
  '(font-lock-punctuation ((t (:inherit diff-changed :foreground "plum1"))) t)
+ '(linum-highlight-face ((t (:inherit default :foreground "green1"))))
  '(woman-bold ((t (:inherit bold :foreground "dodger blue"))))
  '(woman-italic ((t (:foreground "gold2")))))
 
