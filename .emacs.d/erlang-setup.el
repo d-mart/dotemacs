@@ -16,8 +16,9 @@
 
 ;; Erlang Development Tool Suite
 (defun my-edts-start ()
-  (interactive "P")
-  (require 'edts-start) )
+  (interactive)
+  (require 'edts-start)
+  (edts-start) )
 
 (defun erlang-indent-command (&optional whole-exp)
   "Indent current line as Erlang code.
