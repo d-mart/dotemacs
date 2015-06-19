@@ -1,6 +1,9 @@
 ;; ------------------
 ;; Shell / Terminal
 ;; ------------------
+
+(setq ansi-term-color-vector [term term-color-black term-color-red term-color-green term-color-yellow term-color-blue term-color-magenta term-color-cyan term-color-white])
+
 ;; Add color to a shell running in emacs ‘M-x shell’
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -33,14 +36,24 @@
                                (if (comint-after-pmark-p)
                                    (comint-next-input 1)
                                  (forward-line 1))))))
+(use-package sane-term
+  :defer 5
+  :init
+  (setq sane-term-shell-command
+    (cond
+      ((file-exists-p "/usr/local/bin/zsh") "/usr/local/bin/zsh")
+      ((file-exists-p "/usr/local/bin/bash") "/usr/local/bin/bash")
+      ((file-exists-p "/bin/zsh") "/bin/zsh")
+      (t "/bin/bash")))
+  :bind
+  (("C-x t" . sane-term)
+   ("C-x T" . sane-term-create)))
+
 
 ;; use UTF-8 in shells
 (defun my-term-use-utf8 ()
   (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
 (add-hook 'term-exec-hook 'my-term-use-utf8)
-
-;; clickable addresses in term buffers
-(add-hook 'term-mode-hook 'goto-address-mode)
 
 ;; ----------------
 ;; Improvements from http://emacs-journey.blogspot.com/2012/06/improving-ansi-term.html
@@ -54,14 +67,25 @@
     ad-do-it))
 (ad-activate 'term-sentinel)
 
+;; -----------------
+;; some themes set an 'undefined' term which doesn't seem to be valid anymore
+;; quick way to restore to working behavior
+;; -----------------
+(defun fix-term-faces ()
+  (interactive)
+  (setq ansi-term-color-vector [term term-color-black term-color-red term-color-green term-color-yellow term-color-blue term-color-magenta term-color-cyan term-color-white]))
+
 ;; ----------------
 ;; Yank in term-char-mode is just a dumb paste (no-kill-ring)
 ;; but better than switching back and forth to line-mode
 ;; ----------------
 (defun my-term-hook ()
-  (goto-address-mode)
-  (define-key term-raw-map "\C-y" 'term-paste))
+  (goto-address-mode) ;; clickable addresses in term buffers
+  (define-key term-raw-map "\C-y" 'term-paste)
+  (fix-term-faces)
+  (yas-minor-mode -1))
 
+(add-hook 'term-mode-hook 'my-term-hook)
 
 ;; ----------------
 ;; Insert the filename of the active buffer just
