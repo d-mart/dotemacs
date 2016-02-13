@@ -109,11 +109,6 @@
 (global-set-key (kbd "C-c C-e") 'eval-region)
 ;; another binding for transpose lines (gnome steals C-M-t for launch terminal)
 (global-set-key (kbd "C-S-t")   'transpose-lines)
-;; buffer-move bindings
-(global-set-key (kbd "<C-S-up>")     'buf-move-up)
-(global-set-key (kbd "<C-S-down>")   'buf-move-down)
-(global-set-key (kbd "<C-S-left>")   'buf-move-left)
-(global-set-key (kbd "<C-S-right>")  'buf-move-right)
 ;; having to switch to M- (off of C-) for kill-ring-save seems to interrupt my flow alot
 ;; move seldomly-used quoted-insert and take its keybinding for kill-ring-save
 (global-set-key (kbd "C-q")     'kill-ring-save)
@@ -156,10 +151,6 @@
       (global-set-key (kbd "C-z C-z") orig-ctrl-z-binding))
 (global-set-key (kbd "C-z C-g") 'keyboard-quit)
 
-(global-set-key (kbd "C-z h")   'buf-move-left)
-(global-set-key (kbd "C-z j")   'buf-move-down)
-(global-set-key (kbd "C-z k")   'buf-move-up)
-(global-set-key (kbd "C-z l")   'buf-move-right)
 
 ;; add occur mode to isearch-forward:
 ;; switch to occur from a search, e.g.

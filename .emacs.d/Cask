@@ -25,6 +25,7 @@
 (depends-on "bind-key")
 (depends-on "bm")
 (depends-on "browse-kill-ring")
+(depends-on "buffer-move")
 (depends-on "cask")
 (depends-on "coffee-mode")
 (depends-on "company")
