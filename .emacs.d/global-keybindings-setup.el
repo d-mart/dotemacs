@@ -22,6 +22,10 @@
 (global-set-key [S-f7]          'recompile)
 (global-set-key [C-f7]          'kill-compilation)
 
+; I hate when tryying to hold down C-p, i instead hold down C-[,
+; and my window layout is ruined.  Intercep!
+(global-set-key (kbd "ESC ESC ESC") '(lambda () (interactive) (message "Whoopsie!")))
+
 ; fiplr - fuzzy find in project (e.g. git repo)
 (global-set-key (kbd "C-x f")   'fiplr-find-file)
 
