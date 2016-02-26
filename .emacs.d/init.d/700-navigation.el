@@ -28,7 +28,11 @@
 
 (use-package ggtags
   :init
-  (add-hook 'c-mode-hook 'ggtags-mode))
+  (add-hook 'c-mode-hook 'ggtags-mode)
+  ;; remove these keys.  Their redefinition makes me rage. Rage.
+  (define-key 'ggtags-navigation-map "\M-<" nil)
+  (define-key 'ggtags-navigation-map "\M->" nil)
+  )
 
 (use-package buffer-move
   :bind
