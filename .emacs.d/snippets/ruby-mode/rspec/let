@@ -1,0 +1,4 @@
+# name: let(:foo) { bar }
+# key: let
+# --
+let(:$1) { $2 }
