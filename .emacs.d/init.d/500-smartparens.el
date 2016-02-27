@@ -4,7 +4,9 @@
     (require 'smartparens-config)
     (setq sp-highlight-pair-overlay nil)
     (setq sp-autoescape-string-quote nil)
-    (smartparens-global-mode 1)))
+    (smartparens-global-mode 1)
+    (add-hook 'org-mode-hook (lambda () (smartparens-mode -1)))
+    ))
 
 ;  Developer's own configs:
 ;  ;;;;;;;;;
