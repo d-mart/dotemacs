@@ -1,7 +1,6 @@
 ;; -----------------
 ;; Key Bindings
 ;; -----------------
-(global-set-key [C-tab]         'other-window)
 (global-set-key [C-delete]      'kill-word)
 (global-set-key [C-backspace]   'backward-kill-word)
 (global-set-key [home]          'beginning-of-line)
@@ -13,7 +12,6 @@
 (global-set-key [S-f2]          'bm-previous)
 (global-set-key [f3]            'generalized-shell-command)
 (global-set-key [f4]            'switch-to-or-create-shell)
-;; f5 is used by 'Anything'
 (global-set-key [f6]            '(lambda ()  (interactive) (revert-buffer t t) (message "Reverted."))) ;; lifted from dadams 'revert-buffer-no-confirm
 (global-set-key [S-f6]          '(lambda () (interactive) (kill-buffer (current-buffer))))
 (global-set-key [C-f6]          'revert-all-buffers)
@@ -68,9 +66,6 @@
 (global-set-key (kbd "M-.")     'etags-select-find-tag-at-point)
 (global-set-key (kbd "M-?")     'etags-select-find-tag)
 (global-set-key (kbd "C->")     'etags-select-goto-tag-other-window)
-;; regexp search by default
-(global-set-key (kbd "C-r")     'isearch-backward-regexp)
-(global-set-key (kbd "C-s")     'isearch-forward-regexp)
 ;; move by paragraph - useful when region-ing a block of codez - don't take hands of regular area
 (global-set-key (kbd "C-S-n")   'forward-paragraph)
 (global-set-key (kbd "C-S-p")   'backward-paragraph)
@@ -154,17 +149,6 @@
     (global-set-key (kbd "C-z") ctrl-z-map)
       (global-set-key (kbd "C-z C-z") orig-ctrl-z-binding))
 (global-set-key (kbd "C-z C-g") 'keyboard-quit)
-
-
-;; add occur mode to isearch-forward:
-;; switch to occur from a search, e.g.
-;; C-s foo C-o
-(define-key isearch-mode-map (kbd "C-o")
-  (lambda ()
-    (interactive)
-    (let ((case-fold-search isearch-case-fold-search))
-      (occur (if isearch-regexp isearch-string
-               (regexp-quote isearch-string))))))
 
 ;; A safer exit keybind.
 (global-set-key (kbd "C-x C-c")
