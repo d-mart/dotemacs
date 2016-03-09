@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name : switch (dm)
+# key: switch
+# --
+switch(${1:value})
+{
+    case ${2:choice}:
+         $3
+         break;
+
+    default:
+         $4
+}
