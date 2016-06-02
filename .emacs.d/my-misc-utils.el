@@ -232,26 +232,26 @@
 ;; e.g. (print-keymap 'isearch-mode-map)
 ;; -----------------
 (defun print-keymap (keymap)
-  (interactive)
+  (interactive "Mprint keymap:")
   (princ (substitute-command-keys (format "\\{%s}" keymap)))
   t)
 
-
+;; -----------------
+;; Kill stray *ag search... buffers
+;; -----------------
+(defun kill-ag-buffers ()
+  (interactive)
+  (let ((buf-list (buffer-list)))
+    (while buf-list
+      (let ((buffer (car buf-list)))
+        (if (string-match "^\\*ag search" (buffer-name buffer))
+            (kill-buffer buffer)))
+      (setq buf-list (cdr buf-list)))
+    (message "Killed *ag search...* buffers")))
 
 ;;;
 ;;; Keyboard macros
 ;;;
-
-;; ------------------
-;; Keyboard macro to get story number from branch name
-;; in COMMIT_MSG buffers and insert it at the begginging
-;; of the commit comment
-;; ------------------
-(fset 'commit-msg-insert-story-number
-   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([19 98 114 97 110 99 104 32 91 48 45 57 93 13 2 67108896 134217830 17 134217788 91 35 25 93 32] 0 "%d")) arg)))
-
-(require 'git-commit-mode) ;; TODO put some wrapping around this two lines
-(define-key git-commit-mode-map (kbd "C-c m") 'commit-msg-insert-story-number)
 
 ;; ------------------
 ;; Replace ':' with '\n'
@@ -275,3 +275,30 @@
 ;; Not smart, no error/context checking
 (fset 'symbol-to-quote-hashes
    [?\C-s ?: return backspace ?\C-  ?\C-s ?\] return ?\C-b ?\'])
+
+;; -----------------
+;; join next line with this one, with space between
+;; -- e.g.
+;; foo
+;; bar
+;; -- becomes
+;; foo bar
+;; -----------------
+(fset 'dm-join-lines-with-space
+   "\C-e \C-d")
+
+;; -----------------
+;; join next line with this one, with space escaped pipe
+;; -- e.g.
+;; foo
+;; bar
+;; baz
+;; -- becomes (need to manually remove last pipe)
+;; foo\|bar\|baz\|
+;; -- for use with grep e.g.
+;; grep '(foo\|bar\|baz)' big.log
+;; -----------------
+(fset 'dm-join-lines-grep-pipe
+   "\C-e\\|\C-d")
+
+(message "Misc-utils-done")
