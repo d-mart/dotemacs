@@ -9,7 +9,6 @@
     (use-package helm-ls-git)
     (use-package helm-projectile)
     (use-package helm-projectile-rails)
-    (use-package helm-rails)
     (use-package helm-rb)
     (use-package helm-themes)
     ;; (use-package helm-tags
