@@ -3,6 +3,8 @@
 ;;; Git setup
 ;;; ----------------------
 
+(use-package git-commit)
+
 (autoload 'magit-status "magit"
           "Magit emacs git interface" t)
 (autoload 'magit-blame-mode "magit-blame"
@@ -18,7 +20,8 @@
 (fset 'commit-msg-insert-story-number
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([19 98 114 97 110 99 104 32 91 48 45 57 93 13 2 67108896 134217830 17 134217788 91 35 25 93 32] 0 "%d")) arg)))
 
-;(define-key git-commit-mode-map (kbd "C-c m") 'commit-msg-insert-story-number)
+;; git-commit-mode-map comes from the package "git-commit"
+(define-key git-commit-mode-map (kbd "C-c m") 'commit-msg-insert-story-number)
 
 (defalias 'mag 'magit-status)
 (defalias 'mgb 'magit-blame)
