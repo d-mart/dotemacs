@@ -20,6 +20,13 @@
 (setq rspec-use-rake-when-possible nil)
 (setq rspec-use-opts-file-when-available nil)
 
+;; use bash for running rspec
+(defadvice rspec-compile (around rspec-compile-around)
+  "Use BASH shell for running the specs because of ZSH issues."
+  (let ((shell-file-name "/bin/bash"))
+    ad-do-it))
+(ad-activate 'rspec-compile)
+
 ;; yari - make an alias for quick yari-ing
 (defalias 'y 'yari-helm)
 
@@ -72,8 +79,9 @@
   (interactive)
   (beginning-of-line)
   (open-line 1)
-  ;(insert "require 'byebug'; byebug")
-  (insert "binding.pry"))
+  (insert "require 'byebug'; byebug #XXXXXXXXXXXXXXXXXX")
+  ;(insert "binding.pry")
+  )
 
 ;; @todo - improve regexen so they only match as first no-
 ;;         whitespace chars on line
