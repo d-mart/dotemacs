@@ -202,14 +202,6 @@
 (setq auto-indent-backward-delete-char-behavior (quote hungry))
 (setq auto-indent-blank-lines-on-move nil)
 ;(require 'auto-indent-mode)
-;(auto-indent-global-mode)
-
-;; more paren stuff
-; (load-library "parens-utils.el")
-
-;; make a stack of buffers a la alt-tab
-;; key-bindings not set within, see below
-(require 'iflipb)
 
 ;; bookmarks - visible and possibly persistent bookmarks
 (require 'bm)
