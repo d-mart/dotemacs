@@ -6,6 +6,13 @@
 ;;-smerge to eat diff3 output
 
 ;; get directory of this file and append .emacs.d to set up various paths
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (defconst my-config-dir (file-name-directory load-file-name))
 (message (concat "This is what I'll use as top-level config dir: " my-config-dir))
 
@@ -221,8 +228,66 @@
 (key-chord-mode 1)
 (key-chord-define-global "jk" 'undo)
 (key-chord-define-global "hj" 'hippie-expand)
-(key-chord-define-global "bv" 'iswitchb-buffer)
 (key-chord-define-global "cv" 'reindent-then-newline-and-indent)
+(key-chord-mode t)
+
+;; ;; short waits
+;; (setq key-chord-two-keys-delay .020
+;;       key-chord-one-key-delay .030)
+
+;; ;; jordon-dev-mode chords
+;; (dolist (binding
+;;          `((" i" . previous-multiframe-window)
+;;            (" o" . next-multiframe-window)
+;;            ("jf" . switch-window)
+;;            (" l" . ibuffer)
+
+;;            (" m" . magit-status)
+
+;;            (" e" . er/expand-region)
+
+;;            (" q" . quake-mode)
+
+;;            (" 0" . delete-window)
+;;            (" 1" . delete-other-windows)
+;;            (" 2" . split-window-below)
+;;            (" 3" . split-window-right)
+;;            (" =" . winstack-push)
+;;            (" -" . winstack-pop)
+
+;;            (" w" . whitespace-mode)
+
+;;            ("ji" . undo-tree-undo)
+;;            ("jo" . undo-tree-redo)
+;;            ("jk" . undo-tree-switch-branch)
+;;            ("j;" . undo-tree-visualize)
+
+;;            (" b" . ido-switch-buffer)
+;;            (" f" . ido-find-file)
+;;            (" s" . save-buffer)
+
+;;            (" x" . shell)
+
+;;            (" \\". jorbi/toggle-comment)
+
+;;            ("nw" . jabber-display-roster)
+;;            ("ne" . jabber-chat-with)
+
+;;            ("hf" . helm-do-grep)
+
+;;            (" g" . goto-line)
+
+;;            ("nv" . jorbi/find-init-file)
+
+;;            ("io" . imenu-anywhere)
+
+;;            (" r" . recompile)))
+;;   (key-chord-define jordon-dev-mode-map (car binding) (cdr binding))))
+
+
+
+
+
 
 ;; wgrep - edit grep results right in the grep buffer and save changes to files
 (require 'wgrep)
@@ -247,14 +312,13 @@
 
 ;; add some more package repositories for ELPA - DM
 (require 'package)
-(cond
- ((> emacs-major-version 23)
-  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-  (add-to-list 'package-archives '("org"       . "http://orgmode.org/elpa/") t)
-  (add-to-list 'package-archives '("sunrise"   . "http://joseito.republika.pl/sunrise-commander/"))
-  (add-to-list 'package-archives '("ELPA"      . "http://elpa.gnu.org/packages/"))
-  (add-to-list 'package-archives '("melpa"     . "http://melpa.milkbox.net/packages/"))))
 
+(setq package-archives
+      '(("marmalade" . "https://marmalade-repo.org/packages/")
+        ("org"       . "http://orgmode.org/elpa/")
+        ("sunrise"   . "http://joseito.republika.pl/sunrise-commander/")
+        ("ELPA"      . "https://elpa.gnu.org/packages/")
+        ("melpa"     . "https://melpa.org/packages/")))
 
 ;;------------------
 ;; General Behavior
@@ -315,11 +379,11 @@
 ;; ;(setq tramp-shell-prompt-pattern "^[^;$#>]*[;$#>] *")
 ;; (setq tramp-shell-prompt-pattern "^.*$.*")
 ;; (setq password-cache-expiry nil)
-; allow sudo on remote host C-x C-f /sudo:root@host[#port]:/path/to/file
 (set-default 'tramp-default-proxies-alist (quote ((".*" "\\`root\\'" "/ssh:%h:"))))
 ;; note: this works now:
 ; /ssh:bird@bastion|ssh:you@remotehost:/path
 ; /ssh:you@remotehost|sudo:them@remotehost:/path/to/file
+; C-x C-f /ssh:you@remotehost|sudo:remotehost:/path/to/file RET
 
 ;; -----------------
 ;; Look and Feel
@@ -652,8 +716,8 @@
 (load-user-file "elisp-setup.el")
 (load-user-file "yaml-setup.el")
 (load-user-file "javascript-setup.el")
-(load-user-file "org-setup.el")
 (load-user-file "erlang-setup.el")
+(load-user-file "elixir-setup.el")
 (load-user-file "go-setup.el")
 (load-user-file "rust-setup.el")
 (load-user-file "clojure-setup.el")

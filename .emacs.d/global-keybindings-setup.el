@@ -79,18 +79,12 @@
 (global-set-key (kbd "M-p")     'fill-paragraph)
 ;; toggle back and forth between speedbar
 (global-set-key (kbd "C-c s")   'speedbar-get-focus)
-;; get speedbar focus using Super Key
-(global-set-key (kbd "s-s")     'speedbar-get-focus)
-;; ace-jump-buffer
-(global-set-key (kbd "s-b")     'ace-jump-buffer)
-;; rgrep - friendly recursive grep function
-(global-set-key (kbd "C-c g")   'rgrep)
+;; show neotree folder sidebar
+(global-set-key (kbd "s-s")     'neotree-show)
 ;; find files containing a regex.  Send list of files to a dired buffer
 (global-set-key (kbd "C-c G")   'find-grep-dired)
 ;; find file names by regexp and send results to dired buffer
 (global-set-key (kbd "C-c f")   'find-name-dired)
-;; silversurfer (ag) in project
-(global-set-key (kbd "C-h g")   'ag-project-regexp)
 ;; delete all trailing whitespace in a buffer
 (global-set-key (kbd "C-c d")   'delete-trailing-whitespace)
 ;; run icicles-occur - show lines in buffer matching regex
@@ -141,13 +135,9 @@
 ;; Turn Control-z into another keymap.  The previous binding becomes
 ;; `Control-z Control-z'.
 (defvar ctrl-z-map (make-sparse-keymap))
-;; (let ((orig-ctrl-z-binding (lookup-key (current-global-map) [(control ?z)])))
-;;     (global-set-key [(control ?z)] ctrl-z-map)
-;;       (global-set-key [(control ?z) (control ?z)] orig-ctrl-z-binding))
-;; (global-set-key [(control ?z) (control ?g)] 'keyboard-quit)
 (let ((orig-ctrl-z-binding (lookup-key (current-global-map) (kbd "C-z"))))
-    (global-set-key (kbd "C-z") ctrl-z-map)
-      (global-set-key (kbd "C-z C-z") orig-ctrl-z-binding))
+  (global-set-key (kbd "C-z") ctrl-z-map)
+  (global-set-key (kbd "C-z C-z") orig-ctrl-z-binding))
 (global-set-key (kbd "C-z C-g") 'keyboard-quit)
 
 ;; A safer exit keybind.
