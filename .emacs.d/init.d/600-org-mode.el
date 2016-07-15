@@ -10,4 +10,5 @@
 (use-package org-bullets
   :defer org-load-defer-seconds
   :init
-  ((setq org-bullets-bullet-list '("✺" "✹" "✸" "✷" "✶" "✭" "✦" "■" "▲" "●" ))))
+  (progn
+    (setq org-bullets-bullet-list '("✺" "✹" "✸" "✷" "✶" "✭" "✦" "■" "▲" "●" ))))

@@ -37,7 +37,7 @@
                                    (comint-next-input 1)
                                  (forward-line 1))))))
 (use-package sane-term
-  :defer 5
+  :defer 25
   :init
   (setq sane-term-shell-command
     (cond
