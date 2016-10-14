@@ -13,14 +13,19 @@
    ["#424242" "#EF9A9A" "#C5E1A5" "#FFEE58" "#64B5F6" "#E1BEE7" "#80DEEA" "#E0E0E0"])
  '(ansi-term-color-vector
    [unspecified "#FFFFFF" "#d15120" "#5f9411" "#d2ad00" "#6b82a7" "#a66bab" "#6b82a7" "#505050"] t)
+ '(beacon-color "#ec4780")
  '(compilation-message-face (quote default))
  '(custom-enabled-themes (quote (apropospriate-dark)))
  '(custom-safe-themes
    (quote
-    ("1a53efc62256480d5632c057d9e726b2e64714d871e23e43816735e1b85c144c" "5a0eee1070a4fc64268f008a4c7abfda32d912118e080e18c3c865ef864d1bea" "4e262566c3d57706c70e403d440146a5440de056dfaeb3062f004da1711d83fc" default)))
+    ("06dbcfac3705aaaa79e1a3264c6fd44ef0cf86ef5ed67930e4007e63a8c1e8ee" "70403e220d6d7100bae7775b3334eddeb340ba9c37f4b39c189c2c29d458543b" "1a53efc62256480d5632c057d9e726b2e64714d871e23e43816735e1b85c144c" "5a0eee1070a4fc64268f008a4c7abfda32d912118e080e18c3c865ef864d1bea" "4e262566c3d57706c70e403d440146a5440de056dfaeb3062f004da1711d83fc" default)))
  '(debug-on-error nil)
  '(diary-entry-marker (quote font-lock-variable-name-face))
  '(ediff-diff-options "-w" t)
+ '(evil-emacs-state-cursor (quote ("#E57373" bar)))
+ '(evil-insert-state-cursor (quote ("#E57373" hbar)))
+ '(evil-normal-state-cursor (quote ("#FFEE58" box)))
+ '(evil-visual-state-cursor (quote ("#C5E1A5" box)))
  '(fci-rule-character-color "#d9d9d9")
  '(fci-rule-color "#c7c7c7")
  '(fringe-mode (quote (0)) nil (fringe))
@@ -54,6 +59,11 @@
  '(icicle-mode t)
  '(indicate-buffer-boundaries (quote right))
  '(indicate-empty-lines t)
+ '(js-indent-level 2)
+ '(js2-basic-offset 2)
+ '(js2-bounce-indent-p nil)
+ '(js2-highlight-level 3)
+ '(js2-mode-indent-ignore-first-tab t)
  '(magit-diff-use-overlays nil)
  '(magit-log-arguments (quote ("--color" "--decorate" "-n256")))
  '(magit-use-overlays nil)
@@ -65,13 +75,15 @@
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (yasnippet eshell-autojump which-key f3 forest-blue-theme gotham-theme darkokai-theme moonscript redtick helm-c-moccur moccur-edit zoom-frm 0blayout counsel ace-mc dark-mint-theme try buffer-move ggtags helm-gtags dumb-jump omtose-phellack-theme fireplace firestarter flycheck-clangcheck comment-dwim-2 zzz-to-char zone-rainbow magit s elixir-yasnippets elixir-mix slack sublime-themes sift highlight-indent-guides code-library darcula-theme dark-krystal-theme darkburn-theme slim-mode termbright-theme pastelmac-theme helm-grepint helm-fuzzier bpr jenkins beacon abyss-theme emacsql-mysql scratches tab-jump-out use-package-chords spaceline subemacs smart-region w3m atom-one-dark-theme atom-dark-theme skewer-mode async ahungry-theme org-wunderlist org-sync aurora-theme color-moccur emacsql turnip emamux zerodark-theme kaesar-mode kaesar-file kaesar dart-mode avy-zap rainbow-mode alchemist alect-themes ample-theme ample-zen-theme eshell-prompt-extras eshell-z fasd eno auto-complete company helm projectile company-inf-ruby peek-mode ace-window pomodoro protobuf-mode recompile-on-save help-mode+ help-fns+ redis ace-jump-helm-line package-safe-delete corral elixir-mode planet-theme racket-mode zonokai-theme avy helm-dash helm-mt multi-term marcopolo kerl rpn-calc highlight-indentation apropospriate-theme hydra mellow-theme moe-theme darktooth-theme material-theme swiper ztree zenburn-theme zen-and-art-theme yari yaml-mode wgrep warm-night-theme visual-regexp-steroids vagrant use-package undo-tree twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme swoop sunrise-commander subatomic256-theme string-utils spacegray-theme soothe-theme sml-modeline smex smartparens seti-theme scss-mode sane-term rvm rust-mode ruby-tools ruby-interpolation ruby-electric ruby-block ruby-additional rspec-mode roguel-ike rinari reverse-theme restclient rainbow-delimiters railscasts-theme rails-log-mode projectile-rails pow phoenix-dark-pink-theme phi-search-mc phi-search-dired phi-grep peep-dired pallet noccur neotree naquadah-theme move-line monokai-theme molokai-theme mode-line-debug mc-extras math-at-point markdown-mode+ mark-multiple mark-more-like-this magit-push-remote lush-theme lua-mode lfe-mode key-chord json-mode js2-mode jg-quicknav jabber ir-black-theme info+ impatient-mode iflipb iedit ibuffer-vc ibuffer-tramp ibuffer-git hlinum highlight-parentheses highlight-numbers hide-lines heroku-theme helm-themes helm-rb helm-projectile-all helm-projectile helm-ls-git helm-helm-commands helm-git-grep helm-ag haste haml-mode hackernews guru-mode grandshell-theme go-mode gitignore-mode gitconfig-mode git-timemachine git-messenger free-keys flx-ido flatui-theme firebelly-theme fiplr feature-mode expand-region etags-select es-lib elisp-slime-nav edts easy-kill dockerfile-mode dired+ darkmine-theme dark-souls cycle-resize cyberpunk-theme coffee-mode browse-kill-ring bm awk-it auto-yasnippet auto-indent-mode auto-complete-etags anti-zenburn-theme android-mode ag afternoon-theme ace-jump-buffer ace-isearch)))
+    (webpaste 0xc direnv dkl ripgrep counsel-dash doom-themes monitor cmake-mode magit better-shell pcap-mode transfer-sh web-mode yasnippet eshell-autojump which-key f3 forest-blue-theme gotham-theme darkokai-theme moonscript redtick helm-c-moccur moccur-edit zoom-frm 0blayout counsel ace-mc dark-mint-theme try buffer-move ggtags helm-gtags dumb-jump omtose-phellack-theme fireplace firestarter flycheck-clangcheck comment-dwim-2 zzz-to-char zone-rainbow s elixir-yasnippets slack sublime-themes sift highlight-indent-guides code-library darcula-theme dark-krystal-theme darkburn-theme slim-mode termbright-theme pastelmac-theme helm-grepint helm-fuzzier bpr jenkins beacon abyss-theme emacsql-mysql scratches tab-jump-out use-package-chords spaceline subemacs smart-region w3m atom-one-dark-theme atom-dark-theme skewer-mode async ahungry-theme org-wunderlist org-sync aurora-theme color-moccur emacsql turnip emamux zerodark-theme kaesar-mode kaesar-file kaesar dart-mode avy-zap rainbow-mode alchemist alect-themes ample-theme ample-zen-theme eshell-prompt-extras eshell-z fasd eno auto-complete company projectile company-inf-ruby peek-mode ace-window pomodoro protobuf-mode recompile-on-save help-mode+ help-fns+ redis package-safe-delete corral elixir-mode planet-theme racket-mode zonokai-theme avy multi-term marcopolo kerl rpn-calc highlight-indentation apropospriate-theme hydra mellow-theme moe-theme darktooth-theme material-theme swiper ztree zenburn-theme zen-and-art-theme yari yaml-mode wgrep warm-night-theme visual-regexp-steroids vagrant use-package undo-tree twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme swoop sunrise-commander subatomic256-theme string-utils spacegray-theme soothe-theme sml-modeline smex smartparens seti-theme scss-mode sane-term rvm rust-mode ruby-tools ruby-interpolation ruby-electric ruby-block ruby-additional rspec-mode roguel-ike reverse-theme restclient rainbow-delimiters railscasts-theme projectile-rails phoenix-dark-pink-theme phi-search-mc phi-search-dired phi-grep peep-dired pallet noccur neotree naquadah-theme move-line monokai-theme molokai-theme mode-line-debug mc-extras math-at-point markdown-mode+ mark-multiple mark-more-like-this magit-push-remote lush-theme lua-mode lfe-mode key-chord json-mode js2-mode jg-quicknav jabber ir-black-theme info+ impatient-mode iflipb iedit ibuffer-vc ibuffer-tramp ibuffer-git hlinum highlight-parentheses highlight-numbers hide-lines heroku-theme helm-projectile-all haste haml-mode hackernews guru-mode grandshell-theme go-mode gitignore-mode gitconfig-mode git-timemachine git-messenger free-keys flx-ido flatui-theme firebelly-theme fiplr feature-mode expand-region etags-select es-lib elisp-slime-nav edts easy-kill dockerfile-mode dired+ darkmine-theme dark-souls cycle-resize cyberpunk-theme coffee-mode browse-kill-ring bm awk-it auto-yasnippet auto-indent-mode auto-complete-etags anti-zenburn-theme android-mode ag afternoon-theme ace-jump-buffer ace-isearch)))
+ '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#36473A")
  '(pos-tip-foreground-color "#FFFFC8")
  '(remote-shell-program "ssh")
  '(speedbar-supported-extension-expressions
    (quote
     (".wy" ".by" ".[ch]\\(\\+\\+\\|pp\\|c\\|h\\|xx\\)?" ".tex\\(i\\(nfo\\)?\\)?" ".el" ".emacs" ".l" ".lsp" ".p" ".java" ".f\\(90\\|77\\|or\\)?" ".ada" ".p[lm]" ".tcl" ".m" ".scm" ".pm" ".py" ".g" ".s?html" ".ma?k" "[Mm]akefile\\(\\.in\\)?" ".feature" "Rakefile" ".rb" ".yml")))
+ '(tabbar-background-color "#353535")
  '(term-buffer-maximum-size 0)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
