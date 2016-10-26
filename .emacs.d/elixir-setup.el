@@ -3,6 +3,7 @@
 ;;; ----------------------
 
 (defun dm/elixir-settings ()
+  (alchemist-made t)
   (message "loaded dm/elixir-settings"))
 
 (defun dm/elixir-mode-keybindings ()
