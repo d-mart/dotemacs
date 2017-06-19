@@ -23,3 +23,8 @@
 
 (add-hook 'eww-mode-hook 'my-eww-mode-keybindings)
 (add-hook 'eww-mode-hook 'my-eww-mode-hook)
+
+(use-package restclient
+  :init
+  (setq auto-mode-alist
+        (append '(("\\.http$" . restclient-mode)) auto-mode-alist)))

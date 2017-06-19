@@ -15,3 +15,9 @@
   (define-key ctl-x-map (kbd "C--") 'zoom-in/out)
   (define-key ctl-x-map (kbd "C-=") 'zoom-in/out)
   (define-key ctl-x-map (kbd "C-0") 'zoom-in/out))
+
+; smex - ido-stuff on M-x
+(use-package smex
+  :bind
+  (("M-x" . smex)
+   ("M-X" . smex-major-mode-commands)))

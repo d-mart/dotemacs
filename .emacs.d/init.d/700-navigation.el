@@ -35,21 +35,24 @@
    ("C-:"     . avy-goto-char)
    ("C-'"     . avy-goto-char-2)))
 
-(use-package ggtags
-  :init
-  (add-hook 'c-mode-hook 'ggtags-mode)
-  :bind (:map ggtags-navigation-mode-map
-           ("\M-<" . ggtags-navigation-mode-map )
-           ("\M->" . ggtags-navigation-mode-map )))
+;(use-package ggtags
+;  :init
+;  (add-hook 'c-mode-hook 'ggtags-mode)
+;  :bind (:map ggtags-navigation-mode-map
+;           ("\M-<" . ggtags-navigation-mode-map )
+;           ("\M->" . ggtags-navigation-mode-map )))
 
-(use-package ggtags)
-;(use-package buffer-move
-;  :bind
-;  (("C-S-<up>"    . buf-move-up)
-;   ("C-S-<down>"  . buf-move-down)
-;   ("C-S-<left>"  . buf-move-left)
-;   ("C-S-<right>" . buf-move-right)
-;   ("C-z h"       . buf-move-left)
-;   ("C-z j"       . buf-move-down)
-;   ("C-z k"       . buf-move-up)
-;   ("C-z l"       . buf-move-right)))
+(use-package buffer-move
+ :bind
+ (("C-z C-h"     . buf-move-left)
+  ("C-z C-j"     . buf-move-down)
+  ("C-z C-k"     . buf-move-up)
+  ("C-z C-l"     . buf-move-right)
+  ("C-z h"       . windmove-left)
+  ("C-z j"       . windmove-down)
+  ("C-z k"       . windmove-up)
+  ("C-z l"       . windmove-right)))
+
+;; add some others to ctrl-z map
+(global-set-key (kbd "C-z C-g") 'keyboard-quit)
+(global-set-key (kbd "C-z o")   'other-window)

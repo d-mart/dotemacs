@@ -18,7 +18,7 @@
   :bind
   ("C-M-s" . swiper))
 
-(use-package ace-isearch
-  :init
-  (progn
-    (global-ace-isearch-mode +1) ))
+;(use-package ace-isearch
+;  :init
+;  (progn
+;    (global-ace-isearch-mode +1) ))
