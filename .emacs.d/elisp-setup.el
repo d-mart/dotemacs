@@ -1,13 +1,16 @@
-;; add imenu to programming buffers
-(add-hook 'emacs-lisp-mode-hook 'imenu-add-menubar-index)
+(use-package paredit)
 
 ;; elisp-mode keybindings
-(defun my-elisp-mode-keybindings ()
+(defun dm/elisp-mode-keybindings ()
   (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
   (define-key emacs-lisp-mode-map (kbd "C-c #")   'comment-or-uncomment-region))
 
+(defun dm/elisp-mode-hook ()
+  (enable-paredit-mode))
+
 (add-hook 'emacs-lisp-mode-hook 'my-programming-mode-hook)
-(add-hook 'emacs-lisp-mode-hook 'my-elisp-mode-keybindings)
+(add-hook 'emacs-lisp-mode-hook 'dm/elisp-mode-keybindings)
+(add-hook 'emacs-lisp-mode-hook 'dm/elisp-mode-hook)
 (add-hook 'emacs-lisp-mode-hook 'fontify-at-todo)
 
 ;; file modes
