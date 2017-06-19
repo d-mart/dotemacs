@@ -723,7 +723,6 @@
 (load-user-file "dired-setup.el")
 (load-user-file "irc-setup.el")
 (load-user-file "sh-setup.el")
-(load-user-file "global-keybindings-setup.el")
 (load-user-file "misc-utils.el")
 (load-user-file "my-misc-utils.el")
 (load-user-file "my-misc-advice.el")

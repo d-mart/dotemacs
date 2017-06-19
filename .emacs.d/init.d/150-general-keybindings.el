@@ -19,21 +19,10 @@
 (global-set-key [f7]            'next-error)
 (global-set-key [S-f7]          'recompile)
 (global-set-key [C-f7]          'kill-compilation)
-
+(global-set-key [f8]            'xah-search-current-word)
 ; I hate when tryying to hold down C-p, i instead hold down C-[,
 ; and my window layout is ruined.  Intercep!
 (global-set-key (kbd "ESC ESC ESC") '(lambda () (interactive) (message "Whoopsie!")))
-
-; fiplr - fuzzy find in project (e.g. git repo)
-(global-set-key (kbd "C-x f")   'fiplr-find-file)
-
-; smex - ido-stuff on M-x
-(if (featurep 'smex)
-    (progn
-      (global-set-key (kbd "M-x")         'smex)
-      (global-set-key (kbd "M-X")         'smex-major-mode-commands)
-      (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; original M-x.
-      ))
 
 ; helm - incrementally search files, buffers, and more
 (global-set-key (kbd "s-h") 'helm-mini)
@@ -138,7 +127,6 @@
 (let ((orig-ctrl-z-binding (lookup-key (current-global-map) (kbd "C-z"))))
   (global-set-key (kbd "C-z") ctrl-z-map)
   (global-set-key (kbd "C-z C-z") orig-ctrl-z-binding))
-(global-set-key (kbd "C-z C-g") 'keyboard-quit)
 
 ;; A safer exit keybind.
 (global-set-key (kbd "C-x C-c")
