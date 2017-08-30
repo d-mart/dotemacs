@@ -121,6 +121,69 @@
  (if (featurep 'xemacs) (kbd "<C-iso-left-tab>") (kbd "<C-S-iso-lefttab>"))
   'iflipb-previous-buffer)
 
+;; key-chord - two keys pressed simultaneously cause a function to be called
+(use-package key-chord
+ :init
+ (key-chord-mode 1)
+ (key-chord-define-global "jk" 'undo)
+ (key-chord-define-global "hj" 'hippie-expand)
+ (key-chord-define-global "cv" 'reindent-then-newline-and-indent)
+ (key-chord-mode t)
+  ;; short waits
+  ;; (setq key-chord-two-keys-delay .020
+  ;; key-chord-one-key-delay .030)
+ )
+
+
+;; ;; jordon-dev-mode chords
+;; (dolist (binding
+;;          `((" i" . previous-multiframe-window)
+;;            (" o" . next-multiframe-window)
+;;            ("jf" . switch-window)
+;;            (" l" . ibuffer)
+
+;;            (" m" . magit-status)
+
+;;            (" e" . er/expand-region)
+
+;;            (" q" . quake-mode)
+
+;;            (" 0" . delete-window)
+;;            (" 1" . delete-other-windows)
+;;            (" 2" . split-window-below)
+;;            (" 3" . split-window-right)
+;;            (" =" . winstack-push)
+;;            (" -" . winstack-pop)
+
+;;            (" w" . whitespace-mode)
+
+;;            ("ji" . undo-tree-undo)
+;;            ("jo" . undo-tree-redo)
+;;            ("jk" . undo-tree-switch-branch)
+;;            ("j;" . undo-tree-visualize)
+
+;;            (" b" . ido-switch-buffer)
+;;            (" f" . ido-find-file)
+;;            (" s" . save-buffer)
+
+;;            (" x" . shell)
+
+;;            (" \\". jorbi/toggle-comment)
+
+;;            ("nw" . jabber-display-roster)
+;;            ("ne" . jabber-chat-with)
+
+;;            ("hf" . helm-do-grep)
+
+;;            (" g" . goto-line)
+
+;;            ("nv" . jorbi/find-init-file)
+
+;;            ("io" . imenu-anywhere)
+
+;;            (" r" . recompile)))
+;;   (key-chord-define jordon-dev-mode-map (car binding) (cdr binding))))
+
 ;; Turn Control-z into another keymap.  The previous binding becomes
 ;; `Control-z Control-z'.
 (defvar ctrl-z-map (make-sparse-keymap))
