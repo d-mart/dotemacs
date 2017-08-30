@@ -15,3 +15,7 @@
   (define-key ctl-x-map (kbd "C--") 'zoom-in/out)
   (define-key ctl-x-map (kbd "C-=") 'zoom-in/out)
   (define-key ctl-x-map (kbd "C-0") 'zoom-in/out))
+
+(use-package amx
+  :bind
+  ("M-x" . amx))

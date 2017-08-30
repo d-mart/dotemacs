@@ -1,9 +1,9 @@
 ;; ----------------
 ;; General editing settings that apply anywhere
 ;; ----------------
-(use-package avy-zap
+(use-package zzz-to-char
   :init
   ()
   :bind
-  (("M-z" . avy-zap-to-char-dwim)
-   ("M-Z" . avy-zap-up-to-char-dwim)))
+  (("M-z" . zzz-up-to-char)
+   ("M-Z" . zzz-to-char)))

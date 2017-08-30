@@ -201,17 +201,18 @@ user."
 ; =====================================================================
 ; list all non-interactive functions
 ; http://stackoverflow.com/questions/605785/how-do-i-get-a-list-of-emacs-lisp-non-interactive-functions
-(defun list-functions
-    (flet ((first-line (text)
-                       (if text
-                           (substring text 0 (string-match "\n" text))
-                         "")))
-      (mapatoms
-       (lambda (x)
-         (and (fboundp x)                          ; does x name a function?
-              (not (commandp (symbol-function x))) ; is it non-interactive?
-              (subrp (symbol-function x))          ; is it built-in?
-              (insert (symbol-name x) " - " (first-line (documentation x)) "\n"))))))
+;;;;;;;;;;;;; XXXXXXXX NOT WORKING IN 2017.01.08
+;(defun list-functions
+;    (flet ((first-line (text)
+;                       (if text
+;                           (substring text 0 (string-match "\n" text))
+;                         "")))
+;      (mapatoms
+;       (lambda (x)
+;         (and (fboundp x)                          ; does x name a function?
+;              (not (commandp (symbol-function x))) ; is it non-interactive?
+;              (subrp (symbol-function x))          ; is it built-in?
+;              (insert (symbol-name x) " - " (first-line (documentation x)) "\n"))))))
 
 ; ========================================================================
 ; pretty-print XML, including adding line breaks
@@ -230,3 +231,29 @@ by using nxml's indentation rules."
       (backward-char) (insert "\n"))
     (indent-region begin end))
   (message "Ah, much better!"))
+
+; ========================================================================
+; http://ergoemacs.org/emacs/modernization_isearch.html
+; Search next thing at point, like '*' in vim
+(defun xah-search-current-word ()
+  "Call `isearch' on current word or text selection.
+“word” here is A to Z, a to z, and hyphen 「-」 and underline 「_」, independent of syntax table.
+URL `http://ergoemacs.org/emacs/modernization_isearch.html'
+Version 2015-04-09"
+  (interactive)
+  (let ( -p1 -p2 )
+    (if (use-region-p)
+        (progn
+          (setq -p1 (region-beginning))
+          (setq -p2 (region-end)))
+      (save-excursion
+        (skip-chars-backward "-_A-Za-z0-9")
+        (setq -p1 (point))
+        (right-char)
+        (skip-chars-forward "-_A-Za-z0-9")
+        (setq -p2 (point))))
+    (setq mark-active nil)
+    (when (< -p1 (point))
+      (goto-char -p1))
+    (isearch-mode t)
+    (isearch-yank-string (buffer-substring-no-properties -p1 -p2))))

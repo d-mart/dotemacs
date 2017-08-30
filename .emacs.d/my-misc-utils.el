@@ -170,7 +170,8 @@
 ;; and beginning of code
 ;; ------------------
 ;; similar to function beginning-or-indentation from misc-cmds.el
-(defun back-to-indentation-or-beginning () (interactive)
+(defun back-to-indentation-or-beginning (&optional arg) (interactive "P")
+  ;(if (= 'arg 'arg) (progn (message "universal arg") (message "NOT universal arg")))
   (if (= (point) (progn (back-to-indentation) (point)))
       (beginning-of-line)))
 
@@ -302,3 +303,7 @@
    "\C-e\\|\C-d")
 
 (message "Misc-utils-done")
+
+(defun kpc (arg char)
+  (interactive "p\ncenter char: ")
+  (message "you said: %s" char))

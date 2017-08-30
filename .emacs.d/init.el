@@ -147,10 +147,6 @@
 ;(require 'textmate)
 ;(textmate-mode)
 
-;; smex - ido fuzzy matching for M-x
-(require 'smex)
-(smex-initialize)
-
 ;; a little work around for icicles - kill-buffer gets mapped to
 ;; icicle-kill-buffer.  BUT that calls (in some cases)
 ;; kill-buffer-and-its-windows, which I fucking hate
@@ -216,72 +212,6 @@
 (require 'find-file-in-tags)
 ; keybindings below
 
-;; key-chord - two keys pressed simultaneously cause a function to be called
-(require 'key-chord)
-(key-chord-mode 1)
-(key-chord-define-global "jk" 'undo)
-(key-chord-define-global "hj" 'hippie-expand)
-(key-chord-define-global "cv" 'reindent-then-newline-and-indent)
-(key-chord-mode t)
-
-;; ;; short waits
-;; (setq key-chord-two-keys-delay .020
-;;       key-chord-one-key-delay .030)
-
-;; ;; jordon-dev-mode chords
-;; (dolist (binding
-;;          `((" i" . previous-multiframe-window)
-;;            (" o" . next-multiframe-window)
-;;            ("jf" . switch-window)
-;;            (" l" . ibuffer)
-
-;;            (" m" . magit-status)
-
-;;            (" e" . er/expand-region)
-
-;;            (" q" . quake-mode)
-
-;;            (" 0" . delete-window)
-;;            (" 1" . delete-other-windows)
-;;            (" 2" . split-window-below)
-;;            (" 3" . split-window-right)
-;;            (" =" . winstack-push)
-;;            (" -" . winstack-pop)
-
-;;            (" w" . whitespace-mode)
-
-;;            ("ji" . undo-tree-undo)
-;;            ("jo" . undo-tree-redo)
-;;            ("jk" . undo-tree-switch-branch)
-;;            ("j;" . undo-tree-visualize)
-
-;;            (" b" . ido-switch-buffer)
-;;            (" f" . ido-find-file)
-;;            (" s" . save-buffer)
-
-;;            (" x" . shell)
-
-;;            (" \\". jorbi/toggle-comment)
-
-;;            ("nw" . jabber-display-roster)
-;;            ("ne" . jabber-chat-with)
-
-;;            ("hf" . helm-do-grep)
-
-;;            (" g" . goto-line)
-
-;;            ("nv" . jorbi/find-init-file)
-
-;;            ("io" . imenu-anywhere)
-
-;;            (" r" . recompile)))
-;;   (key-chord-define jordon-dev-mode-map (car binding) (cdr binding))))
-
-
-
-
-
-
 ;; wgrep - edit grep results right in the grep buffer and save changes to files
 (require 'wgrep)
 
@@ -309,7 +239,6 @@
 (setq package-archives
       '(("marmalade" . "https://marmalade-repo.org/packages/")
         ("org"       . "http://orgmode.org/elpa/")
-        ("sunrise"   . "http://joseito.republika.pl/sunrise-commander/")
         ("ELPA"      . "https://elpa.gnu.org/packages/")
         ("melpa"     . "https://melpa.org/packages/")))
 
@@ -722,7 +651,7 @@
 (load-user-file "ediff-setup.el")
 (load-user-file "dired-setup.el")
 (load-user-file "irc-setup.el")
-(load-user-file "global-keybindings-setup.el")
+(load-user-file "sh-setup.el")
 (load-user-file "misc-utils.el")
 (load-user-file "my-misc-utils.el")
 (load-user-file "my-misc-advice.el")
