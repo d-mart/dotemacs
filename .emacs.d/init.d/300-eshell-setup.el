@@ -13,6 +13,24 @@
     (setq eshell-highlight-prompt nil
           eshell-prompt-function 'epe-theme-dakrone)))
 
+(defun eshell/ll (&rest args)
+  "a shortcut for ls that automatically adds some flags to the ls"
+  (eshell/ls "-l" "-a" args))
+
+(defun dm/eshell-mode-keybindings ()
+  "keymappings for use in eshell"
+  )
+
+(defun dm/eshell-mode-hook ()
+  "personal eshell sauce"
+  (dm/eshell-mode-keybindings))
+
+(add-hook 'eshell-mode-hook 'dm/eshell-mode-hook)
+
+;; see also:
+;;; eshell-aliases-file var -> defaults ~/.emacs.d/eshell/alias
+;;; refresh aliases after editing with eshell-read-aliases-list
+
 ;(defmacro with-face (str &rest properties)
 ;  `(propertize ,str 'face (list ,@properties)))
 ;
