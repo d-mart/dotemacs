@@ -201,17 +201,18 @@ user."
 ; =====================================================================
 ; list all non-interactive functions
 ; http://stackoverflow.com/questions/605785/how-do-i-get-a-list-of-emacs-lisp-non-interactive-functions
-(defun list-functions
-    (flet ((first-line (text)
-                       (if text
-                           (substring text 0 (string-match "\n" text))
-                         "")))
-      (mapatoms
-       (lambda (x)
-         (and (fboundp x)                          ; does x name a function?
-              (not (commandp (symbol-function x))) ; is it non-interactive?
-              (subrp (symbol-function x))          ; is it built-in?
-              (insert (symbol-name x) " - " (first-line (documentation x)) "\n"))))))
+;;;;;;;;;;;;; XXXXXXXX NOT WORKING IN 2017.01.08
+;(defun list-functions
+;    (flet ((first-line (text)
+;                       (if text
+;                           (substring text 0 (string-match "\n" text))
+;                         "")))
+;      (mapatoms
+;       (lambda (x)
+;         (and (fboundp x)                          ; does x name a function?
+;              (not (commandp (symbol-function x))) ; is it non-interactive?
+;              (subrp (symbol-function x))          ; is it built-in?
+;              (insert (symbol-name x) " - " (first-line (documentation x)) "\n"))))))
 
 ; ========================================================================
 ; pretty-print XML, including adding line breaks
