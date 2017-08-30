@@ -25,3 +25,5 @@ amx-items
 emojis/*
 *.data
 *.notes
+private/*
+.org-id-locations
