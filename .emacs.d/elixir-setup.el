@@ -17,6 +17,8 @@
 (add-hook 'elixir-mode-hook 'dm/elixir-settings)
 (add-hook 'elixir-mode-hook 'dm/elixir-mode-keybindings)
 
+(add-to-list 'auto-mode-alist '("mix.lock" . elixir-mode))
+
 (defun dm/elixir-insert-debugger ()
   (interactive)
   (beginning-of-line)
