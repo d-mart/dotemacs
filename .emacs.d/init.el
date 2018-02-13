@@ -140,21 +140,6 @@
            (position (cdr (assoc selected-symbol name-and-pos))))
       (goto-char position))))
 
-;; buffer-move - great way to move buffers in windows easily
-(load-library "buffer-move")
-
-;; textmate mode - lots of the joys of textmate with less textmate
-;(require 'textmate)
-;(textmate-mode)
-
-;; a little work around for icicles - kill-buffer gets mapped to
-;; icicle-kill-buffer.  BUT that calls (in some cases)
-;; kill-buffer-and-its-windows, which I fucking hate
-(defalias 'kill-buffer-and-its-windows 'kill-buffer)
-
-;; enhancements to compile mode
-;(require 'compile+)
-
 ;; uniquify - makes buffer names for files of same name more useful.
 ;; e.g. instead of foo.c and foo.c<2>, foo.c|dir1 and foo.c|dir2
 (require 'uniquify)
@@ -167,9 +152,6 @@
 ;(require 'auto-complete-config)
 ;(require 'auto-complete-etags)
 (setq ac-stop-words '("/" "//"))  ; don't autocomplete C comments
-
-;(add-to-list 'ac-dictionary-directories (concat my-config-dir "elpa/auto-complete-1.4.20110207/dict"))
-;(ac-config-default)
 
 ;; Browse kill ring - see list of text that has been killed
 (require 'browse-kill-ring)
@@ -199,9 +181,6 @@
 (setq auto-indent-backward-delete-char-behavior (quote hungry))
 (setq auto-indent-blank-lines-on-move nil)
 ;(require 'auto-indent-mode)
-
-;; bookmarks - visible and possibly persistent bookmarks
-(require 'bm)
 
 ;; etags-select - look thru list of matching tags before jumping
 (require 'etags-select)
