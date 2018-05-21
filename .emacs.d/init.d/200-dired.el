@@ -35,3 +35,21 @@
           (switch-to-buffer filebuffer)                                    ; simply switch
         (view-file file))                                                    ; ... view it
       (other-window -1))))                   ; give the attention back to the dired buffer
+
+(use-package dired-subtree
+  :config
+  (bind-keys :map dired-mode-map
+             ("i" . dired-subtree-insert)
+             (";" . dired-subtree-remove)))
+
+(use-package dired-narrow
+  :config
+  (bind-keys :map dired-mode-map
+             ("C-c n" . dired-narrow)
+             ("C-c e" . dired-narrow-regexp)))
+
+(use-package dired-filter
+  :config
+  (bind-keys :map dired-mode-map
+             ("C-c f" . dired-filter-mode)))
+(define-key dired-mode-map (kbd "C-c C-f") dired-filter-map)
