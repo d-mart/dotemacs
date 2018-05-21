@@ -1,25 +1,35 @@
-(defun select-current-line ()
+(defun dm/select-current-line ()
   "Set the region to the entire current line"
   (interactive)
-  (transient-mark-mode 1)
+  (transient-mark-mode)
   (end-of-line)
   (set-mark (line-beginning-position)))
 
-(defun select-another-line ()
+(defun dm/select-another-line ()
   "Move the mark to the end of the next line"
   (interactive)
-  (forward-line 1)
-  (end-of-line))
+  (if (region-active-p)
+      (progn
+        (forward-line 1)
+         (end-of-line))
+    (dm/select-current-line)))
 
-(defun select-current-word ()
+(defun dm/select-current-word ()
   "Set the region to the current word"
   (interactive)
-  (transient-mark-mode 1)
+  (transient-mark-mode)
   (let (pt)
     (skip-chars-backward "-_A-Za-z0-9")
     (setq pt (point))
     (skip-chars-forward "-_A-Za-z0-9")
     (set-mark pt)))
+
+(defun dm/kill-ring-save-region-or-line ()
+  "If the region is active, save it to the kill ring. Otherwise save current line to kill ring"
+  (interactive)
+  (save-excursion
+    (unless (region-active-p) (dm/select-current-line))
+    (kill-ring-save (region-beginning) (region-end))))
 
 (defun set-tab-width ()
   "Set tab width locally. Accept universal arg or prompt"
@@ -60,7 +70,7 @@
   (describe-function last-command))
 
 ;; -----------------
-;; Hilite some text.  Search for same
+;; Mark some text. Search for same
 ;; -----------------
 (defun search-selected-text()
   "Performs a nonincremental-search-forward. The text in the current region is what search for."
@@ -70,7 +80,7 @@
          (end (max (point) (mark)))
          (word (buffer-substring start end))
          )
-    (deactivate-mark)  ;; @todo - need to reselect mark for search result
+    (deactivate-mark)  ;; todo - need to reselect mark for search result
     (search-forward word)))
 
 ;; -----------------

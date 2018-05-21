@@ -101,6 +101,10 @@
 (global-set-key (kbd "M-/")     'hippie-expand)
 ;; backwards zap to char
 (global-set-key (kbd "M-Z")     'backward-zap-to-char)
+
+(global-set-key (kbd "M-L")     'dm/select-another-line)
+(global-set-key (kbd "M-K")     'dm/kill-ring-save-region-or-line)
+
 ;; see list of killed text
 (global-set-key (kbd "C-c k")   'browse-kill-ring)
 ;; lusty
