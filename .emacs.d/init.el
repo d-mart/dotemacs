@@ -300,11 +300,6 @@
 ;(defvar myFont ":-unknown-Droid Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
 
 (safe-wrap (set-default-font myFont))
-;; set above font as default for new frame as well
-;(safe-wrap (setq default-frame-alist
-;      (append '((font . 'myFont)
-;                (geometry . "-1-1"))
-;              default-frame-alist)))
 
 ; highlight the cursor line
 ; M-x list-colors-display
@@ -407,10 +402,6 @@
 (setq scroll-step 1)
 ;; actually like this better
 (setq scroll-step 10)
-
-;; default size and location
-(add-to-list 'default-frame-alist '(left . 0))
-(add-to-list 'default-frame-alist '(top . 0))
 
 ;; titlebar = buffer unless filename
 (setq frame-title-format '(buffer-file-name "emacs - %f" ("emacs - %b")))
