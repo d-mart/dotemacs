@@ -6,7 +6,7 @@
   (require 'eshell-z))
 
 
-(use-package shell-prompt-extras
+(use-package eshell-prompt-extras
   :init
   (with-eval-after-load "esh-opt"
     (autoload 'epe-theme-dakrone "eshell-prompt-extras")

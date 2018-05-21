@@ -8,6 +8,10 @@
     (add-hook 'org-mode-hook (lambda () (smartparens-mode -1)))
     ))
 
+
+(defun dm/insert-literal-quote ()
+  (interactive)
+  (insert-quoted "\""))
 ;  Developer's own configs:
 ;  ;;;;;;;;;
 ;  ;; global

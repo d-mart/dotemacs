@@ -2,10 +2,6 @@
 ;; Navigation, window/frame/buffer movement and selection
 ;; ----------------
 
-(use-package 0blayout
-  :init
-  (0blayout-mode))
-
 (use-package bm)
 
 (use-package ace-window
