@@ -4,8 +4,9 @@
       '((emacs-lisp . t)
         (plantuml   . t)
         (ruby       . t)
-        (sh         . t)
-        ;(elixir     . t)
+        (shell      . t)
+        (elixir     . t)
+        (restclient . t)
         ))
 
 ;; TODO: embetter this
@@ -18,7 +19,9 @@
   :init
   (setq org-log-into-drawer "NOTES")
   (setq org-refile-allow-creating-parent-nodes t)
-  (setq org-agenda-files '("~/org/belford_release.org"))
+  (setq org-agenda-files '("~/org/bross_release.org"))
+  ;;(setq org-startup-indented t)
+  (setf org-blank-before-new-entry '((heading . nil) (plain-list-item . nil)))
   (org-babel-do-load-languages 'org-babel-load-languages dm/org-babel-languages)
   ;:bind ()
   )
@@ -28,3 +31,10 @@
   :init
   (progn
     (setq org-bullets-bullet-list '("✺" "✹" "✸" "✷" "✶" "✭" "✦" "■" "▲" "●" ))))
+
+(defun dm/cycle-previous-heading ()
+  (interactive)
+  (outline-previous-heading)
+  (org-cycle))
+
+(define-key org-mode-map [(control c) (control tab)] 'dm/cycle-previous-heading)
