@@ -10,13 +10,6 @@
   (setq beacon-push-mark 35)
   (setq beacon-color "#666600"))
 
-(use-package zoom-frm
-  :init
-  (define-key ctl-x-map (kbd "C-+") 'zoom-in/out)
-  (define-key ctl-x-map (kbd "C--") 'zoom-in/out)
-  (define-key ctl-x-map (kbd "C-=") 'zoom-in/out)
-  (define-key ctl-x-map (kbd "C-0") 'zoom-in/out))
-
 (use-package amx
   :bind
   ("M-x" . amx))
@@ -44,14 +37,24 @@
 (defun dm/post-theme-change-adjust-hook ()
   (let ((current-theme (car custom-enabled-themes)))
     (cond
+
      ((eq current-theme 'doom-molokai)
       (message "setting doom-molokai special theme sauce")
-      ;; TODO
+      ;; TODO - set these *in* the theme somehow
+      (custom-set-faces
+       '(org-level-4 ((t (:inherit org-level-3 :foreground "SeaGreen2"))))
+       '(org-level-5 ((t (:inherit org-level-3 :foreground "SkyBlue2"))))
+       '(org-level-6 ((t (:inherit org-level-3 :foreground "goldenrod2"))))
+       '(org-level-8 ((t (:foreground "NavajoWhite3" :weight semi-bold)))))
       )
+
      ((eq current-theme 'darkokai)
       (message "setting darkokai special theme sauce")
-      ;; TODO
+      (custom-set-faces
+       '(org-block ((t (:foreground "wheat3"))))
+       )
       )
+
      )))
 
 ;; advise load-theme to get a hook when the theme changes

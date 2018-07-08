@@ -6,6 +6,7 @@
   (define-key dired-mode-map (kbd "p")   'dired-view-previous)) ; was dired-previous-line
 
 (add-hook 'dired-mode-hook 'dm/dired-mode-keybindings)
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
 (defun dired-view-next ()
   "Move down one line and view the current file in another window."

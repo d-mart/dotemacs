@@ -2,9 +2,6 @@
 ;;; Dired setup
 ;;;------------------
 
-;; dired+ - Lots of improvements to dir listing buffers
-(require 'dired+)
-
 ;; from emacswiki - show dired buffers with directories listed first
 (defun mydired-sort ()
   "Sort dired listings with directories first."

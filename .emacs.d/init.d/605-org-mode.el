@@ -17,9 +17,17 @@
 (use-package org-mode
   :defer org-load-defer-seconds
   :init
+  (setq org-agenda-files (quote (nil)))
+  (setq org-ellipsis " … ")
+  (setq org-fontify-done-headline t)
+  (setq org-fontify-quote-and-verse-blocks t)
+  (setq org-fontify-whole-heading-line t)
   (setq org-log-into-drawer "NOTES")
   (setq org-refile-allow-creating-parent-nodes t)
-  (setq org-agenda-files '("~/org/bross_release.org"))
+
+  (setq org-babel-no-eval-on-ctrl-c-ctrl-c nil)
+  (setq org-confirm-babel-evaluate nil)
+
   ;;(setq org-startup-indented t)
   (setf org-blank-before-new-entry '((heading . nil) (plain-list-item . nil)))
   (org-babel-do-load-languages 'org-babel-load-languages dm/org-babel-languages)
