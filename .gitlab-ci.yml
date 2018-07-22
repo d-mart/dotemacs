@@ -1,0 +1,27 @@
+image: ubuntu:latest
+
+before_script:
+  - echo "Starting CI job for dotemacs install"
+   
+after_script:
+  - echo "After script section"
+  - echo "For example you might do some cleanup here"
+   
+build1:
+  stage: build
+  script:
+    - apt-get update 
+    - apt-get install -y emacs-nox
+    - deploy.sh -l
+    - deploy-cask.sh
+   
+#test1:
+#  stage: test
+#  script: 
+#    - echo "Do a test here"
+#    - echo "For example run a test suite"
+
+#deploy1:
+#  stage: deploy
+#  script:
+#    - echo "Do your deploy here"
