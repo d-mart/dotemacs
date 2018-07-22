@@ -602,7 +602,6 @@
   (load-file (expand-file-name file my-config-dir)))
 
 (load-user-file "faces-setup.el")
-(load-user-file "programming-setup.el")
 (load-user-file "ediff-setup.el")
 (load-user-file "dired-setup.el")
 (load-user-file "irc-setup.el")
