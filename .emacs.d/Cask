@@ -137,7 +137,6 @@
 (depends-on "impatient-mode")
 (depends-on "inf-ruby")
 (depends-on "inflections")
-(depends-on "info+")
 (depends-on "isend-mode")
 (depends-on "ivy")
 (depends-on "ivy-yasnippet")
