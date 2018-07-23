@@ -82,6 +82,7 @@
 (depends-on "eshell-autojump")
 (depends-on "eshell-prompt-extras")
 (depends-on "eshell-z")
+(depends-on "ess")
 (depends-on "etags-select")
 (depends-on "expand-region")
 (depends-on "f")
