@@ -1,6 +1,0 @@
-[submodule ".emacs.d/plugins/rhtml"]
-	path = .emacs.d/plugins/rhtml
-	url = git://github.com/eschulte/rhtml.git
-[submodule ".emacs.d/plugins/distel"]
-	path = .emacs.d/plugins/distel
-	url = git://github.com/massemanet/distel.git
