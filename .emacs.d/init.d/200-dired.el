@@ -52,5 +52,4 @@
 (use-package dired-filter
   :config
   (bind-keys :map dired-mode-map
-             ("C-c f" . dired-filter-mode)))
-(define-key dired-mode-map (kbd "C-c C-f") dired-filter-map)
+             ("C-c C-f" . dired-filter-mode)))

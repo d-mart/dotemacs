@@ -12,8 +12,10 @@ build1:
   script:
     - apt-get update
     - apt-get install -y emacs-nox
-    - deploy.sh -l
-    - deploy-cask.sh
+    - pwd
+    - ls -l
+    #- deploy.sh -l
+    #- deploy-cask.sh
 
 test1:
   stage: test
