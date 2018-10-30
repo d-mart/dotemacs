@@ -6,7 +6,8 @@
 
 (use-package ace-window
   :init
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)) ; replaces 1 2 3 4 ... for window numbering
+  ;(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)) ; replaces 1 2 3 4 ... for window numbering
+  (setq aw-keys '(?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9 ?0 ?! ?@ ?# ?$ ?% ?% ?^ ?& ?* ?( ?)))
   (ace-window-display-mode t)
   :bind
   (("C-x C-o" . ace-window)
