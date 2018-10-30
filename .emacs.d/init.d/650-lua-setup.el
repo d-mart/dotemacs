@@ -1,7 +1,16 @@
 ;;;
 ;;; Configuration and mode customization lua
 ;;;
+
+(defun dm/lua-mode-keykindings ()
+  (define-key lua-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
+  (define-key lua-mode-map (kbd "C-c #")   'comment-or-uncomment-region))
+
+(defun dm/lua-mode-hook ())
+
 (add-hook 'lua-mode-hook 'my-programming-mode-hook)
+(add-hook 'lua-mode-hook 'dm/lua-mode-hook)
+(add-hook 'lua-mode-hook 'dm/lua-mode-keykindings)
 
 (setq lua-indent-level 2)
 
