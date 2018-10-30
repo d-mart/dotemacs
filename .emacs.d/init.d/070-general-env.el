@@ -14,6 +14,11 @@
   :bind
   ("M-x" . amx))
 
+(if (eq (window-system) 'ns)
+    (use-package ns-auto-titlebar
+      :init
+      (ns-auto-titlebar-mode)))
+
 ;; frame setup
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
