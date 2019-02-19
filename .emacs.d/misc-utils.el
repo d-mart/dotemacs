@@ -259,7 +259,7 @@ Version 2015-04-09"
     (isearch-yank-string (buffer-substring-no-properties -p1 -p2))))
 
 ; ========================================================================
-  ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
+;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
 (defun unfill-paragraph (&optional region)
   "Takes a multi-line paragraph and makes it into a single line of text."
   (interactive (progn (barf-if-buffer-read-only) '(t)))
@@ -267,3 +267,8 @@ Version 2015-04-09"
         ;; This would override `fill-column' if it's an integer.
         (emacs-lisp-docstring-fill-column t))
     (fill-paragraph nil region)))
+
+; ========================================================================
+(defun revert-buffer-no-confirm ()
+  "Revert buffer without confirmation."
+  (interactive) (revert-buffer t t))
