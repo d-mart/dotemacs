@@ -12,8 +12,8 @@
 
 (defun dm/js-mode-keybindings ())
 
-
-(add-hook 'js2-mode-hook 'my-programming-mode-hook)
+(add-hook 'js2-mode-hook 'dm/programming-mode-hook)
+(add-hook 'js2-mode-hook 'dm/programming-mode-keybindings)
 (add-hook 'js2-mode-hook 'dm/js-mode-settings)
 (add-hook 'js2-mode-hook 'dm/js-mode-keybindings)
 

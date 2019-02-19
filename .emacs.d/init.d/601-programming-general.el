@@ -2,7 +2,7 @@
 ;;; Configuration and mode customization
 ;;; common to all programming modes
 ;;;
-(defun my-programming-mode-hook ()
+(defun dm/programming-mode-hook ()
   (linum-mode 1)
   (hlinum-activate)
   (hl-line-mode 1)
@@ -10,6 +10,10 @@
   (rainbow-delimiters-mode t)
   (fontify-at-todo)
   (highlight-numbers-mode))
+(defalias 'dm/programming-mode-hook 'my-programming-mode-hook) ; until the old name is purged
+
+(defun dm/programming-mode-keybindings ()
+  (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region))
 
 (defadvice electric-newline-and-maybe-indent (before eol-before-electric-newline ())
   "move to the end of the current line before inserting a new line before
