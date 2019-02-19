@@ -29,8 +29,13 @@
    ("M-g M-f" . avy-goto-line)
    ("M-g g"   . avy-goto-line) ; avy-goto-line also duplicates standard...
    ("M-g M-g" . avy-goto-line) ; ... goto-line number functionality
-   ("C-:"     . avy-goto-char)
-   ("C-'"     . avy-goto-char-2)))
+   ("M-g p"   . avy-goto-line-above)
+   ("M-g M-p" . avy-goto-line-above)
+   ("M-g n"   . avy-goto-line-below)
+   ("M-g M-n" . avy-goto-line-below)
+   ("C-;"     . avy-goto-char)
+   ("C-:"     . avy-goto-char-2)
+   ("C-'"     . avy-goto-char-timer)))
 
 ;(use-package ggtags
 ;  :init
