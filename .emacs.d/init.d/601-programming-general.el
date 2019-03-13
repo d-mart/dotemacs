@@ -10,7 +10,7 @@
   (rainbow-delimiters-mode t)
   (fontify-at-todo)
   (highlight-numbers-mode))
-(defalias 'dm/programming-mode-hook 'my-programming-mode-hook) ; until the old name is purged
+(defalias 'my-programming-mode-hook 'dm/programming-mode-hook) ; until the old name is purged
 
 (defun dm/programming-mode-keybindings ()
   (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region))

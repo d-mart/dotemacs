@@ -8,7 +8,10 @@
    '(js2-bounce-indent-p nil)
    '(js2-highlight-level 3)
    '(js2-mode-indent-ignore-first-tab t)
-   '(js-indent-level 2)))
+   '(js-indent-level 2)
+   '(js2-strict-missing-semi-warning nil)
+   '(js2-missing-semi-one-line-override nil)
+   ))
 
 (defun dm/js-mode-keybindings ())
 
