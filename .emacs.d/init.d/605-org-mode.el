@@ -9,14 +9,12 @@
         (restclient . t)
         ))
 
-;; TODO: embetter this
-(setq org-plantuml-jar-path "/usr/local/Cellar/plantuml/8057/libexec/plantuml.jar")
-
 (setq org-edit-src-auto-save-idle-delay 4)
 
 (use-package org-mode
   :defer org-load-defer-seconds
   :init
+  (setq org-plantuml-jar-path plantuml-jar-path)
   (setq org-agenda-files (quote (nil)))
   (setq org-ellipsis " … ")
   (setq org-fontify-done-headline t)
@@ -31,7 +29,9 @@
   ;;(setq org-startup-indented t)
   (setf org-blank-before-new-entry '((heading . nil) (plain-list-item . nil)))
   (org-babel-do-load-languages 'org-babel-load-languages dm/org-babel-languages)
-  ;:bind ()
+  :bind (
+         ("C-c C-TAB" . dm/cycle-previous-heading)
+         )
   )
 
 (use-package org-bullets
@@ -44,5 +44,3 @@
   (interactive)
   (outline-previous-heading)
   (org-cycle))
-
-(define-key org-mode-map [(control c) (control tab)] 'dm/cycle-previous-heading)
