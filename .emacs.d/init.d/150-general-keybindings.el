@@ -131,6 +131,7 @@
  (key-chord-mode 1)
  (key-chord-define-global "jk" 'undo)
  (key-chord-define-global "hj" 'hippie-expand)
+ (key-chord-define-global "fj" 'hippie-expand)
  (key-chord-define-global "cv" 'reindent-then-newline-and-indent)
  (key-chord-mode t)
   ;; short waits
