@@ -1,12 +1,10 @@
-(use-package paredit)
-
 ;; elisp-mode keybindings
 (defun dm/elisp-mode-keybindings ()
   (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
   (define-key emacs-lisp-mode-map (kbd "C-c #")   'comment-or-uncomment-region))
 
 (defun dm/elisp-mode-hook ()
-  (enable-paredit-mode))
+  ())
 
 (add-hook 'emacs-lisp-mode-hook 'dm/programming-mode-hook)
 (add-hook 'emacs-lisp-mode-hook 'dm/elisp-mode-keybindings)
