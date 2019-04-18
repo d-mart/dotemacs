@@ -8,7 +8,7 @@
 
 (defun dm/lua-mode-hook ())
 
-(add-hook 'lua-mode-hook 'my-programming-mode-hook)
+(add-hook 'lua-mode-hook 'dm/programming-mode-hook)
 (add-hook 'lua-mode-hook 'dm/lua-mode-hook)
 (add-hook 'lua-mode-hook 'dm/lua-mode-keykindings)
 

@@ -6,7 +6,7 @@
   (setq erlang-indent-level 2)
   (setq tab-width 2))
 
-(add-hook 'erlang-mode-hook 'my-programming-mode-hook)
+(add-hook 'erlang-mode-hook 'dm/programming-mode-hook)
 (add-hook 'erlang-mode-hook 'my-erlang-settings)
 
 (add-to-list 'auto-mode-alist '("\\.erl$" . erlang-mode))

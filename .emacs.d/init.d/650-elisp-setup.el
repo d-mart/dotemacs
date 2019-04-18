@@ -8,7 +8,7 @@
 (defun dm/elisp-mode-hook ()
   (enable-paredit-mode))
 
-(add-hook 'emacs-lisp-mode-hook 'my-programming-mode-hook)
+(add-hook 'emacs-lisp-mode-hook 'dm/programming-mode-hook)
 (add-hook 'emacs-lisp-mode-hook 'dm/elisp-mode-keybindings)
 (add-hook 'emacs-lisp-mode-hook 'dm/elisp-mode-hook)
 (add-hook 'emacs-lisp-mode-hook 'fontify-at-todo)

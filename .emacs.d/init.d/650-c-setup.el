@@ -9,7 +9,7 @@
 ;; treat underscore '_' as part of a word in c-mode
 ;;(modify-syntax-entry ?_ "w" c-mode-syntax-table)
 
-(add-hook 'c-mode-common-hook 'my-programming-mode-hook)
+(add-hook 'c-mode-common-hook 'dm/programming-mode-hook)
 
 ;; C-mode keybindings
 (defun my-c-mode-keybindings ()

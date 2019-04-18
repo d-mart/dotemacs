@@ -12,7 +12,7 @@
   (define-key sh-mode-map (kbd "C-c C-e") 'sh-send-line-or-region))
 
 
-(add-hook 'sh-mode-hook 'my-programming-mode-hook)
+(add-hook 'sh-mode-hook 'dm/programming-mode-hook)
 (add-hook 'sh-mode-hook 'dm-sh-mode-settings)
 (add-hook 'sh-mode-hook 'dm-sh-mode-keybindings)
 

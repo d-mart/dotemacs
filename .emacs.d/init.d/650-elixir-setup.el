@@ -13,7 +13,7 @@
   (define-key elixir-mode-map (kbd "s-p")     'dm/elixir-insert-inspect)
   )
 
-(add-hook 'elixir-mode-hook 'my-programming-mode-hook)
+(add-hook 'elixir-mode-hook 'dm/programming-mode-hook)
 (add-hook 'elixir-mode-hook 'dm/elixir-settings)
 (add-hook 'elixir-mode-hook 'dm/elixir-mode-keybindings)
 

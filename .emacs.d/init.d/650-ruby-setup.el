@@ -39,7 +39,7 @@
   (define-key ruby-mode-map (kbd "C-c C-r") 'ruby-compilation-rake)
   (define-key ruby-mode-map (kbd "C-c C-d") 'dm-ruby-insert-debugger))
 
-(add-hook 'ruby-mode-hook 'my-programming-mode-hook)
+(add-hook 'ruby-mode-hook 'dm/programming-mode-hook)
 (add-hook 'ruby-mode-hook 'my-ruby-mode-keybindings)
 (add-hook 'ruby-mode-hook 'fontify-at-todo)
 ;; (add-hook 'ruby-mode-hook 'projectile-rails-on)
