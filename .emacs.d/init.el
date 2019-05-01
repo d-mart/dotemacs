@@ -183,7 +183,7 @@
 ;(require 'auto-indent-mode)
 
 ;; etags-select - look thru list of matching tags before jumping
-(require 'etags-select)
+;(require 'etags-select)
 ; keybindings below
 
 ;; find file in tags - run (find-file-in-tags), enter filename
