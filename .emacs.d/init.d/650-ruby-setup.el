@@ -79,8 +79,7 @@
   (interactive)
   (beginning-of-line)
   (open-line 1)
-  (insert "require 'byebug'; byebug #XXXXXXXXXXXXXXXXXX")
-  ;(insert "binding.pry")
+  (insert "binding.pry #XXXXXXXXXXXXXXXXXX")
   )
 
 ;; @todo - improve regexen so they only match as first no-
