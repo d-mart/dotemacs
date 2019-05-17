@@ -31,6 +31,16 @@
     (unless (region-active-p) (dm/select-current-line))
     (kill-ring-save (region-beginning) (region-end))))
 
+(defun dm/join-line-end-of-line ()
+  "Go to end of line, join line, go to end of line"
+  ;; TODO make this repeat over a region
+  (interactive)
+  (next-line)
+  (end-of-line)
+  (join-line)
+  (just-one-space 0)
+  (end-of-line))
+
 (defun set-tab-width ()
   "Set tab width locally. Accept universal arg or prompt"
   (interactive)
