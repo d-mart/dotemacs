@@ -39,8 +39,6 @@
 (global-set-key (kbd "C-|")     'toggle-window-split)
 ; ace-jump-mode
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
-; make a window stick with a buffer
-(global-set-key [C-pause]       'toggle-window-dedicated)
 ; Describe last function - for when you want to know wtf emacs just did
 (global-set-key (kbd "C-h z")   'describe-last-function)
 ; Jump to definition of function

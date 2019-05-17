@@ -48,6 +48,7 @@
   (message "Set tab width to %d" tab-width))
 (defalias 'set-tab-width 'tw)
 
+
 ;;; ------------
 ;;; Don't display ^M in buffers that have
 ;;; mixed line endings
@@ -57,20 +58,6 @@
   (interactive)
   (setq buffer-display-table (make-display-table))
   (aset buffer-display-table ?\^M []))
-
-;; ----------------
-;; Toggle Window Dedication
-;; ----------------
-(defun toggle-window-dedicated ()
-  "Toggle whether the current active window is dedicated or not"
-  (interactive)
-  (message
-   (if (let (window (get-buffer-window (current-buffer)))
-         (set-window-dedicated-p window
-                                 (not (window-dedicated-p window))))
-     "Window '%s' is dedicated"
-     "Window '%s' is normal")
-   (current-buffer)))
 
 ;; -----------------
 ;; Get info on the last function run
