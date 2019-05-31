@@ -95,7 +95,6 @@
 
 ;; -----------------
 ;; Kill all buffers
-;; good when doing lots of git'ing.  (Could also revert)
 ;; -----------------
 (defun nuke-all-buffers ()
   "Kill all buffers, leaving *scratch* only."

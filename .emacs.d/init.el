@@ -96,15 +96,6 @@
 ;; Load modules
 ;;------------------
 
-;; functions and settings for working with tags
-;; (specific to projects I'm working on)
-(load-library "tag-utils.el")
-
-;; Set up color themes for console vs X
-;(add-hook 'after-make-frame-functions
-;  '(lambda (f)
-;  (with-selected-frame f
-
 ;; ido - interactively do stuff - great flex matching for possible completions in input
 (setq ido-enable-flex-matching t)
 (ido-mode t)

@@ -115,13 +115,6 @@
 (global-set-key (kbd "C-x C-f") 'ido-find-file)
 
 (global-set-key (kbd "C-c b")   'bury-buffer)
-;; insert '%' unless cursor just moved AND next to a paren/brace/bracket
-;;; -br0ken (global-set-key (kbd "%")       'goto-match-paren)
-;; iflipb bindings
-(global-set-key (kbd "<C-tab>") 'iflipb-next-buffer)
-(global-set-key
- (if (featurep 'xemacs) (kbd "<C-iso-left-tab>") (kbd "<C-S-iso-lefttab>"))
-  'iflipb-previous-buffer)
 
 ;; key-chord - two keys pressed simultaneously cause a function to be called
 (use-package key-chord
