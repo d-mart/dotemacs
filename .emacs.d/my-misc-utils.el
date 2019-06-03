@@ -103,6 +103,17 @@
   (delete-other-windows)  ; kill all other windows
   (switch-to-buffer "*scratch*")) ; create new *scratch* buffer
 
+(defun nuke-all-clean-buffers ()
+  "Kill all clean/saved buffers"
+  (interactive)
+  (mapcar
+   (lambda (x)
+     (if (not (buffer-modified-p x))
+         (kill-buffer x)))
+   (buffer-list)) ; kill all buffers
+  (delete-other-windows)  ; kill all other windows
+  (switch-to-buffer "*scratch*"))
+
 ;; ------------------
 ;; Show full path of buffer
 ;; Useful if editing different files
