@@ -6,13 +6,14 @@
 
 (use-package web-mode
   :init
-  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'"       . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.eex\\'"       . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.phtml\\'"     . web-mode))
   (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'"   . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'"   . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mustache\\'"  . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml\\'"    . web-mode))
   :custom
   (web-mode-markup-indent-offset 2 "4 spaces good, 2 spaces better")
   (web-mode-css-indent-offset    2 "2 spaces")
@@ -23,3 +24,8 @@
     '(("erb"  . (("beg" "end")))
      ))
   )
+
+(use-package web-mode-edit-element
+  :init
+  (add-hook 'web-mode-hook
+            'web-mode-edit-element-minor-mode))
