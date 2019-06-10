@@ -1,5 +1,28 @@
 ;; misc-utils.el
-;; Various handy functions found in travels across the intarbwebs
+;; Various handy functions found in travels across the intarbwebz
+
+; ======================================================================
+; https://emacs.stackexchange.com/questions/37887/send-region-to-shell-in-another-buffer/37889
+(defun tws-region-to-process (arg beg end)
+  "Send the current region to a process buffer.
+The first time it's called, will prompt for the buffer to
+send to. Subsequent calls send to the same buffer, unless a
+prefix argument is used (C-u), or the buffer no longer has an
+active process."
+  (interactive "P\nr")
+  (when (or arg ;; user asks for selection
+          (not (boundp 'tws-process-target)) ;; target not set
+          ;; or target is not set to an active process:
+          (not (process-live-p (get-buffer-process tws-process-target))))
+    (let (procs buf)
+     (setq procs (remove nil (seq-map
+                  (lambda (el)
+                    (when (setq buf (process-buffer el))
+                      (buffer-name buf)))
+                  (process-list))))
+     (if (not procs) (error "No process buffers currently open.")
+      (setq tws-process-target (completing-read "Process: " procs)))))
+  (process-send-region tws-process-target beg end))
 
 ; ======================================================================
 ;; from http://www.emacswiki.org/emacs/DuplicateLines
