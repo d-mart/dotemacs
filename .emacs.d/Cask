@@ -286,11 +286,8 @@
 (depends-on "vmd-mode")
 (depends-on "web")
 (depends-on "web-mode")
-<<<<<<< Updated upstream
 (depends-on "web-mode-edit-element")
 (depends-on "web-narrow-mode")
-=======
->>>>>>> Stashed changes
 (depends-on "web-server")
 (depends-on "webpaste")
 (depends-on "websocket")
