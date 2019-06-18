@@ -129,6 +129,7 @@
 (depends-on "highlight-indentation")
 (depends-on "highlight-numbers")
 (depends-on "highlight-parentheses")
+(depends-on "highlight-thing")
 (depends-on "hlinum")
 (depends-on "ht")
 (depends-on "htmlize")
