@@ -37,13 +37,6 @@
    ("C-:"     . avy-goto-char-2)
    ("C-'"     . avy-goto-char-timer)))
 
-;(use-package ggtags
-;  :init
-;  (add-hook 'c-mode-hook 'ggtags-mode)
-;  :bind (:map ggtags-navigation-mode-map
-;           ("\M-<" . ggtags-navigation-mode-map )
-;           ("\M->" . ggtags-navigation-mode-map )))
-
 (use-package buffer-move
  :bind
  (("C-z C-h"     . buf-move-left)
