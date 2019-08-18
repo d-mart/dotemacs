@@ -29,9 +29,18 @@
   ;;(setq org-startup-indented t)
   (setf org-blank-before-new-entry '((heading . nil) (plain-list-item . nil)))
   (org-babel-do-load-languages 'org-babel-load-languages dm/org-babel-languages)
+
   :bind (
          ("C-c C-TAB" . dm/cycle-previous-heading)
          )
+  )
+
+(use-package org-tempo
+  :defer org-load-defer-seconds
+  :init
+  (add-to-list 'org-structure-template-alist '("ex" . "src elixir"))
+  (add-to-list 'org-structure-template-alist '("ru" . "src ruby"))
+  (add-to-list 'org-structure-template-alist '("sh" . "src bash"))
   )
 
 (use-package org-bullets
