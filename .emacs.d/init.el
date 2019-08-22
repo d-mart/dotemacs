@@ -594,7 +594,6 @@
 
 (load-user-file "faces-setup.el")
 (load-user-file "ediff-setup.el")
-(load-user-file "dired-setup.el")
 (load-user-file "irc-setup.el")
 (load-user-file "misc-utils.el")
 (load-user-file "my-misc-utils.el")
