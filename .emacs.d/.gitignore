@@ -27,3 +27,5 @@ emojis/*
 *.notes
 private/*
 .org-id-locations
+recentf
+bookmarks
