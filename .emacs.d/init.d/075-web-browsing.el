@@ -27,4 +27,6 @@
 (use-package restclient
   :init
   (setq auto-mode-alist
-        (append '(("\\.http$" . restclient-mode)) auto-mode-alist)))
+        (append '(("\\.http$" . restclient-mode)) auto-mode-alist))
+  :bind
+  ("C-c C-b" . dm/post-body-toggle))

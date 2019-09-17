@@ -324,3 +324,27 @@
 (defun kpc (arg char)
   (interactive "p\ncenter char: ")
   (message "you said: %s" char))
+
+;; for expanding and contracting url-encoded POST bodies in restclient
+;;; e.g. back and forth between
+;;;
+;;; foo=bar&baz=quux
+;;;     AND
+;;; foo=bar
+;;; baz=quux
+(defun dm/post-body-toggle ()
+  (interactive)
+  (save-restriction
+    (narrow-to-region (region-beginning) (region-end))
+    (goto-char (point-min))
+    (let ((to-find "") (replace-with "") (newline "
+"))
+      (if (eq (search-forward "&" nil t) nil)
+          (progn (setq to-find newline) (setq replace-with "&"))
+          (progn (setq replace-with newline) (setq to-find "&")))
+      (goto-char (point-min))
+      (while (search-forward to-find nil t)
+        (replace-match replace-with))
+      (goto-char (- (point-max) 1))
+      (if (looking-at "&") ; no dangling '&'
+          (delete-char 1)))))
