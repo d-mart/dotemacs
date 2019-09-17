@@ -11,6 +11,7 @@
 
 (use-package deadgrep
   :config
+  (setq deadgrep--search-type 'regex)
   :bind
   ("C-h g" . deadgrep))
 
