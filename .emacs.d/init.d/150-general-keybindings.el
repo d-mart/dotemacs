@@ -199,5 +199,5 @@
 (if (eq system-type 'darwin)
     (progn
       (global-set-key (kbd "s-c") 'kill-ring-save)
-      (global-set-key (kbd "s-v") 'cua-paste)
+      (global-set-key (kbd "s-v") 'yank)
       (global-set-key (kbd "s-x") 'kill-region)))

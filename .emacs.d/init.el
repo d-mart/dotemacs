@@ -336,10 +336,6 @@
     (scroll-bar-mode -1)               ;; graphical emacs, no scroll-bar
     (toggle-menu-bar-mode-from-frame)) ;; probably text emacs, turn off menu-bar
 
-;; Show indicators of buffer boundaries in fringe
-;(setq-default indicate-buffer-boundaries 'left
-;      default-indicate-empty-lines t)
-
 ;; automatically follow symlinks into version-controlled files instead of asking
 (setq vc-follow-symlinks t)
 
@@ -434,10 +430,6 @@
   (after my-window-splitting-advice first () activate)
   (set-window-buffer (next-window) (other-buffer)))
 
-;; cua mode (rectangle only)
-(setq cua-enable-cua-keys nil)
-(cua-mode)
-
 ;;; ------------
 ;;; Programming major mode hooks
 ;;; ------------
@@ -449,18 +441,12 @@
                             ("FIXME" 0 font-lock-warning-face prepend)
                             ("XXX" 0 font-lock-warning-face prepend))))
 
-;(font-lock-add-keywords 'c-mode
-;    '(("\\<[\\+-]?[0-9]+\\(.[0-9]+\\)?\\>" 0 'font-lock-digit-face) ; FIXME: negative or positive prefixes do not highlight to this regexp but does to one below
-;    ("\\([][{}()~^<>:=,.\\+*/%-]\\)" 0 'font-lock-digit-face)))
-
 (font-lock-add-keywords 'c-mode
     '(("\\([][()~^<>:=,.\\+*/%-]\\)" 0 'font-lock-punctuation-face)))
 
 (font-lock-add-keywords 'c-mode
     '(("\\<[\\+-]?[0-9]+\\(.[0-9A-Fa-f]+\\)?\\>" 0 'font-lock-digit-face)))
 
-;; do not make backup files
-;;(setq make-backup-files nil)
 ;; DO make backup files
 (setq make-backup-files t)
 
