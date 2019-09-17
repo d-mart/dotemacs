@@ -95,7 +95,6 @@
 (depends-on "expand-region")
 (depends-on "f")
 (depends-on "face-explorer")
-(depends-on "faceup")
 (depends-on "fakir")
 (depends-on "fd-dired")
 (depends-on "feature-mode")
