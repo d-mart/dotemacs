@@ -76,16 +76,34 @@
   (setq ansi-term-color-vector [term term-color-black term-color-red term-color-green term-color-yellow term-color-blue term-color-magenta term-color-cyan term-color-white]))
 
 ;; ----------------
-;; Yank in term-char-mode is just a dumb paste (no-kill-ring)
-;; but better than switching back and forth to line-mode
+;; Toggle back and forth between line and char mode in term-mode
 ;; ----------------
-(defun my-term-hook ()
+(defun dm/toggle-term-line-char-mode ()
+  (interactive)
+  (if (term-in-char-mode)
+    (term-line-mode)
+    (term-char-mode)))
+
+;; ----------------
+;; Term bindings / hook
+;; ----------------
+(defun dm/term-keybindings ()
+  (define-key term-raw-map (kbd "C-y")     'term-paste)
+  (define-key term-raw-map (kbd "C-c C-j") 'dm/toggle-term-line-char-mode)
+  (define-key term-raw-map (kbd "C-c C-k") 'dm/toggle-term-line-char-mode)
+  (define-key term-raw-map (kbd "C-\\")    'dm/toggle-term-line-char-mode)
+
+  (define-key term-mode-map (kbd "C-c C-j") 'dm/toggle-term-line-char-mode)
+  (define-key term-mode-map (kbd "C-c C-k") 'dm/toggle-term-line-char-mode)
+  (define-key term-mode-map (kbd "C-\\")    'dm/toggle-term-line-char-mode))
+
+(defun dm/term-hook ()
   (goto-address-mode) ;; clickable addresses in term buffers
-  (define-key term-raw-map "\C-y" 'term-paste)
+  (dm/term-keybindings)
   (fix-term-faces)
   (yas-minor-mode -1))
 
-(add-hook 'term-mode-hook 'my-term-hook)
+(add-hook 'term-mode-hook 'dm/term-hook)
 
 ;; ----------------
 ;; Insert the filename of the active buffer just
