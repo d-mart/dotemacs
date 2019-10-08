@@ -348,3 +348,20 @@
       (goto-char (- (point-max) 1))
       (if (looking-at "&") ; no dangling '&'
           (delete-char 1)))))
+
+;;
+;; Load an .envrc or similar. Right now exports 'export ' at the beginning
+;; of lines, but can easily be updated
+;; TODO: handle (ignore) commented lines
+(defun dm/load-env-file (filename)
+ "load a list of environment variables from a file, like from an .envrc file"
+ (with-temp-buffer
+   (insert-file-contents filename)
+   (mapc (function (lambda (line)
+                     (let ((parts (split-string line "=" t))
+                           (env-var (replace-regexp-in-string "^[[:space:]]*export " "" (car (split-string line "=" t))))
+                           (env-value (cadr (split-string line "=" t))))
+                       (message "Setting env [ %s ] to [ %s ]" env-var env-value)
+                       (setenv env-var env-value))))
+         (split-string (buffer-string) "\n" t)))
+ (message "variables from %s added to environment" filename))
