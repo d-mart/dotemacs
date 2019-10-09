@@ -16,9 +16,11 @@
 (require 'rvm)
 
 ;; make rspec-mode use rvm, but not use rake
-(setq rspec-use-rvm t)
-(setq rspec-use-rake-when-possible nil)
-(setq rspec-use-opts-file-when-available nil)
+(setq rspec-use-opts-file-when-available t)
+
+; to enable debugging rspec
+;(add-hook 'after-init-hook 'inf-ruby-switch-setup)
+
 
 ;; use bash for running rspec
 (defadvice rspec-compile (around rspec-compile-around)
@@ -26,9 +28,6 @@
   (let ((shell-file-name "/bin/bash"))
     ad-do-it))
 (ad-activate 'rspec-compile)
-
-;; yari - make an alias for quick yari-ing
-(defalias 'y 'yari-helm)
 
 ;; Ruby-mode keybindings
 (defun my-ruby-mode-keybindings ()
