@@ -18,9 +18,20 @@
 ;; make rspec-mode use rvm, but not use rake
 (setq rspec-use-opts-file-when-available t)
 
-; to enable debugging rspec
-;(add-hook 'after-init-hook 'inf-ruby-switch-setup)
+; to enable debugging rspec, from docs:
+;;; to use binding.pry or byebug, install inf-ruby and add this to your init file:
+;;; (add-hook 'after-init-hook 'inf-ruby-switch-setup)
+;;; When you've hit the breakpoint, hit C-x C-q to enable inf-ruby.
+(add-hook 'after-init-hook 'inf-ruby-switch-setup)
+;; ... but not working for me...
+(defun dm/toggle-rspec-comp-or-inf-mode ()
+  (interactive)
+  (if (eq major-mode 'rspec-compilation-mode)
+    (inf-ruby-switch-from-compilation)
+    (rspec-compilation-mode)))
 
+(define-key compilation-mode-map (kbd "M-d") 'dm/toggle-rspec-comp-or-inf-mode)
+(define-key inf-ruby-mode-map    (kbd "M-d") 'dm/toggle-rspec-comp-or-inf-mode)
 
 ;; use bash for running rspec
 (defadvice rspec-compile (around rspec-compile-around)
