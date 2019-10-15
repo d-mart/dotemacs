@@ -212,6 +212,7 @@
 (depends-on "ob-dart")
 (depends-on "ob-elixir")
 (depends-on "ob-restclient")
+(depends-on "ob-sql-mode")
 (depends-on "omtose-phellack-theme")
 (depends-on "org")
 (depends-on "org-brain")
