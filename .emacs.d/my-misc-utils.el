@@ -355,6 +355,7 @@
 ;; TODO: handle (ignore) commented lines
 (defun dm/load-env-file (filename)
  "load a list of environment variables from a file, like from an .envrc file"
+ (interactive "Fenv file:")
  (with-temp-buffer
    (insert-file-contents filename)
    (mapc (function (lambda (line)
