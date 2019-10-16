@@ -216,6 +216,7 @@
 (depends-on "omtose-phellack-theme")
 (depends-on "org")
 (depends-on "org-brain")
+(depends-on "org-bullets")
 (depends-on "org-sticky-header")
 (depends-on "org-web-tools")
 (depends-on "org2web")
