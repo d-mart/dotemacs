@@ -1,5 +1,3 @@
-(setq org-load-defer-seconds 10)
-
 (setq dm/org-babel-languages
       '((emacs-lisp . t)
         (plantuml   . t)
@@ -7,12 +5,11 @@
         (shell      . t)
         (elixir     . t)
         (restclient . t)
+        (sql        . t)
         ))
 
-(setq org-edit-src-auto-save-idle-delay 4)
 
 (use-package org-mode
-  :defer org-load-defer-seconds
   :init
   (setq org-plantuml-jar-path plantuml-jar-path)
   (setq org-agenda-files (quote (nil)))
@@ -26,7 +23,9 @@
   (setq org-confirm-babel-evaluate nil)
 
   ; babel blocks
-  (setq org-src-tab-acts-natively t)
+  (setq org-src-tab-acts-natively t) ; this indents code blocks but also seems to indent the entire SRC block
+  (setq org-edit-src-content-indentation 0)
+  (setq org-edit-src-auto-save-idle-delay 4)
 
   ; capture
   (setq org-default-notes-file "~/org/notes.org")
@@ -53,7 +52,6 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 
 (use-package org-tempo
-  :defer org-load-defer-seconds
   :init
   (add-to-list 'org-structure-template-alist '("ex"  . "src elixir"))
   (add-to-list 'org-structure-template-alist '("ru"  . "src ruby"))
@@ -62,10 +60,13 @@
   )
 
 (use-package org-bullets
-  :defer org-load-defer-seconds
+  :defer t
   :init
   (progn
-    (setq org-bullets-bullet-list '("✺" "✹" "✸" "✷" "✶" "✭" "✦" "■" "▲" "●" ))))
+    (setq org-bullets-bullet-list '("✺" "✹" "✸" "✷" "✶" "✭" "✦" "■" "▲" "●" ))
+    (add-hook 'org-mode-hook 'org-bullets-mode)))
+
+(use-package ob-sql-mode)
 
 (defun dm/cycle-previous-heading ()
   (interactive)
