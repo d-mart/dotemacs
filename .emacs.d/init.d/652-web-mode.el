@@ -29,3 +29,10 @@
   :init
   (add-hook 'web-mode-hook
             'web-mode-edit-element-minor-mode))
+
+(defun dm/web-mode-keybindings ()
+  (define-key web-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region))
+
+(add-hook 'web-mode-hook 'dm/programming-mode-hook)
+(add-hook 'web-mode-hook 'dm/web-mode-keybindings)
+(add-hook 'web-mode-hook 'fontify-at-todo)
