@@ -30,8 +30,9 @@
     (inf-ruby-switch-from-compilation)
     (rspec-compilation-mode)))
 
-(define-key compilation-mode-map (kbd "M-d") 'dm/toggle-rspec-comp-or-inf-mode)
-(define-key inf-ruby-mode-map    (kbd "M-d") 'dm/toggle-rspec-comp-or-inf-mode)
+;;;;;; note to self - maybe put these in the rspec-mode hook?
+;(define-key compilation-mode-map (kbd "M-d") 'dm/toggle-rspec-comp-or-inf-mode)
+;(define-key inf-ruby-mode-map    (kbd "M-d") 'dm/toggle-rspec-comp-or-inf-mode)
 
 ;; use bash for running rspec
 (defadvice rspec-compile (around rspec-compile-around)

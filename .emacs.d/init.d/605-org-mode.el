@@ -8,6 +8,9 @@
         (sql        . t)
         ))
 
+;; testing to fix src block indentation
+;; (setq org-src-preserve-indentation nil) ; doesn't fix
+;; (setq org-edit-src-content-indentation 0) ;no
 
 (use-package org-mode
   :init
@@ -35,7 +38,7 @@
   (org-babel-do-load-languages 'org-babel-load-languages dm/org-babel-languages)
 
   :bind (
-         ("C-c C-TAB" . dm/cycle-previous-heading) ; not working
+         ("C-c C-\t" . dm/cycle-previous-heading) ; not working
          )
   )
 
