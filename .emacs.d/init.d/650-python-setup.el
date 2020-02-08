@@ -4,8 +4,8 @@
 
 ;; python-mode keybindings
 (defun dm/python-mode-keybindings ()
-  (define-key ruby-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
-  (define-key ruby-mode-map (kbd "C-c C-d") 'dm/python-insert-debugger))
+  (define-key python-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
+  (define-key python-mode-map (kbd "C-c C-d") 'dm/python-insert-debugger))
 
 (add-hook 'python-mode-hook 'dm/programming-mode-hook)
 (add-hook 'python-mode-hook 'dm/python-mode-keybindings)
