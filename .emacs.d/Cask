@@ -33,6 +33,7 @@
 (depends-on "buffer-watcher")
 (depends-on "cask")
 (depends-on "chronos")
+(depends-on "cider")
 (depends-on "circe")
 (depends-on "clojure-mode")
 (depends-on "closql")

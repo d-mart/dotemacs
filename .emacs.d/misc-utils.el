@@ -2,6 +2,12 @@
 ;; Various handy functions found in travels across the intarbwebz
 
 ; ======================================================================
+; https://stackoverflow.com/questions/26677909/emacs-sql-mode-postgresql-and-inputing-password
+(defun my-pass (key)
+  (string-trim-right
+   (shell-command-to-string (concat "pass " key))))
+
+; ======================================================================
 ; https://emacs.stackexchange.com/questions/37887/send-region-to-shell-in-another-buffer/37889
 (defun tws-region-to-process (arg beg end)
   "Send the current region to a process buffer.
