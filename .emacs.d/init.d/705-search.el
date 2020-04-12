@@ -10,11 +10,10 @@
   ("C-h g" . ag-project-regexp))
 
 (use-package deadgrep
-  :config
+  :init
   (setq deadgrep--search-type 'regex)
   :bind
   ("C-h g" . deadgrep))
-
 
 ;; rgrep - friendly recursive grep function
 (global-set-key (kbd "C-c g") 'rgrep)
