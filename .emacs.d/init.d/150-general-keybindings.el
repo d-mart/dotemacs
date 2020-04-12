@@ -1,12 +1,6 @@
 ;; -----------------
 ;; Key Bindings
 ;; -----------------
-(global-set-key [C-delete]      'kill-word)
-(global-set-key [C-backspace]   'backward-kill-word)
-(global-set-key [home]          'beginning-of-line)
-(global-set-key [end]           'end-of-line)
-(global-set-key [C-home]        'beginning-of-buffer)
-(global-set-key [C-end]         'end-of-buffer)
 (global-set-key [C-f2]          'bm-toggle)
 (global-set-key [f2]            'bm-next)
 (global-set-key [S-f2]          'bm-previous)
@@ -21,11 +15,8 @@
 (global-set-key [C-f7]          'kill-compilation)
 (global-set-key [f8]            'xah-search-current-word)
 ; I hate when tryying to hold down C-p, i instead hold down C-[,
-; and my window layout is ruined.  Intercep!
+; and my window layout is ruined.  Intercept!
 (global-set-key (kbd "ESC ESC ESC") '(lambda () (interactive) (message "Whoopsie!")))
-
-; helm - incrementally search files, buffers, and more
-(global-set-key (kbd "s-h") 'helm-mini)
 
 ; a few more version-control bindings
 (global-set-key (kbd "C-x v e") 'ediff-revision)
@@ -37,8 +28,6 @@
 
 ; toggle two windows between being split horizontally and vertically
 (global-set-key (kbd "C-|")     'toggle-window-split)
-; ace-jump-mode
-(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 ; Describe last function - for when you want to know wtf emacs just did
 (global-set-key (kbd "C-h z")   'describe-last-function)
 ; Jump to definition of function
@@ -49,16 +38,14 @@
 (global-set-key (kbd "M-D")     'backward-kill-word)
 ; bounce back and forth between beginning of line and beginning of text
 (global-set-key (kbd "C-a")     'back-to-indentation-or-beginning)
-; Use etags-select-find-tag for more functionality (replaces find-tag)
-(global-set-key (kbd "M-.")     'etags-select-find-tag-at-point)
-(global-set-key (kbd "M-?")     'etags-select-find-tag)
-(global-set-key (kbd "C->")     'etags-select-goto-tag-other-window)
+
 ;; move by paragraph - useful when region-ing a block of codez - don't take hands of regular area
 (global-set-key (kbd "C-S-n")   'forward-paragraph)
 (global-set-key (kbd "C-S-p")   'backward-paragraph)
 
-(global-set-key (kbd "C-x ,")   'find-file-in-tags)
-;(global-set-key (kbd "C-x C-b")  'electric-buffer-list)
+;; temp - buff-menu is being interfered with by some other package - use ibuffer for now
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
 ; Make Emacs use "newline-and-indent" when you hit the Enter key so
 ; that you don't need to keep using TAB to align yourself when coding.
 (global-set-key (kbd "C-m")     'newline-and-indent)
@@ -74,8 +61,6 @@
 (global-set-key (kbd "C-c f")   'find-name-dired)
 ;; delete all trailing whitespace in a buffer
 (global-set-key (kbd "C-c d")   'delete-trailing-whitespace)
-;; run icicles-occur - show lines in buffer matching regex
-(global-set-key (kbd "C-c o")   'icicle-occur)
 ;; kill any directory listing buffers to reduce clutter
 (global-set-key (kbd "C-c C-d") 'kill-all-dired-buffers)
 ;; org interaction bindings
@@ -87,14 +72,10 @@
 (global-set-key (kbd "C-S-c t") 'insert-time-string)
 ;; eval region (I seem to use it a lot)
 (global-set-key (kbd "C-c C-e") 'eval-region)
-;; another binding for transpose lines (gnome steals C-M-t for launch terminal)
-(global-set-key (kbd "C-S-t")   'transpose-lines)
 ;; having to switch to M- (off of C-) for kill-ring-save seems to interrupt my flow alot
 ;; move seldomly-used quoted-insert and take its keybinding for kill-ring-save
 (global-set-key (kbd "C-q")     'kill-ring-save)
 (global-set-key (kbd "C-c q")   'quoted-insert)
-;; iswitchb
-; using this with autoindent mode now (global-set-key (kbd "<M-RET>") 'iswitchb-buffer)
 ;; hippie-expand
 (global-set-key (kbd "M-/")     'hippie-expand)
 ;; backwards zap to char
@@ -105,11 +86,6 @@
 
 ;; see list of killed text
 (global-set-key (kbd "C-c k")   'browse-kill-ring)
-;; lusty
-(global-set-key (kbd "C-c C-f") 'lusty-file-explorer)
-(global-set-key (kbd "C-c C-b") 'lusty-buffer-explorer)
-;; temp - buff-menu is being interfered with by some other package - use ibuffer for now
-(global-set-key (kbd "C-x C-b") 'ibuffer)
 ;; temp - iswitchb bombs if an SGML HTML buffer is open
 (global-set-key (kbd "C-x b")   'ido-switch-buffer)
 (global-set-key (kbd "C-x C-f") 'ido-find-file)
