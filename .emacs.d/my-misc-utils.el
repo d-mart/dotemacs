@@ -41,13 +41,30 @@
   (just-one-space 0)
   (end-of-line))
 
+(defun dm/join-lines-with-comma (beginning end)
+  "join all lines in region into one line separated by commas"
+  (interactive "r")
+  (if (use-region-p)
+      (progn
+        (goto-char beginning)
+        (while (re-search-forward "\n" end t)
+          (replace-match "," nil nil))
+        (goto-char beginning))
+    (message "(region is not active)")))
+
+(defun dm/split-on-str (split-str)
+  "Split lines on a given string. The string is removed"
+  (interactive "sSplit lines on: ")
+    (goto-char (line-beginning-position))
+    (while (re-search-forward split-str (line-end-position) t)
+      (replace-match "\n" nil nil)))
+
 (defun set-tab-width ()
   "Set tab width locally. Accept universal arg or prompt"
   (interactive)
   (setq tab-width (string-to-int (read-from-minibuffer "Tab width: " )))
   (message "Set tab width to %d" tab-width))
 (defalias 'set-tab-width 'tw)
-
 
 ;;; ------------
 ;;; Don't display ^M in buffers that have
@@ -293,33 +310,6 @@
 ;; Not smart, no error/context checking
 (fset 'symbol-to-quote-hashes
    [?\C-s ?: return backspace ?\C-  ?\C-s ?\] return ?\C-b ?\'])
-
-;; -----------------
-;; join next line with this one, with space between
-;; -- e.g.
-;; foo
-;; bar
-;; -- becomes
-;; foo bar
-;; -----------------
-(fset 'dm-join-lines-with-space
-   "\C-e \C-d")
-
-;; -----------------
-;; join next line with this one, with space escaped pipe
-;; -- e.g.
-;; foo
-;; bar
-;; baz
-;; -- becomes (need to manually remove last pipe)
-;; foo\|bar\|baz\|
-;; -- for use with grep e.g.
-;; grep '(foo\|bar\|baz)' big.log
-;; -----------------
-(fset 'dm-join-lines-grep-pipe
-   "\C-e\\|\C-d")
-
-(message "Misc-utils-done")
 
 (defun kpc (arg char)
   (interactive "p\ncenter char: ")
