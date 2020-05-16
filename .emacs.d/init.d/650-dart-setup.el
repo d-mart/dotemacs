@@ -6,7 +6,7 @@
   (sp-local-pair 'dart-mode "<" ">" :wrap "C-<")
   (setq highlight-thing-case-sensitive-p t)
   (setq highlight-thing-delay-seconds 3.5)
-  (highlight-thing-mode t)
+  ;(highlight-thing-mode t)
   (message "loaded dm/dart-settings"))
 
 (defun dm/dart-insert-dump ()
