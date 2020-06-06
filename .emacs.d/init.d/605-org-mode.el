@@ -17,13 +17,15 @@
   (setq org-plantuml-jar-path plantuml-jar-path)
   (setq org-agenda-files (quote (nil)))
   (setq org-ellipsis " … ")
-  (setq org-fontify-done-headline t)
-  (setq org-fontify-quote-and-verse-blocks t)
-  (setq org-fontify-whole-heading-line t)
   (setq org-log-into-drawer "NOTES")
   (setq org-refile-allow-creating-parent-nodes t)
   (setq org-babel-no-eval-on-ctrl-c-ctrl-c nil)
   (setq org-confirm-babel-evaluate nil)
+  (setq org-catch-invisible-edits t) ; don't allow edits inside collapsed (invisible) subtrees
+
+  (setq org-fontify-done-headline t)
+  (setq org-fontify-quote-and-verse-blocks t)
+  (setq org-fontify-whole-heading-line t)
 
   ; babel blocks
   (setq org-src-tab-acts-natively t) ; this indents code blocks but also seems to indent the entire SRC block
@@ -32,6 +34,7 @@
 
   ; capture
   (setq org-default-notes-file "~/org/notes.org")
+  (setq org-default-tasks-file "~/org/tasks.org")
 
   ;;(setq org-startup-indented t)
   (setf org-blank-before-new-entry '((heading . nil) (plain-list-item . nil)))
@@ -66,7 +69,8 @@
   :defer t
   :init
   (progn
-    (setq org-bullets-bullet-list '("✺" "✹" "✸" "✷" "✶" "✭" "✦" "■" "▲" "●" ))
+    (setq org-bullets-bullet-list '("●" "▲" "■" "✦" "✭" "✶" "✷" "✸" "✹" "✺"))
+    ;(setq org-bullets-bullet-list '("✺" "✹" "✸" "✷" "✶" "✭" "✦" "■" "▲" "●" ))
     (add-hook 'org-mode-hook 'org-bullets-mode)))
 
 (use-package ob-sql-mode)
