@@ -14,7 +14,6 @@
  '(clojure-indent-style (quote always-indent))
  '(company-quickhelp-color-background "#4F4F4F")
  '(company-quickhelp-color-foreground "#DCDCCC")
- '(compilation-message-face (quote default))
  '(custom-enabled-themes (quote (darkokai)))
  '(custom-safe-themes
    (quote
@@ -30,22 +29,11 @@
  '(frame-brackground-mode (quote dark))
  '(fringe-mode (quote (0)) nil (fringe))
  '(global-git-commit-mode t)
- '(highlight-changes-colors (quote ("#ff8eff" "#ab7eff")))
  '(highlight-indent-guides-auto-enabled nil)
  '(highlight-symbol-colors
    (quote
     ("#FFEE58" "#C5E1A5" "#80DEEA" "#64B5F6" "#E1BEE7" "#FFCC80")))
  '(highlight-symbol-foreground-color "#E0E0E0")
- '(highlight-tail-colors
-   (quote
-    (("#323342" . 0)
-     ("#63de5d" . 20)
-     ("#4BBEAE" . 30)
-     ("#1DB4D0" . 50)
-     ("#9A8F21" . 60)
-     ("#A75B00" . 70)
-     ("#F309DF" . 85)
-     ("#323342" . 100))))
  '(hl-paren-background-colors (quote ("#2492db" "#95a5a6" nil)))
  '(hl-paren-colors
    (quote
@@ -61,7 +49,6 @@
  '(js2-mode-indent-ignore-first-tab t)
  '(js2-strict-missing-semi-warning nil)
  '(linum-format " %5i ")
- '(magit-diff-use-overlays nil)
  '(magit-log-arguments (quote ("--color" "--decorate" "-n256")))
  '(magit-use-overlays nil)
  '(main-line-color1 "#1E1E1E")
@@ -72,8 +59,7 @@
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
- '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
-    (bufler mlso-theme dired-sidebar ewal-doom-themes all-the-icons-ibuffer all-the-icons-ivy-rich dired-git org-fragtog vs-dark-theme clojure-mode counsel-jq git-walktree org-bullets all-the-icons-ivy treemacs ob-sql-mode sqlup-mode grip-mode hercules 0x0 dart-server highlight-thing frog-jump-buffer naysayer-theme wgrep-ag web-mode web-mode-edit-element web-narrow-mode ob-dart flutter font-lock-studio goto-line-preview terminal-toggle emmet-mode forge ivy-pages ns-auto-titlebar isolate fd-dired ess deadgrep all-the-icons-dired "amx" shut-up epl git commander f dash s ivy-yasnippet load-env-vars nova-theme ob-elixir ob-restclient graphviz-dot-mode dired-filter dired-narrow dired-subtree swoop elcontext panda-theme sequential-command smart-jump projectile-rails counsel-projectile dotenv-mode scp docker docker-compose-mode docker-tramp chronos dumb-diff pocket-reader buffer-watcher org-web-tools winnow x509-mode bind-chord ido-completing-read+ amx org2web vc-msg crux isend-mode gist face-explorer find-file-in-project fzf org-sticky-header groovy-mode navi-mode viewer vmd-mode async-await fuff madhat2r-theme markdown-edit-indirect markdown-preview-eww markdown-preview-mode melancholy-theme zweilight-theme distinguished-theme gratuitous-dark-theme gruber-darker-theme kooten-theme rust-playground winum apib-mode elmacro darkane-theme erlang emacs-profiles webpaste 0xc direnv dkl ripgrep counsel-dash doom-themes monitor cmake-mode better-shell pcap-mode transfer-sh eshell-autojump which-key f3 forest-blue-theme gotham-theme darkokai-theme moonscript redtick helm-c-moccur moccur-edit counsel ace-mc dark-mint-theme try buffer-move ggtags helm-gtags dumb-jump omtose-phellack-theme fireplace firestarter flycheck-clangcheck comment-dwim-2 zzz-to-char zone-rainbow elixir-yasnippets sublime-themes sift highlight-indent-guides code-library darcula-theme dark-krystal-theme darkburn-theme slim-mode termbright-theme pastelmac-theme helm-grepint helm-fuzzier bpr jenkins beacon abyss-theme emacsql-mysql scratches tab-jump-out use-package-chords subemacs smart-region w3m atom-one-dark-theme atom-dark-theme skewer-mode async ahungry-theme org-wunderlist org-sync aurora-theme color-moccur emacsql turnip emamux zerodark-theme kaesar-mode kaesar-file kaesar dart-mode rainbow-mode alchemist alect-themes ample-theme ample-zen-theme eshell-prompt-extras eshell-z fasd eno auto-complete peek-mode ace-window pomodoro protobuf-mode recompile-on-save help-mode+ help-fns+ redis package-safe-delete corral elixir-mode planet-theme zonokai-theme avy multi-term marcopolo kerl rpn-calc highlight-indentation apropospriate-theme mellow-theme moe-theme darktooth-theme material-theme ztree zen-and-art-theme yari wgrep warm-night-theme visual-regexp-steroids vagrant twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme subatomic256-theme string-utils spacegray-theme soothe-theme sml-modeline seti-theme scss-mode rvm ruby-tools ruby-interpolation ruby-block roguel-ike reverse-theme rainbow-delimiters railscasts-theme phoenix-dark-pink-theme phi-search-mc phi-search-dired phi-grep peep-dired pallet neotree naquadah-theme move-line molokai-theme mode-line-debug mc-extras math-at-point markdown-mode+ mark-multiple mark-more-like-this magit-push-remote lush-theme lua-mode lfe-mode key-chord jg-quicknav jabber ir-black-theme impatient-mode iflipb iedit ibuffer-vc ibuffer-tramp ibuffer-git hlinum highlight-parentheses highlight-numbers hide-lines heroku-theme helm-projectile-all haste haml-mode hackernews guru-mode grandshell-theme gitignore-mode gitconfig-mode git-timemachine git-messenger free-keys flx-ido flatui-theme firebelly-theme fiplr feature-mode expand-region etags-select es-lib elisp-slime-nav edts easy-kill dockerfile-mode dired+ darkmine-theme dark-souls cycle-resize cyberpunk-theme coffee-mode browse-kill-ring bm awk-it auto-indent-mode auto-complete-etags anti-zenburn-theme android-mode ag afternoon-theme ace-jump-buffer ace-isearch use-package undo-tree ruby-electric rake powerline pivotal-tracker monokai-theme magit-popup log4e json-snatcher json-reformat json-mode inflections inf-ruby gntp git-commit emojify diminish circe alert)))
+    (org-jira ox-jira zzz-to-char zweilight-theme ztree zenburn-theme yari x509-mode winum winnow wgrep-ag webpaste web-narrow-mode web-mode-edit-element vs-dark-theme vmd-mode visual-regexp-steroids viewer vc-msg vagrant undo-tree transfer-sh swoop string-utils sqlup-mode soothe-theme sml-modeline smartparens smart-jump sequential-command scss-mode scp rvm rust-playground ruby-tools ruby-interpolation ruby-electric ruby-block rspec-mode rpn-calc roguel-ike ripgrep rg redis recompile-on-save rainbow-delimiters railscasts-theme protobuf-mode projectile-rails powerline pomodoro pocket-reader plantuml-mode pivotal-tracker phoenix-dark-pink-theme phi-search-mc phi-search-dired phi-grep peep-dired peek-mode pcap-mode panda-theme pallet package-safe-delete org2web org-sticky-header org-fragtog org-bullets omtose-phellack-theme ob-sql-mode ob-restclient ob-elixir ob-dart ns-auto-titlebar nova-theme nov noccur nimbus-theme neotree naysayer-theme navi-mode multi-term move-line monitor molokai-theme mode-line-debug mlso-theme melancholy-theme mc-extras math-at-point material-theme markdown-preview-mode markdown-preview-eww markdown-mode+ mark-multiple mark-more-like-this marcopolo major-mode-hydra magit-popup madhat2r-theme lua-mode load-env-vars lfe-mode kooten-theme kerl js2-mode jg-quicknav ivy-yasnippet ivy-pages ivy-hydra ivy-explorer isolate isend-mode impatient-mode iflipb iedit ido-completing-read+ ibuffer-vc ibuffer-tramp ibuffer-git hlinum highlight-thing highlight-parentheses highlight-numbers highlight-indentation hide-lines heroku-theme hercules haste haml-mode hackernews guru-mode gruber-darker-theme groovy-mode grip-mode gratuitous-dark-theme graphviz-dot-mode go-mode gitignore-mode gitconfig-mode git-walktree git-timemachine git-messenger gist fzf fuff frog-jump-buffer free-keys forge font-lock-studio flx-ido flutter flatui-theme fireplace fiplr find-file-in-project feature-mode fd-dired face-explorer expand-region ewal-doom-themes etags-select ess eshell-z eshell-prompt-extras eshell-autojump es-lib erlang emojify emmet-mode elmacro elixir-yasnippets elisp-slime-nav elcontext easy-kill dumb-diff dotenv-mode dockerfile-mode docker-compose-mode docker dkl distinguished-theme direnv dired-sidebar dired-narrow dired-git dired-filter diminish deadgrep dart-server dart-mode darkokai-theme darkburn-theme dark-krystal-theme cycle-resize cyberpunk-theme crux counsel-projectile counsel-jq counsel-dash corral coffee-mode cmake-mode clojure-mode circe chronos bufler buffer-watcher buffer-move browse-kill-ring bm bind-chord better-shell beacon auto-yasnippet auto-indent-mode auto-complete-etags apropospriate-theme apib-mode android-mode amx all-the-icons-ivy-rich all-the-icons-ibuffer all-the-icons-dired alert alchemist ag ace-jump-buffer ace-isearch 0xc 0x0)))
  '(pos-tip-background-color "#E6DB74")
  '(pos-tip-foreground-color "#242728")
  '(powerline-color1 "#1E1E1E")
@@ -113,7 +99,7 @@
  ;; If there is more than one, they won't work right.
  '(font-lock-punctuation ((t (:inherit diff-changed :foreground "plum1"))) t)
  '(org-block ((t (:foreground "wheat3"))))
- '(org-level-4 ((t (:inherit org-level-3 :foreground "SeaGreen2"))))
+ '(org-level-4 ((t (:inherit org-level-3 :foreground "orchid3"))))
  '(org-level-5 ((t (:inherit org-level-3 :foreground "SkyBlue2"))))
  '(org-level-6 ((t (:inherit org-level-3 :foreground "goldenrod2"))))
  '(org-level-8 ((t (:foreground "NavajoWhite3" :weight semi-bold)))))
