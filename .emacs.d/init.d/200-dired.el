@@ -101,6 +101,10 @@
   (bind-keys :map dired-mode-map
              ("C-c C-f" . dired-filter-mode)))
 
+(use-package dired-sidebar
+  :ensure t
+  :commands (dired-sidebar-toggle-sidebar))
+
 ;; This is a minor mode that can be enabled from a dired buffer.
 ;; Once enabled it will show the file from point in the other window.
 ;; Moving to the other file within the dired buffer with <down>/<up> or
