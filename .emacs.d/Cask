@@ -17,6 +17,7 @@
 (depends-on "all-the-icons-ivy-rich")
 (depends-on "amx")
 (depends-on "android-mode")
+(depends-on "ansi")
 (depends-on "apib-mode")
 (depends-on "apropospriate-theme")
 (depends-on "async")
