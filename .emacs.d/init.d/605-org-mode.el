@@ -79,3 +79,8 @@
   (interactive)
   (outline-previous-heading)
   (org-cycle))
+
+(defun dm/org-mode-hook ()
+  (linum-mode -1))
+
+(add-hook 'org-mode-hook 'dm/org-mode-hook)
