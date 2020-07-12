@@ -23,6 +23,10 @@
   (setq org-confirm-babel-evaluate nil)
   (setq org-catch-invisible-edits t) ; don't allow edits inside collapsed (invisible) subtrees
 
+  ; speed-commands - trialing
+  (setq org-use-speed-commands t) ;
+  ;(setq org-speed-commands-user .......) ; add my own
+
   (setq org-fontify-done-headline t)
   (setq org-fontify-quote-and-verse-blocks t)
   (setq org-fontify-whole-heading-line t)
