@@ -7,3 +7,5 @@
   :bind
   (("M-z" . zzz-up-to-char)
    ("M-Z" . zzz-to-char)))
+
+(setq cursor-type 'box)
