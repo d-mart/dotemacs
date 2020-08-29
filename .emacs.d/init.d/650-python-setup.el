@@ -18,3 +18,5 @@
   (indent-for-tab-command)
   (insert "import pdb; pdb.set_trace() #XXXXXXXXXXXXXXXXXX")
   )
+
+(add-to-list 'auto-mode-alist '("Tiltfile" . python-mode))
