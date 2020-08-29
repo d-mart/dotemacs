@@ -87,4 +87,10 @@
 (defun dm/org-mode-hook ()
   (linum-mode -1))
 
+(defun dm/org-daily ()
+  (interactive)
+  (find-file
+   (concat "~/org/daily/" (format-time-string "%Y-%m-%d") ".org")
+   ))
+
 (add-hook 'org-mode-hook 'dm/org-mode-hook)
