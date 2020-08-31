@@ -292,13 +292,6 @@
 
 (safe-wrap (set-default-font myFont))
 
-; highlight the cursor line
-; M-x list-colors-display
-;; (defface hl-line '((t (:background "#1A1A1A")))
-;;   "Face to use for `hl-line-face'." :group 'hl-line)
-;; (setq hl-line-face 'hl-line)
-;; (global-hl-line-mode nil)
-
 ;; If region is active and text is inserted, kill region
 (delete-selection-mode +1)
 
@@ -384,40 +377,11 @@
 ;; ask for conf when opening mega-large files
 (setq large-file-warning-threshold 200000000)
 
-;; Scroll down with the cursor,move down the buffer one
-;; line at a time, instead of in larger amounts.
-(setq scroll-step 1)
-;; actually like this better
+;; Scroll down with the cursor, move down the buffer this many if at bottom or top
 (setq scroll-step 10)
 
 ;; titlebar = buffer unless filename
 (setq frame-title-format '(buffer-file-name "emacs - %f" ("emacs - %b")))
-
-;; Drive out the mouse when it's too near to the cursor.
-;(mouse-avoidance-mode 'animate)
-
-;; cursor is a line instead of block
-(setq-default cursor-type  '(bar . 3))
-(setq-default cursor-color "#ffffff")
-
-;; change cursor color at each blink
-(defvar blink-cursor-colors (list  "#92c48f" "#6785c5" "#be369c" "#d9ca65")
-  "On each blink the cursor will cycle to the next color in this list.")
-
-;; (setq blink-cursor-count 0)
-;; (defun blink-cursor-timer-function ()
-;;   "Zarza wrote this cyberpunk variant of timer `blink-cursor-timer'.
-;; Warning: overwrites original version in `frame.el'.
-
-;; This one changes the cursor color on each blink. Define colors in `blink-cursor-colors'."
-;;   (when (not (internal-show-cursor-p))
-;;     (when (>= blink-cursor-count (length blink-cursor-colors))
-;;       (setq blink-cursor-count 0))
-;;     (set-cursor-color (nth blink-cursor-count blink-cursor-colors))
-;;     (setq blink-cursor-count (+ 1 blink-cursor-count))
-;;     )
-;;   (internal-show-cursor nil (not (internal-show-cursor-p))))
-
 
 ;; make split-window-vertically put next buffer in new window
 (defadvice split-window-vertically
