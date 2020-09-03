@@ -2,6 +2,7 @@
       '((emacs-lisp . t)
         (plantuml   . t)
         (ruby       . t)
+        (python     . t)
         (shell      . t)
         (elixir     . t)
         (restclient . t)
@@ -85,6 +86,7 @@
   (org-cycle))
 
 (defun dm/org-mode-hook ()
+  (message "running dm/org-mode-hook")
   (linum-mode -1))
 
 (defun dm/org-daily ()

@@ -302,12 +302,6 @@
 ;; Show column number in status bar
 (setq column-number-mode t)
 
-;; show line numbers in fringe
-;; (global-linum-mode t)
-(add-hook 'find-file-hook (lambda () (linum-mode 1)))
-(add-hook 'find-file-hook (lambda () (hlinum-activate)))
-(setq linum-format "%d|")
-
 ;; show current function name in mode-line
 (add-hook 'find-file-hook (lambda () (which-function-mode 1)))
 
@@ -474,7 +468,6 @@
 (set-register ?e '(file . "~/.emacs.d/init.el"))
 (set-register ?o '(file . "~/misc.org"))
 (set-register ?r '(file . "/tmp/temp.rb"))
-(set-register ?l '(file . "~/.emacs.d/.cask/24.3.50.1/elpa"))
 (set-register ?s '(file . "~/.emacs.d/snippets"))
 
 (require 'epa-file)

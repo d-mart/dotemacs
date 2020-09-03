@@ -3,6 +3,7 @@
 ;;; common to all programming modes
 ;;;
 (defun dm/programming-mode-hook ()
+  (message "running dm/programming-mode-hook")
   (linum-mode 1)
   (hlinum-activate)
   (hl-line-mode 1)
@@ -10,6 +11,8 @@
   (rainbow-delimiters-mode t)
   (fontify-at-todo)
   (highlight-numbers-mode))
+
+(setq linum-format "%d|")
 
 
 (defun dm/programming-mode-keybindings ()
