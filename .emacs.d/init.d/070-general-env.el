@@ -31,21 +31,6 @@
 (advice-add 'make-frame-command :after #'dm/after-make-frame-advice)
 
 ;;
-;; Font size
-;;
-; emacs fonts are set in hundredths of points.
-; for example, 110 height ==> 11pts
-(defun dm/increase-font-size ()
-  (interactive)
-  (set-face-attribute 'default nil :height
-    (+ (face-attribute 'default :height) 10)))
-
-(defun dm/decrease-font-size ()
-  (interactive)
-  (set-face-attribute 'default nil :height
-    (- (face-attribute 'default :height) 10)))
-
-;;
 ;; Theme stuff
 ;;
 (defvar dm/selected-theme 'darkokai ;'doom-molokai

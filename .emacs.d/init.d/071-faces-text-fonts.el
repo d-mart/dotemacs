@@ -20,3 +20,18 @@
 
 (global-set-key (kbd "C-c z i") 'zoom-frame)
 (global-set-key (kbd "C-c z o") 'zoom-frame-out)
+
+;;
+;; Font size
+;;
+; emacs fonts are set in hundredths of points.
+; for example, 110 height ==> 11pts
+(defun dm/increase-font-size ()
+  (interactive)
+  (set-face-attribute 'default nil :height
+    (+ (face-attribute 'default :height) 10)))
+
+(defun dm/decrease-font-size ()
+  (interactive)
+  (set-face-attribute 'default nil :height
+    (- (face-attribute 'default :height) 10)))
