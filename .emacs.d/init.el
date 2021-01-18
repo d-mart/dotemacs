@@ -5,14 +5,6 @@
 ;;-(diff-buffer-with-file)
 ;;-smerge to eat diff3 output
 
-;; get directory of this file and append .emacs.d to set up various paths
-
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-(package-initialize)
-
 (defconst my-config-dir (file-name-directory load-file-name))
 (message (concat "This is what I'll use as top-level config dir: " my-config-dir))
 
