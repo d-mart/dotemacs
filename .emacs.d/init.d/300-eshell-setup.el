@@ -5,13 +5,19 @@
   :init
   (require 'eshell-z))
 
-
 (use-package eshell-prompt-extras
   :init
   (with-eval-after-load "esh-opt"
     (autoload 'epe-theme-dakrone "eshell-prompt-extras")
     (setq eshell-highlight-prompt nil
           eshell-prompt-function 'epe-theme-dakrone)))
+
+(use-package eshell-syntax-highlighting
+  :after esh-mode
+  :demand t ;; Install if not already installed.
+  :config
+  ;; Enable in all Eshell buffers.
+  (eshell-syntax-highlighting-global-mode +1))
 
 (defun eshell/ll (&rest args)
   "a shortcut for ls that automatically adds some flags to the ls"
