@@ -217,6 +217,7 @@
 (depends-on "monitor")
 (depends-on "monokai-theme")
 (depends-on "multi-term")
+(depends-on "multi-vterm")
 (depends-on "multiple-cursors")
 (depends-on "mustache")
 (depends-on "navi-mode")
