@@ -81,6 +81,7 @@
 (depends-on "docker-compose-mode")
 (depends-on "docker-tramp")
 (depends-on "dockerfile-mode")
+(depends-on "doom-modeline")
 (depends-on "doom-themes")
 (depends-on "dotenv-mode")
 (depends-on "dumb-diff")
