@@ -19,6 +19,16 @@
       :init
       (ns-auto-titlebar-mode)))
 
+(use-package doom-modeline
+  :ensure t
+  :init
+  (setq doom-modeline-buffer-file-name-style 'truncate-upto-project) ; 'auto
+  (setq doom-modeline-major-mode-icon t)
+  (setq doom-modeline-major-mode-color-icon t)
+  (setq doom-modeline-enable-word-count t)
+  (setq doom-modeline-buffer-encoding nil)
+  (doom-modeline-mode 1))
+
 ;; frame setup
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
