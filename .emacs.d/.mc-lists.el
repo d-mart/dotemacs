@@ -5,6 +5,7 @@
       '(
         back-to-indentation-or-beginning
         kill-region
+        kill-start-of-line
         org-delete-char
         org-end-of-line
         org-kill-line
