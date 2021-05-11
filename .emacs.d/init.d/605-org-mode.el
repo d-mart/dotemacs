@@ -33,9 +33,11 @@
   (setq org-fontify-whole-heading-line t)
 
   ; babel blocks
-  (setq org-src-tab-acts-natively t) ; this indents code blocks but also seems to indent the entire SRC block
+  (setq org-startup-indented nil)    ; don't indent babel blocks at startup
+  (setq org-adapt-indentation nil)   ; don't indent babel blocks - start at left margin
+  (setq org-src-tab-acts-natively t) ; Use babel language's indendation
   (setq org-edit-src-content-indentation 0)
-  (setq org-edit-src-auto-save-idle-delay 4)
+  (setq org-edit-src-auto-save-idle-delay 1)
 
   ; capture
   (setq org-default-notes-file "~/org/notes.org")
