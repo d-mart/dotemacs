@@ -11,10 +11,6 @@
 (autoload 'rhtml-mode "rhtml-mode"
           "RHTML embedded ruby editing mode" t)
 
-;; rvm.el - make various ruby packages use correct version
-;;          ruby according to rvm
-(require 'rvm)
-
 ;; make rspec-mode use rvm, but not use rake
 (setq rspec-use-opts-file-when-available t)
 

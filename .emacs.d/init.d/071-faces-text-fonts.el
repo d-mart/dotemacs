@@ -42,7 +42,7 @@
 ;;
 ;; Themes and Faces
 ;;
-(defvar dm/selected-theme 'doom-dark+ ;'darkokai ;'doom-molokai
+(defvar dm/selected-theme 'doom-molokai
   "theme to activate at emacs start")
 
 (defvar after-load-theme-hook nil
