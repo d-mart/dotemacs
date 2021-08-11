@@ -25,6 +25,15 @@
 (global-set-key (kbd "C-c z o") 'zoom-frame-out)
 
 ;;
+;; Enable eomji for macos if on > 27
+;;
+(if (version< "27.0" emacs-version)
+    (set-fontset-font
+       "fontset-default" 'unicode "Apple Color Emoji" nil 'prepend)
+    (set-fontset-font
+       t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend))
+
+;;
 ;; Font size
 ;;
 ; emacs fonts are set in hundredths of points.
