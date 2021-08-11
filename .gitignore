@@ -1,3 +1,4 @@
 transient/
 *.elc
 .emacs.d/hackernews/
+.emacs.d/.mc-lists.bak
