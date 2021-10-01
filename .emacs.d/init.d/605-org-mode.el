@@ -63,6 +63,7 @@
 (use-package org-tempo
   :init
   (add-to-list 'org-structure-template-alist '("ex"  . "src elixir"))
+  (add-to-list 'org-structure-template-alist '("el"  . "src elisp"))
   (add-to-list 'org-structure-template-alist '("ru"  . "src ruby"))
   (add-to-list 'org-structure-template-alist '("sh"  . "src bash"))
   (add-to-list 'org-structure-template-alist '("sql" . "src sql"))
