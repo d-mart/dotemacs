@@ -9,10 +9,6 @@
         (sql        . t)
         ))
 
-;; testing to fix src block indentation
-;; (setq org-src-preserve-indentation nil) ; doesn't fix
-;; (setq org-edit-src-content-indentation 0) ;no
-
 (use-package org-mode
   :init
   (setq org-plantuml-jar-path plantuml-jar-path)
