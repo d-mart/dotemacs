@@ -5,6 +5,20 @@
 
 (use-package git-commit)
 
+(use-package blamer
+  :ensure t
+  :defer 20
+  :custom
+  (blamer-idle-time 0.3)
+  (blamer-min-offset 70)
+  :custom-face
+  (blamer-face ((t :foreground "#7a88cf"
+                    :background nil
+                    :height 140
+                    :italic t)))
+  :config
+  (global-blamer-mode 1))
+
 (autoload 'magit-status "magit"
           "Magit emacs git interface" t)
 (autoload 'magit-blame-mode "magit-blame"
