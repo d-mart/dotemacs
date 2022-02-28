@@ -48,6 +48,22 @@
          )
   )
 
+(setq dm/org-directory "~/org/")
+(setq dm/org-daily-directory (concat dm/org-directory "daily/"))
+
+
+;;;;;;;; to process
+;; (setq org-capture-templates
+;;       `(("i" "inbox" entry (file ,(concat jethro/org-agenda-directory "inbox.org"))
+;;          "* TODO %?")
+;;         ("e" "email" entry (file+headline ,(concat jethro/org-agenda-directory "emails.org") "Emails")
+;;          "* TODO [#A] Reply: %a :@home:@school:" :immediate-finish t)
+;;         ("l" "link" entry (file ,(concat jethro/org-agenda-directory "inbox.org"))
+;;          "* TODO %(org-cliplink-capture)" :immediate-finish t)
+;;         ("c" "org-protocol-capture" entry (file ,(concat jethro/org-agenda-directory "inbox.org"))
+;;          "* TODO [[%:link][%:description]]\n\n %i" :immediate-finish t)))
+
+
 ;; Make windmove work in Org mode if shift-arrow won't
 ;; do anything special
 (add-hook 'org-shiftup-final-hook    'windmove-up)
@@ -91,7 +107,7 @@
 (defun dm/org-daily ()
   (interactive)
   (find-file
-   (concat "~/org/daily/" (format-time-string "%Y-%m-%d") ".org")
+   (concat dm/org-daily-directory (format-time-string "%Y-%m-%d") ".org")
    ))
 
 (add-hook 'org-mode-hook 'dm/org-mode-hook)
