@@ -4,6 +4,9 @@
 (setq mc/cmds-to-run-for-all
       '(
         back-to-indentation-or-beginning
+        indent-for-tab-command
+        isearch-backward-regexp
+        isearch-forward-regexp
         kill-region
         kill-start-of-line
         org-delete-char
