@@ -12,7 +12,7 @@
 (setq custom-file (concat my-config-dir "custom.el"))
 (load custom-file 'noerror)
 
-;; Use pallet and cask to manage ELPA elisp packages
+;; Use Cask to manage ELPA elisp packages
 ;; To set up cask:
 ;; 1.) git clone https://github.com/cask/cask ~/.cask
 ;; 2.) ln -s ~/.cask/bin/cask ~/bin # or otherwise add cask to the path
@@ -20,9 +20,6 @@
 (require 'cask "~/.cask/cask.el")
 (setq cask-file "~/.emacs.d/Cask")
 (cask-initialize)
-
-(require 'pallet)
-(pallet-mode t)
 
 (require 'use-package)
 
