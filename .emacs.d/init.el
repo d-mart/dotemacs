@@ -15,6 +15,8 @@
 ;; Use Cask to manage ELPA elisp packages
 ;; To set up cask:
 ;; 1.) git clone https://github.com/cask/cask ~/.cask
+;;     NOTE - the way I'm using it is deprecated - need to check out an older version
+;; 1.5) cd ~/.cask && git checkout v0.8.8 # last known working tag
 ;; 2.) ln -s ~/.cask/bin/cask ~/bin # or otherwise add cask to the path
 ;; 3.) cd ~/.emacs.d && cask install
 (require 'cask "~/.cask/cask.el")
