@@ -225,13 +225,6 @@
 ;; Remove trailing whitespace when a file is saved
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; Easy buffer switching by holding down shift and press any arrow key.
-(windmove-default-keybindings 'shift)
-;; Hook framemove into windmove, i.e. if windmove can't move
-;; anymore, call framemove
-(require 'framemove)
-(setq framemove-hook-into-windmove t)
-
 ;; Show unfinished keystrokes early.
 (setq echo-keystrokes 0.1)
 

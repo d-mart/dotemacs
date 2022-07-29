@@ -48,6 +48,13 @@
   ("C-z k"       . windmove-up)
   ("C-z l"       . windmove-right)))
 
+;; Hook framemove into windmove, i.e. if windmove can't move
+;; anymore, call framemove
+(use-package framemove
+  :config
+  (setq framemove-hook-into-windmove t))
+
+
 ;; add some others to ctrl-z map
 (global-set-key (kbd "C-z C-g") 'keyboard-quit)
 (global-set-key (kbd "C-z o")   'other-window)
