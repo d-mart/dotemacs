@@ -1,5 +1,9 @@
 ;; Look and feel / environment settings
 
+(use-package exec-path-from-shell
+  :ensure t
+  :init (exec-path-from-shell-initialize))
+
 ; Set cursor color to white
 (setq dm/cursor-color "#ffffff")
 (set-cursor-color dm/cursor-color)
