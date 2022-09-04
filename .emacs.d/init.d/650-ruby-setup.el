@@ -86,7 +86,7 @@
   (interactive)
   (beginning-of-line)
   (open-line 1)
-  (insert "binding.pry_instance #XXXXXXXXXXXXXXXXXX")
+  (insert "binding.pry #XXXXXXXXXXXXXXXXXX")
   )
 
 ;; @todo - improve regexen so they only match as first no-
