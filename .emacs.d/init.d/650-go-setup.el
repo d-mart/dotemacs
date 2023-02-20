@@ -12,4 +12,4 @@
 (add-hook 'go-mode-hook 'dm/go-mode-keybindings)
 (add-hook 'go-mode-hook 'fontify-at-todo)
 
-(add-hook 'before-save-hook 'gofmt-before-save)
+;;;; temp (add-hook 'before-save-hook 'gofmt-before-save)

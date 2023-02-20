@@ -8,7 +8,7 @@
   (hlinum-activate)
   (hl-line-mode 1)
   (sml-modeline-mode t)
-  (rainbow-delimiters-mode t)
+  ;;; TODO (rainbow-delimiters-mode t)
   (fontify-at-todo)
   (highlight-numbers-mode))
 
