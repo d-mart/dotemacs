@@ -36,20 +36,6 @@
                                (if (comint-after-pmark-p)
                                    (comint-next-input 1)
                                  (forward-line 1))))))
-(use-package sane-term
-  :defer 25
-  :init
-  (setq sane-term-shell-command
-    (cond
-      ((file-exists-p "/usr/local/bin/zsh") "/usr/local/bin/zsh")
-      ((file-exists-p "/usr/local/bin/bash") "/usr/local/bin/bash")
-      ((file-exists-p "/bin/zsh") "/bin/zsh")
-      (t "/bin/bash")))
-  :bind
-  (("C-x t" . sane-term)
-   ("C-x T" . sane-term-create)))
-
-
 ;; use UTF-8 in shells
 (defun my-term-use-utf8 ()
   (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
