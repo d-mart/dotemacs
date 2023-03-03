@@ -14,6 +14,7 @@
   (setq beacon-push-mark 35)
   (setq beacon-color "#666600"))
 
+(use-package ido-completing-read+)
 (use-package amx
   :bind
   ("M-x" . amx))
