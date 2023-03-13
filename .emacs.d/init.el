@@ -51,14 +51,6 @@
                             ("XXX" 0 font-lock-warning-face prepend))))
 
 ;; TODO - these need to move to a logical place
-(use-package hlinum)
-(use-package sml-modeline)
-(use-package ruby-interpolation)
-;;;(use-package rainbow-delimeters)
-(use-package highlight-numbers)
-(use-package framemove
-  :load-path "plugins")
-(use-package diminish)
 (use-package browse-kill-ring)
 (use-package wgrep)
 
@@ -71,22 +63,6 @@
 
 ;; set up default location for emacs-themes
 (setq custom-theme-directory (concat my-config-dir "themes"))
-
-;; TODO - move this mac stuff to mac specific setup file
-(if (eq system-type 'darwin)
-    (progn
-      (setq ns-function-modifier 'hyper)
-      (setq mac-command-modifier 'super)
-      (setq mac-option-modifier  'meta)
-      (toggle-menu-bar-mode-from-frame)))
-
-(if (eq window-system 'ns)
-    ;;something for OS X if true
-    ; workaround for having trouble with colors on OSX
-    (setq x-colors (ns-list-colors))
-
-   ;; optional something if not
-)
 
 ;;------------------
 ;; Error handling macro

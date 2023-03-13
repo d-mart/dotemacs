@@ -9,6 +9,9 @@
         (sql        . t)
         ))
 
+(use-package ob-sql-mode)
+(use-package ob-restclient)
+
 (use-package org
   :init
   (setq org-plantuml-jar-path plantuml-jar-path)
@@ -93,8 +96,6 @@
     (setq org-bullets-bullet-list '("●" "▲" "■" "✦" "✭" "✶" "✷" "✸" "✹" "✺"))
     ;(setq org-bullets-bullet-list '("✺" "✹" "✸" "✷" "✶" "✭" "✦" "■" "▲" "●" ))
     (add-hook 'org-mode-hook 'org-bullets-mode)))
-
-(use-package ob-sql-mode)
 
 (defun dm/cycle-previous-heading ()
   (interactive)

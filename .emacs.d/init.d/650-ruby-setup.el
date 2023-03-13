@@ -46,22 +46,14 @@
   (define-key ruby-mode-map (kbd "C-c C-r") 'ruby-compilation-rake)
   (define-key ruby-mode-map (kbd "C-c C-d") 'dm-ruby-insert-debugger))
 
+(use-package ruby-interpolation
+  :hook ruby-mode)
+
 (add-hook 'ruby-mode-hook 'dm/programming-mode-hook)
 (add-hook 'ruby-mode-hook 'my-ruby-mode-keybindings)
 (add-hook 'ruby-mode-hook 'fontify-at-todo)
 ;; (add-hook 'ruby-mode-hook 'projectile-rails-on)
-
-(require 'ruby-interpolation)
-(add-hook 'ruby-mode-hook 'ruby-interpolation-mode)
-
 (add-hook 'ruby-mode-hook 'rspec-mode)
-
-;; add imenu to programming buffers
-(add-hook 'ruby-mode-hook 'imenu-add-menubar-index)
-
-;; robe - code navigation and doc for ruby
-;; (add-hook 'ruby-mode-hook 'robe-mode)
-;; (remove-hook 'robe-mode 'ruby-mode-hook)
 
 ;; Note to self:
 ;; use M-x rvm-activate-corresponding-ruby to activate rvm version for use with Rinari

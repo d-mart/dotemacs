@@ -1,5 +1,11 @@
 ;; Look and feel / environment settings
 
+(use-package hlinum)
+(use-package sml-modeline)
+;;;(use-package rainbow-delimeters)
+(use-package highlight-numbers)
+(use-package diminish)
+
 (use-package exec-path-from-shell
   :ensure t
   :init (exec-path-from-shell-initialize))
