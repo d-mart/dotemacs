@@ -56,7 +56,8 @@
 (use-package ruby-interpolation)
 ;;;(use-package rainbow-delimeters)
 (use-package highlight-numbers)
-(use-package framemove)
+(use-package framemove
+  :load-path "plugins")
 (use-package diminish)
 (use-package browse-kill-ring)
 (use-package wgrep)
