@@ -3,8 +3,7 @@
 ;;; YML files
 ;;;
 
-(autoload 'yaml-mode "yaml-mode"
-          "YAML syntax highlighting")
+(use-package yaml-mode)
 
 ;; yaml-mode keybindings
 (defun my-yaml-mode-keybindings ()
@@ -13,6 +12,6 @@
 
 (add-hook 'yaml-mode-hook 'my-yaml-mode-keybindings)
 
-;; Open files matching these 
+;; Open files matching these
 (add-to-list 'auto-mode-alist '("\\.yml$"  . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
