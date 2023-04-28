@@ -11,6 +11,7 @@
   (define-key yaml-mode-map (kbd "C-c #")   'comment-or-uncomment-region))
 
 (add-hook 'yaml-mode-hook 'my-yaml-mode-keybindings)
+(add-hook 'yaml-mode-hook 'dm/programming-mode-hook)
 
 ;; Open files matching these
 (add-to-list 'auto-mode-alist '("\\.yml$"  . yaml-mode))

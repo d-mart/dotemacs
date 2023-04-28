@@ -11,6 +11,8 @@
 (autoload 'rhtml-mode "rhtml-mode"
           "RHTML embedded ruby editing mode" t)
 
+(use-package rspec-mode)
+
 ;; make rspec-mode use rvm, but not use rake
 (setq rspec-use-opts-file-when-available t)
 
