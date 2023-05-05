@@ -79,15 +79,12 @@
 ; (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 
-;; this package is not available on melpa (use-package org-tempo
-;; this package is not available on melpa   :init
-;; this package is not available on melpa   (add-to-list 'org-structure-template-alist '("ex"   . "src elixir"))
-;; this package is not available on melpa   (add-to-list 'org-structure-template-alist '("el"   . "src elisp"))
-;; this package is not available on melpa   (add-to-list 'org-structure-template-alist '("ru"   . "src ruby"))
-;; this package is not available on melpa   (add-to-list 'org-structure-template-alist '("sh"   . "src bash"))
-;; this package is not available on melpa   (add-to-list 'org-structure-template-alist '("sql"  . "src sql"))
-;; this package is not available on melpa   (add-to-list 'org-structure-template-alist '("json" . "src json"))
-;; this package is not available on melpa   )
+(add-to-list 'org-structure-template-alist '("ex"   . "src elixir"))
+(add-to-list 'org-structure-template-alist '("el"   . "src elisp"))
+(add-to-list 'org-structure-template-alist '("ru"   . "src ruby"))
+(add-to-list 'org-structure-template-alist '("sh"   . "src bash"))
+(add-to-list 'org-structure-template-alist '("sql"  . "src sql"))
+(add-to-list 'org-structure-template-alist '("json" . "src json"))
 
 (use-package org-bullets
   :defer t
