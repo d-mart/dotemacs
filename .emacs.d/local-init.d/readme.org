@@ -1,0 +1,13 @@
+#+TITLE: Local, Machine-Specific Config
+
+Use this directory for machine-specific configuration
+
+* Commentary
+** Run Order
+Configuration files in this directory will run after generic config, so can be used to override anything in addition to setting local config.
+* Examples
+** Set default font
+: 900-font.el
+#+BEGIN_SRC emacs-lisp
+(set-frame-font "Fira Code 14" nil t)
+#+END_SRC

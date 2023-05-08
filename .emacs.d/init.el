@@ -58,8 +58,10 @@
 ;; files in init.d are sorted before loading
 ;; files in init.d beginning with and underscore are ignored
 (defconst my-el-initd (concat my-config-dir "init.d"))
+(defconst my-local-el-initd  (concat my-config-dir "local-init.d"))
 (setq my-el-init-file-regex "^[^_].*.el$")
 (load-files-matching-pattern my-el-initd my-el-init-file-regex)
+(load-files-matching-pattern my-local-el-initd my-el-init-file-regex)
 
 ;; set up default location for emacs-themes
 (setq custom-theme-directory (concat my-config-dir "themes"))
