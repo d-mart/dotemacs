@@ -4,9 +4,9 @@
 
 (use-package bm)
 
+(use-package ace-window) ;;; TODO for some reason the below won't load without this
 (use-package ace-window
   :init
-  ;(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)) ; replaces 1 2 3 4 ... for window numbering
   (setq aw-keys '(?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9 ?0 ?! ?@ ?# ?$ ?% ?% ?^ ?& ?* ?( ?)))
   (ace-window-display-mode t)
   :bind
@@ -48,12 +48,12 @@
   ("C-z k"       . windmove-up)
   ("C-z l"       . windmove-right)))
 
-;; Hook framemove into windmove, i.e. if windmove can't move
-;; anymore, call framemove
 (use-package framemove
+  :load-path "plugins"
+  :init
+  (setq framemove-hook-into-windmove t)
   :config
-  (setq framemove-hook-into-windmove t))
-
+  (windmove-default-keybindings))
 
 ;; add some others to ctrl-z map
 (global-set-key (kbd "C-z C-g") 'keyboard-quit)

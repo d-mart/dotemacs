@@ -8,10 +8,12 @@
   (define-key dired-mode-map (kbd "p")     'dired-view-previous)  ; was dired-previous-line
   (define-key dired-mode-map (kbd "C-c w") 'wdired-change-to-wdired-mode))
 
+(use-package all-the-icons-dired
+  :hook dired)
+
 (add-hook 'dired-mode-hook 'dm/dired-mode-keybindings)
 (add-hook 'dired-mode-hook 'dm/dired-mode-line-function)
 (add-hook 'dired-mode-hook 'dired-hide-details-mode)
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 (add-hook 'dired-mode-hook 'auto-revert-mode) ;; Auto-refresh dired on file change
 
 (add-hook 'find-file-hooks 'dm/dired-mode-line-function)

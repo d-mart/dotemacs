@@ -1,6 +1,7 @@
 ;; -----------------
 ;; eshell config
 ;; -----------------
+(use-package eshell-z)
 (use-package eshell-autojump
   :init
   (require 'eshell-z))

@@ -1,5 +1,11 @@
 ;; Look and feel / environment settings
 
+(use-package hlinum)
+(use-package sml-modeline)
+;;;(use-package rainbow-delimeters)
+(use-package highlight-numbers)
+(use-package diminish)
+
 (use-package exec-path-from-shell
   :ensure t
   :init (exec-path-from-shell-initialize))
@@ -14,6 +20,7 @@
   (setq beacon-push-mark 35)
   (setq beacon-color "#666600"))
 
+(use-package ido-completing-read+)
 (use-package amx
   :bind
   ("M-x" . amx))

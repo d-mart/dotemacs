@@ -1,15 +1,18 @@
 (setq dm/org-babel-languages
       '((emacs-lisp . t)
+        ;(go         . t)
         (plantuml   . t)
         (ruby       . t)
         (python     . t)
         (shell      . t)
-        (elixir     . t)
         (restclient . t)
         (sql        . t)
         ))
 
-(use-package org-mode
+(use-package ob-sql-mode)
+(use-package ob-restclient)
+
+(use-package org
   :init
   (setq org-plantuml-jar-path plantuml-jar-path)
   (setq org-agenda-files (quote (nil)))
@@ -76,15 +79,12 @@
 ; (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 
-(use-package org-tempo
-  :init
-  (add-to-list 'org-structure-template-alist '("ex"   . "src elixir"))
-  (add-to-list 'org-structure-template-alist '("el"   . "src elisp"))
-  (add-to-list 'org-structure-template-alist '("ru"   . "src ruby"))
-  (add-to-list 'org-structure-template-alist '("sh"   . "src bash"))
-  (add-to-list 'org-structure-template-alist '("sql"  . "src sql"))
-  (add-to-list 'org-structure-template-alist '("json" . "src json"))
-  )
+(add-to-list 'org-structure-template-alist '("ex"   . "src elixir"))
+(add-to-list 'org-structure-template-alist '("el"   . "src elisp"))
+(add-to-list 'org-structure-template-alist '("ru"   . "src ruby"))
+(add-to-list 'org-structure-template-alist '("sh"   . "src bash"))
+(add-to-list 'org-structure-template-alist '("sql"  . "src sql"))
+(add-to-list 'org-structure-template-alist '("json" . "src json"))
 
 (use-package org-bullets
   :defer t
@@ -93,8 +93,6 @@
     (setq org-bullets-bullet-list '("●" "▲" "■" "✦" "✭" "✶" "✷" "✸" "✹" "✺"))
     ;(setq org-bullets-bullet-list '("✺" "✹" "✸" "✷" "✶" "✭" "✦" "■" "▲" "●" ))
     (add-hook 'org-mode-hook 'org-bullets-mode)))
-
-(use-package ob-sql-mode)
 
 (defun dm/cycle-previous-heading ()
   (interactive)

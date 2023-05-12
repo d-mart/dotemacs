@@ -12,20 +12,20 @@
 (setq custom-file (concat my-config-dir "custom.el"))
 (load custom-file 'noerror)
 
-;; Use Cask to manage ELPA elisp packages
-;; To set up cask:
-;; 1.) git clone https://github.com/cask/cask ~/.cask
-;;     NOTE - the way I'm using it is deprecated - need to check out an older version
-;; 1.5) cd ~/.cask && git checkout v0.8.8 # last known working tag
-;; 2.) ln -s ~/.cask/bin/cask ~/bin # or otherwise add cask to the path
-;; 3.) cd ~/.emacs.d && cask install
-(require 'cask "~/.cask/cask.el")
-(setq cask-file "~/.emacs.d/Cask")
-(cask-initialize)
+;; set up package management
+(require 'package)
+(setq package-archives
+      '(("ELPA"      . "https://elpa.gnu.org/packages/")
+        ("melpa"     . "https://melpa.org/packages/")
+        ("org"       . "https://orgmode.org/elpa/")))
 
-(require 'use-package)
-
-(server-start)
+;; bootstrap use-package
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-and-compile
+  (setq use-package-always-ensure t
+        use-package-expand-minimally t))
 
 ;; look under .emacs.d for packages
 (let ((default-directory my-config-dir))
@@ -42,31 +42,29 @@
              (load init-file)
              (message (concat "Loaded this file: " init-file)))))
 
+; fontify some keywords: '@todo' 'FIXME' 'XXX'
+(defun fontify-at-todo ()
+  (font-lock-add-keywords nil
+                          '(("@todo" 0 font-lock-warning-face prepend)
+                            ("TODO" 0 font-lock-warning-face prepend)
+                            ("FIXME" 0 font-lock-warning-face prepend)
+                            ("XXX" 0 font-lock-warning-face prepend))))
+
+;; TODO - these need to move to a logical place
+(use-package browse-kill-ring)
+(use-package wgrep)
+
 ;; load all files in init.d.
 ;; files in init.d are sorted before loading
 ;; files in init.d beginning with and underscore are ignored
 (defconst my-el-initd (concat my-config-dir "init.d"))
+(defconst my-local-el-initd  (concat my-config-dir "local-init.d"))
 (setq my-el-init-file-regex "^[^_].*.el$")
 (load-files-matching-pattern my-el-initd my-el-init-file-regex)
+(load-files-matching-pattern my-local-el-initd my-el-init-file-regex)
 
 ;; set up default location for emacs-themes
 (setq custom-theme-directory (concat my-config-dir "themes"))
-
-;; TODO - move this mac stuff to mac specific setup file
-(if (eq system-type 'darwin)
-    (progn
-      (setq ns-function-modifier 'hyper)
-      (setq mac-command-modifier 'super)
-      (setq mac-option-modifier  'meta)
-      (toggle-menu-bar-mode-from-frame)))
-
-(if (eq window-system 'ns)
-    ;;something for OS X if true
-    ; workaround for having trouble with colors on OSX
-    (setq x-colors (ns-list-colors))
-
-   ;; optional something if not
-)
 
 ;;------------------
 ;; Error handling macro
@@ -194,23 +192,15 @@
 (setq abbrev-file-name "~/.emacs.d/abbrev_defs")
 (setq save-abbrevs t)
 
-;; add some more package repositories for ELPA - DM
-(require 'package)
-
-(setq package-archives
-      '(("ELPA"      . "https://elpa.gnu.org/packages/")
-        ("melpa"     . "https://melpa.org/packages/")))
-
 ;;------------------
 ;; General Behavior
 ;;------------------
 ;; start emacs server so you can open files in this session from other shells
 ;; *unless* it's already running
-;; (load "server")
-;; (unless (server-running-p)
-;;     (server-start)
-;;     ;; When opening a buffer from emacsclient, don't prompt when it is killed
-;;     (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
+(unless (server-running-p)
+  (server-start)
+  ;; When opening a buffer from emacsclient, don't prompt when it is killed
+  (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
 
 ;; Enable recursive minibuffer
 (setq enable-recursive-minibuffers t)
@@ -373,14 +363,6 @@
 ;;; ------------
 ;;; Programming major mode hooks
 ;;; ------------
-; fontify some keywords: '@todo' 'FIXME' 'XXX'
-(defun fontify-at-todo ()
-  (font-lock-add-keywords nil
-                          '(("@todo" 0 font-lock-warning-face prepend)
-                            ("TODO" 0 font-lock-warning-face prepend)
-                            ("FIXME" 0 font-lock-warning-face prepend)
-                            ("XXX" 0 font-lock-warning-face prepend))))
-
 (font-lock-add-keywords 'c-mode
     '(("\\([][()~^<>:=,.\\+*/%-]\\)" 0 'font-lock-punctuation-face)))
 
