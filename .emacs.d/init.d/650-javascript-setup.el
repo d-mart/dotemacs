@@ -1,6 +1,7 @@
 ;;; ----------------------
 ;;; Javascript setup
 ;;; ----------------------
+(use-package js2-mode)
 
 (defun dm/js-mode-settings ()
   (custom-set-variables
@@ -20,9 +21,15 @@
 (add-hook 'js2-mode-hook 'dm/js-mode-settings)
 (add-hook 'js2-mode-hook 'dm/js-mode-keybindings)
 
+(add-to-list 'auto-mode-alist '("\\.js$"     . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.js.erb$" . js2-mode))
+
+;; ------------------- json mode
+
+(use-package json-mode)
+
 (add-hook 'json-mode-hook 'dm/programming-mode-hook)
 (add-hook 'json-mode-hook 'dm/js-mode-settings)
 (add-hook 'json-mode-hook 'dm/js-mode-keybindings)
 
-(add-to-list 'auto-mode-alist '("\\.js$"     . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.js.erb$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
