@@ -2,6 +2,8 @@
 ;;; Go
 ;;; ----------------------
 
+(use-package go-mode)
+
 (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
 
 (defun dm/go-mode-keybindings ()
