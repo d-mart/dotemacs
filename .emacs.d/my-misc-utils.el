@@ -238,7 +238,7 @@
                  (new-num-str (number-to-string (+ this-num
                                                    counter))))
             (replace-match new-num-str)
-            (incf counter)
+            (cl-incf counter)
             (forward-line)))))))
 
 ;; ------------------
