@@ -27,6 +27,10 @@
   (setq use-package-always-ensure t
         use-package-expand-minimally t))
 
+;;; force packages declared by use-package to be installed. Slower, but honestly just easier
+(require 'use-package-ensure)
+(setq use-package-always-ensure t) 
+
 ;; look under .emacs.d for packages
 (let ((default-directory my-config-dir))
   (normal-top-level-add-subdirs-to-load-path))
@@ -51,8 +55,8 @@
                             ("XXX" 0 font-lock-warning-face prepend))))
 
 ;; TODO - these need to move to a logical place
-(use-package browse-kill-ring)
-(use-package wgrep)
+;;(use-package browse-kill-ring)
+;;(use-package wgrep)
 
 ;; load all files in init.d.
 ;; files in init.d are sorted before loading
@@ -134,7 +138,7 @@
 (setq ac-stop-words '("/" "//"))  ; don't autocomplete C comments
 
 ;; Browse kill ring - see list of text that has been killed
-(require 'browse-kill-ring)
+;;(require 'browse-kill-ring)
 
 ;; Highlight the parens cursor is within
 ;(require 'highlight-parentheses)
@@ -170,9 +174,6 @@
 ;; that exists in tags file, and voila - visited.
 (require 'find-file-in-tags)
 ; keybindings below
-
-;; wgrep - edit grep results right in the grep buffer and save changes to files
-(require 'wgrep)
 
 ;; hippie expand settings -
 ;; bound over dabbrev-expand M-/
@@ -415,7 +416,7 @@
 (defalias 'vtt  'visit-tags-table)
 (defalias 'gmw  'gdb-many-windows)
 (defalias 'grw  'gdb-restore-windows)
-(defalias 'bkr  'browse-kill-ring)
+;;(defalias 'bkr  'browse-kill-ring)
 (defalias 'dbf  'diff-buffer-with-file)
 (defalias 'dfb  'diff-buffer-with-file)
 (defalias 'ar   'align-regexp)
@@ -423,7 +424,7 @@
 (defalias 'wd   'wdired-change-to-wdired-mode)
 (defalias 'reb  're-builder)
 (defalias 'tde  'toggle-debug-on-error)
-(defalias 'lm   'linum-mode)
+;;(defalias 'lm   'linum-mode)
 (defalias 'tail 'auto-revert-tail-mode)
 
 ;; -----------------
