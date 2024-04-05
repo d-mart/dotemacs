@@ -47,7 +47,9 @@
   (org-babel-do-load-languages 'org-babel-load-languages dm/org-babel-languages)
 
   :bind (
-         ("C-c C-\t" . dm/cycle-previous-heading) ; not working
+         ("C-c C-\t" . dm/cycle-previous-heading)
+         ("S-<left>"   . org-timestamp-down-day)
+         ("S-<right>"  . org-timestamp-up-day)
          )
   )
 

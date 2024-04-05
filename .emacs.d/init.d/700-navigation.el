@@ -46,14 +46,16 @@
   ("C-z h"       . windmove-left)
   ("C-z j"       . windmove-down)
   ("C-z k"       . windmove-up)
-  ("C-z l"       . windmove-right)))
+  ("C-z l"       . windmove-right))
+)
 
 (use-package framemove
   :load-path "plugins"
   :init
   (setq framemove-hook-into-windmove t)
-  :config
-  (windmove-default-keybindings))
+;;;  :config
+;;;  (windmove-default-keybindings)
+  )
 
 ;; add some others to ctrl-z map
 (global-set-key (kbd "C-z C-g") 'keyboard-quit)
