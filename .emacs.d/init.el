@@ -29,7 +29,7 @@
 
 ;;; force packages declared by use-package to be installed. Slower, but honestly just easier
 (require 'use-package-ensure)
-(setq use-package-always-ensure t) 
+(setq use-package-always-ensure t)
 
 ;; look under .emacs.d for packages
 (let ((default-directory my-config-dir))
@@ -198,10 +198,13 @@
 ;;------------------
 ;; start emacs server so you can open files in this session from other shells
 ;; *unless* it's already running
+
+(require 'server)
 (unless (server-running-p)
-  (server-start)
+        (server-start)
   ;; When opening a buffer from emacsclient, don't prompt when it is killed
-  (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
+        (remove-hook 'kill-buffer-query-functions
+                     'server-kill-buffer-query-function))
 
 ;; Enable recursive minibuffer
 (setq enable-recursive-minibuffers t)
