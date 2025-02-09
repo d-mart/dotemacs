@@ -16,8 +16,7 @@
 (require 'package)
 (setq package-archives
       '(("ELPA"      . "https://elpa.gnu.org/packages/")
-        ("melpa"     . "https://melpa.org/packages/")
-        ("org"       . "https://orgmode.org/elpa/")))
+        ("melpa"     . "https://melpa.org/packages/")))
 
 ;; bootstrap use-package
 (unless (package-installed-p 'use-package)
