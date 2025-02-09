@@ -3,3 +3,4 @@ transient/
 .emacs.d/hackernews/
 .emacs.d/.mc-lists.bak
 .emacs.d/local-init.d/*.el
+.emacs.d/eln-cache/
