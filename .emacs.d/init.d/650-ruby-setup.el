@@ -65,13 +65,14 @@
   (interactive)
   (beginning-of-line)
   (open-line 1)
-  (insert "binding.pry #XXXXXXXXXXXXXXXXXX")
+  (insert "require 'debug'; binding.break #XXXXXXXXXXXXXXXXXX")
   )
 
 ;; @todo - improve regexen so they only match as first no-
 ;;         whitespace chars on line
 (font-lock-add-keywords 'ruby-mode
                         '(("^[[:space:]]*require\\(_dependency\\)?\\b" 0 'font-lock-keyword-face)
+                          ("^[[:space:]]*require\\(_relative\\)?\\b"   0 'font-lock-keyword-face)
                           ("^[[:space:]]*it\\b"                        0 'font-lock-keyword-face)
                           ("^[[:space:]]*describe\\b"                  0 'font-lock-keyword-face)
                           ("^[[:space:]]*context\\b"                   0 'font-lock-keyword-face)
