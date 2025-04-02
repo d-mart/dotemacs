@@ -23,12 +23,12 @@ hard copy to a specified directory (to experiment with plugins etc).
 -g <SHA>    specify a SHA or git ref to use
 -x          launch emacs using new location of .emacs when finished
 
-# To make a backup of ~/.emacs and ~/.emacs.d and symlink this 
+# To make a backup of ~/.emacs and ~/.emacs.d and symlink this
 # repo copy there
 $ ./deploy.sh -s
 
 # To copy the repo tree to another dir, making it if necessary
-$ ./deploy.sh -c -t /tmp/emacs_test 
+$ ./deploy.sh -c -t /tmp/emacs_test
 
 # To copy or symlink a specific SHA:
 $ ./deploy.sh -g 983abc3f -c /tmp/old_config
@@ -43,9 +43,10 @@ then
     exit 255
 fi
 
-local OPTARG=""
-local LAUNCH="no"
-local SHA=""
+OPTARG=""
+LAUNCH="no"
+SHA=""
+
 # Process arguments
 while getopts "hxslct:g:" opt
 do
@@ -80,12 +81,12 @@ done
 
 # Checkout SHA if specified.  Not a lot of error checking here
 # If running on a dirty repo dir this could bonk.
-if [ ! -z $SHA ] 
+if [ ! -z $SHA ]
 then
     pushd $SRC_DIR > /dev/null
     git checkout $SHA || exit $?
 
-    # Pull in any git submodules 
+    # Pull in any git submodules
     git submodule init
     git submodule update
     popd > /dev/null
@@ -129,7 +130,7 @@ find . -type f -name "*.el" | awk '{print "(byte-compile-file \"" $1 "\")";}' > 
 rm ../runme.el
 popd > /dev/null
 
-# Create run string using new .emacs. 
+# Create run string using new .emacs.
 # Then either display or run
 EMACS=`command -v emacs`
 if [ ! -z "$EMACS" ]
