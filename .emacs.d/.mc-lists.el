@@ -7,6 +7,8 @@
         indent-for-tab-command
         isearch-backward-regexp
         isearch-forward-regexp
+        isearch-printing-char
+        isearch-repeat-backward
         kill-region
         kill-start-of-line
         org-delete-char
