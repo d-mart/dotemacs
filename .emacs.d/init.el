@@ -280,15 +280,6 @@
 ;; show current function name in mode-line
 (add-hook 'find-file-hook (lambda () (which-function-mode 1)))
 
-;; show a visual indicator of view's position of buffer in the modeline
-;(sml-modeline-mode)
-
-;; C-k kills whole line and newline if at beginning of line
-(setq kill-whole-line t)
-
-;; Always add a final newline
-(setq require-trailing-newline t)
-
 ;; enable the upcase-region and downcase-region commands
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
@@ -301,20 +292,8 @@
 ;; automatically follow symlinks into version-controlled files instead of asking
 (setq vc-follow-symlinks t)
 
-;; blink matching paren when closing
-(setq blink-matching-paren t)
-;; ... and at cursor
-(show-paren-mode t)
-
-;; don't display toolbar and menubar (this is emacs after all...)
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-
 ;; always re-read the TAGS file if it's changed without asking
 (setq tags-revert-without-query t)
-
-;; Emacs will not automatically add new lines
-(setq next-line-add-newlines nil)
 
 ;; compilation buffer scrolls with output instead
 ;; of sitting at the top of the output

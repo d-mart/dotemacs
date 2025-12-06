@@ -4,6 +4,7 @@
 (setq mc/cmds-to-run-for-all
       '(
         back-to-indentation-or-beginning
+        comment-or-uncomment-region
         indent-for-tab-command
         isearch-backward-regexp
         isearch-forward-regexp
@@ -11,8 +12,10 @@
         isearch-repeat-backward
         kill-region
         kill-start-of-line
+        markdown-end-of-line
         org-delete-char
         org-end-of-line
+        org-force-self-insert
         org-kill-line
         org-self-insert-command
         org-yank
@@ -21,4 +24,5 @@
 
 (setq mc/cmds-to-run-once
       '(
+        markdown-outdent-or-delete
         ))

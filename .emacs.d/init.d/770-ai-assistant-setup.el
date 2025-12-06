@@ -47,6 +47,6 @@
 
 (use-package chatgpt-shell
   :defer t
-  :confg
+  :config
   ()
   )

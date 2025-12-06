@@ -1,4 +1,19 @@
+;;
 ;; Look and feel / environment settings
+;;
+
+;; blink matching paren when closing
+(setq blink-matching-paren t)
+;; ... and at cursor
+(show-paren-mode t)
+
+;; don't display toolbar and menubar (this is emacs after all...)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+
+(setq kill-whole-line t) ; C-k kills whole line and newline if at beginning of line
+(setq require-trailing-newline t) ; Always add a final newline
+(setq next-line-add-newlines nil) ; Emacs will not automatically add new lines
 
 (use-package hlinum)
 (use-package sml-modeline)
