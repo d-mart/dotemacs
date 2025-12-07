@@ -3,7 +3,8 @@
 ;;; eww and launching URLs
 ;;;
 
-(setq browse-url-browser-function 'eww-browse-url)
+;(setq browse-url-browser-function 'eww-browse-url)
+(setq browse-url-browser-function 'browse-url-default-browser)
 ;(setq browse-url-browser-function 'browse-url-firefox)
 
 ; A little help finding firefox on OSX
