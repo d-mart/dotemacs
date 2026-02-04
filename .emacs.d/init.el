@@ -488,5 +488,11 @@
 (load-user-file "my-misc-utils.el")
 (load-user-file "my-misc-advice.el")
 
+;; Load host-specific overrides if present
+(let ((host-overrides (expand-file-name "host-overrides.el" my-config-dir)))
+  (when (file-exists-p host-overrides)
+    (load-file host-overrides)
+    (message "Loaded host-specific overrides")))
+
 (message "All set.")
 (put 'erase-buffer 'disabled nil)

@@ -4,4 +4,5 @@ transient/
 .emacs.d/.mc-lists.bak
 .emacs.d/local-init.d/*.el
 .emacs.d/eln-cache/
+.emacs.d/host-overrides.el
 .aider*

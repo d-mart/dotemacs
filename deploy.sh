@@ -118,6 +118,49 @@ case $MODE in
 	;;
 esac
 
+## Create host-overrides.el template if it doesn't exist
+if [ ! -f "$TARGET_DIR/.emacs.d/host-overrides.el" ]; then
+    cat > "$TARGET_DIR/.emacs.d/host-overrides.el" << 'HOSTOVERRIDES'
+;;; host-overrides.el --- Host-specific configuration overrides
+;;
+;; This file is for host-specific settings that override the default
+;; configuration. It is loaded last during initialization and is
+;; git-ignored, so you can safely customize it per machine.
+;;
+;; Examples of things you might want to override:
+;;
+;; Org-mode directory locations:
+;; (setq dm/org-directory "~/Dropbox/org/")
+;; (setq dm/org-daily-directory (concat dm/org-directory "daily/"))
+;;
+;; Custom paths:
+;; (setq my-custom-path "/path/to/something")
+;;
+;; Machine-specific keybindings:
+;; (global-set-key (kbd "C-c m") 'my-custom-function)
+;;
+;; Performance tweaks for slower/faster machines:
+;; (setq gc-cons-threshold (* 100 1024 1024))
+;;
+;; Host-specific package configuration:
+;; (use-package some-package
+;;   :config
+;;   (setq some-package-setting "value"))
+;;
+;; Font settings per machine:
+;; (set-face-attribute 'default nil :height 140)
+;;
+;;; Code:
+
+;; Add your host-specific overrides below:
+
+
+(provide 'host-overrides)
+;;; host-overrides.el ends here
+HOSTOVERRIDES
+    echo "Created host-overrides.el template"
+fi
+
 ## Recompile .el files... sometimes they include hard-coded paths
 pushd $TARGET_DIR/.emacs.d > /dev/null
 # remove all compiled elisp files (*.elc)
