@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;; ----------------
 ;; General editing settings that apply anywhere
 ;; ----------------

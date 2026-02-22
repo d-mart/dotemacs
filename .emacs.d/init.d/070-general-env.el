@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;;
 ;; Look and feel / environment settings
 ;;
@@ -15,7 +16,6 @@
 (setq require-trailing-newline t) ; Always add a final newline
 (setq next-line-add-newlines nil) ; Emacs will not automatically add new lines
 
-(use-package hlinum)
 (use-package sml-modeline)
 ;;;(use-package rainbow-delimeters)
 (use-package highlight-numbers)
@@ -23,7 +23,8 @@
 
 (use-package exec-path-from-shell
   :ensure t
-  :init (exec-path-from-shell-initialize))
+  :config
+  (exec-path-from-shell-initialize))
 
 ; Set cursor color to white
 (setq dm/cursor-color "#ffffff")
@@ -31,9 +32,10 @@
 
 (use-package beacon
   :init
-  (beacon-mode 1)
   (setq beacon-push-mark 35)
-  (setq beacon-color "#666600"))
+  (setq beacon-color "#666600")
+  :config
+  (beacon-mode 1))
 
 (use-package ido-completing-read+)
 (use-package amx
@@ -42,7 +44,7 @@
 
 (if (eq (window-system) 'ns)
     (use-package ns-auto-titlebar
-      :init
+      :config
       (ns-auto-titlebar-mode)))
 
 (use-package doom-modeline
@@ -53,6 +55,7 @@
   (setq doom-modeline-major-mode-color-icon t)
   (setq doom-modeline-enable-word-count t)
   (setq doom-modeline-buffer-encoding nil)
+  :config
   (doom-modeline-mode 1))
 
 ;; frame setup

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;;;
 ;;; My setup for IRC (the accounts here are tunnelled to a ZNC bouncer and passwords are replaced)
 ;;; 

@@ -1,5 +1,5 @@
+;; -*- lexical-binding: nil; -*-
 
 (use-package yasnippet
-
-  :init
+  :config
   (yas-global-mode 1))

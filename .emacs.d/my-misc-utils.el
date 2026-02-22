@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 (defun dm/select-current-line ()
   "Set the region to the entire current line"
   (interactive)
@@ -64,7 +65,7 @@
   (interactive)
   (setq tab-width (string-to-int (read-from-minibuffer "Tab width: " )))
   (message "Set tab width to %d" tab-width))
-(defalias 'set-tab-width 'tw)
+(defalias 'tw 'set-tab-width)
 
 ;;; ------------
 ;;; Don't display ^M in buffers that have

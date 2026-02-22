@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 (setq dm/org-babel-languages
       '((emacs-lisp . t)
         ;(go         . t)

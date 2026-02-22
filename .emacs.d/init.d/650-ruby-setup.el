@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;;;
 ;;; Configuration and mode customization for
 ;;; ruby and rails

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;; customization stuff made by emacs's customization UI
 
 (custom-set-variables

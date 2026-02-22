@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;; ----------------
 ;; version control, git, etc
 ;; ----------------

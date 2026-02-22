@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;; -----------------
 ;; Key Bindings
 ;; -----------------
@@ -94,7 +95,7 @@
 
 ;; key-chord - two keys pressed simultaneously cause a function to be called
 (use-package key-chord
- :init
+ :config
  (key-chord-mode 1)
  (key-chord-define-global "jk" 'undo)
  (key-chord-define-global "hj" 'hippie-expand)

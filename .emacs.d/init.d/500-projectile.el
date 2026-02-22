@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;(use-package projectile
 ;  :init
 ;  ((setq projectile-enable-caching t)

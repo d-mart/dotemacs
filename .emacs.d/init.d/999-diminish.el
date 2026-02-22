@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;; Diminish modeline clutter
 (require 'diminish)
 

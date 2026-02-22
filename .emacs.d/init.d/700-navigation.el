@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;; ----------------
 ;; Navigation, window/frame/buffer movement and selection
 ;; ----------------

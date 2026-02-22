@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;; NOTES
 ;;-To byte-compile all elisp files in current directory and below:
 ;;   C-u 0 M-x byte-recompile-directory

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;;;------------------
 ;;; Operating System-Dependent Configuration
 ;;;------------------

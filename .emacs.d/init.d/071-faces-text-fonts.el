@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 
 ;;
 ;; Typefaces and Fonts
@@ -86,15 +87,16 @@
 
      )))
 
-;; advise load-theme to get a hook when the theme changes
-;; @TODO - check if load-theme is called from customize-themes
-(defadvice load-theme (after run-after-load-theme-hook activate)
-  "Run `after-load-theme-hook'."
+;; Advise load-theme to get a hook when the theme changes.
+(defun dm/run-after-load-theme-hook (&rest _args)
+  "Run `after-load-theme-hook' after loading a theme."
   (run-hooks 'after-load-theme-hook))
+
+(advice-add 'load-theme :after #'dm/run-after-load-theme-hook)
 
 (defun dm/load-theme ()
   (message "Setting theme: %s" dm/selected-theme)
-  (load-theme dm/selected-theme))
+  (load-theme dm/selected-theme t))
 
 (add-hook 'after-init-hook 'dm/load-theme)
 (add-hook 'after-load-theme-hook 'dm/post-theme-change-adjust-hook)

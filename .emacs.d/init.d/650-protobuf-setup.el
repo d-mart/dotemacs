@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 (autoload 'protobuf-mode "protobuf-mode"
           "Google Protocol Buffers syntax hilighting" t)
 

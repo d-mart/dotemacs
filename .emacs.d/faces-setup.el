@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 (defface font-lock-punctuation-face
   '((((background dark)) (:foreground "MediumOrchid1"))
     (t (:foreground "MediumOrchid3")))

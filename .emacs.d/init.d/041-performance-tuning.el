@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;; General configuration tweaks to emacs to affect
 ;; memory usage and computation speed
 

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;; C mode
 (setq c-basic-offset 4)
 (setq c-default-style "linux"

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;; ----------------
 ;; Project-level packages, settings
 ;; ----------------

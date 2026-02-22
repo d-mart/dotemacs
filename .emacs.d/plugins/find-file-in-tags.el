@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;;; directly open files referenced in TAGS files
 ;;;
 ;;; Copyright (C) 2010 Trey Jackson

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 
 ;; Save point position between sessions
 (require 'saveplace)

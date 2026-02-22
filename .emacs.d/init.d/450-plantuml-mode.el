@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 (use-package plantuml-mode
   :init
   (setq plantuml-default-exec-mode 'jar) ; or 'server if you want diagrams sent out

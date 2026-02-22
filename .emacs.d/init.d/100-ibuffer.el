@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 
 (use-package ibuffer-git
   :init (setq ibuffer-formats '((mark git-status-mini modified read-only " "

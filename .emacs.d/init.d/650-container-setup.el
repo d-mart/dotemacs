@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;;; ----------------------
 ;;; docker, kube, etc setup
 ;;; ----------------------

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;; configure ace-isearch
 ;; regexp search by default
 (global-set-key (kbd "C-r")     'isearch-backward-regexp)

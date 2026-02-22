@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 (ido-mode 1)
 (ido-everywhere 1)
 (setq ido-file-extensions-order '(".rb"  ".ex" ".sh" ".org" ".el"))

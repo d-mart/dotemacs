@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 
 ;; These variables inform emacs when to split a window or re-use one
 ;split-width-threshold

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;; ripped from README.md
 
 (use-package color-moccur

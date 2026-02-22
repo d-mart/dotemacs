@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;;;------------------
 ;;; Dired setup
 ;;;------------------
@@ -59,10 +60,11 @@
       (sort-regexp-fields t "^.*$" "[ ]*." (point) (point-max)))
     (set-buffer-modified-p nil)))
 
-(defadvice dired-readin
-  (after dired-after-updating-hook first () activate)
-  "Sort dired listings with directories first before adding marks."
-  'dm/dired-sort)
+(defun dm/dired-readin-advice (&rest _args)
+  "Sort dired listing after it is refreshed."
+  (dm/dired-sort))
+
+(advice-add 'dired-readin :after #'dm/dired-readin-advice)
 
 ;; - Get a warning on the modeline when editing a file as root
 (defun dm/dired-mode-line-function ()

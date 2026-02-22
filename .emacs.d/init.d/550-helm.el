@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 (if t
   (message "helm disabled for now")
   (use-package helm

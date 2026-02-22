@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;; misc-utils.el
 ;; Various handy functions found in travels across the intarbwebz
 

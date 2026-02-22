@@ -1,42 +1,11 @@
+;; -*- lexical-binding: nil; -*-
 ;;
 ;; sql-setup.el
 ;;
 ;; Configuration for sql (mysql, maria, postgres) interaction
 ;;
 
-
-; XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
-
-(setq sql-connection-alist
-      '((server1 (sql-product 'postgres)
-                  (sql-port 5432)
-                  (sql-server "ec2-54-225-205-79.compute-1.amazonaws.com")
-                  (sql-user "kfisoebiihceln")
-                  (sql-password "d32db90cd39db97343b746f2f0daabcd8e8ece1a9fa9f1022692af3763d90e95")
-                  (sql-database "debt49hl6a5bh2"))
-        (server2 (sql-product 'postgres)
-                  (sql-port 5432)
-                  (sql-server "localhost")
-                  (sql-user "user")
-                  (sql-password "password")
-                  (sql-database "db2"))))
-
-(defun my-sql-server1 ()
-  (interactive)
-  (my-sql-connect 'postgres 'server1))
-
-(defun my-sql-server2 ()
-  (interactive)
-  (my-sql-connect 'postgres 'server2))
-
-(defun my-sql-connect (product connection)
-  ;; remember to set the sql-product, otherwise, it will fail for the first time
-  ;; you call the function
-  (setq sql-product product)
-  (sql-connect connection))
-; XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
-
-;postgres://kfisoebiihceln:d32db90cd39db97343b746f2f0daabcd8e8ece1a9fa9f1022692af3763d90e95@ec2-54-225-205-79.compute-1.amazonaws.com:5432/debt49hl6a5bh2
+;postgres://user:pass@ehost:5432/database
 (defun split-sql-url (url)
   "connect to a database after entering a URL"
   (interactive "sDatabase URL: ")

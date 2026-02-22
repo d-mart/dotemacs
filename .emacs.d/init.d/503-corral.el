@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 (use-package corral
   :init
   (progn ())
