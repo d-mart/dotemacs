@@ -1,25 +1,26 @@
-;(use-package copilot
-;  :defer t
-;  :hook (prog-mode . copilot-mode)
-;  :config
-;  ;; Bind on the minor-mode map (active when copilot-mode is on)
-;  (when-let ((map (bound-and-true-p copilot-mode-map)))
-;    (define-key map (kbd "C-c C-a") #'copilot-accept-completion)
-;    (define-key map (kbd "M-]")     #'copilot-next-completion)
-;    (define-key map (kbd "M-[")     #'copilot-previous-completion)
-;    (define-key map (kbd "C-c C-k") #'copilot-clear-overlay))
-;  ;; Bind on the completion map (active while a suggestion is shown)
-;  (when-let ((map (bound-and-true-p copilot-completion-map)))
-;    (define-key map (kbd "<tab>")   #'copilot-accept-completion)
-;    (define-key map (kbd "C-<tab>") #'copilot-accept-completion-by-word)
-;    (define-key map (kbd "M-<tab>") #'copilot-accept-completion-by-line)))
+;; -*- lexical-binding: nil; -*-
+(use-package copilot
+ :defer t
+ :hook (prog-mode . copilot-mode)
+ :config
+ ;; Bind on the minor-mode map (active when copilot-mode is on)
+ (when-let* ((map (bound-and-true-p copilot-mode-map)))
+   (define-key map (kbd "C-c C-a") #'copilot-accept-completion)
+   (define-key map (kbd "M-]")     #'copilot-next-completion)
+   (define-key map (kbd "M-[")     #'copilot-previous-completion)
+   (define-key map (kbd "C-c C-k") #'copilot-clear-overlay))
+ ;; Bind on the completion map (active while a suggestion is shown)
+ (when-let* ((map (bound-and-true-p copilot-completion-map)))
+   (define-key map (kbd "<tab>")   #'copilot-accept-completion)
+   (define-key map (kbd "C-<tab>") #'copilot-accept-completion-by-word)
+   (define-key map (kbd "M-<tab>") #'copilot-accept-completion-by-line)))
 
-;(use-package copilot-chat
-;    :defer t
-;    :after copilot
-;    :config
-;    (setq copilot-chat-model "gpt-5-codex")
-;  )
+(use-package copilot-chat
+   :defer t
+   :after copilot
+   :config
+   (setq copilot-chat-model "gpt-5-codex")
+ )
 
 
 (defun dm/copilot-post-install ()
