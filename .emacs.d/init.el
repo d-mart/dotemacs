@@ -35,16 +35,15 @@
 (let ((default-directory my-config-dir))
   (normal-top-level-add-subdirs-to-load-path))
 
-(require 'cl)
+(require 'cl-lib)
 (defun load-files-matching-pattern (init-dir init-file-regex)
   "Load all files in <dir> matching <file-regex>
    e.g.
    (load-files-matching-regex '/path/to/elisp/files' '.*el$') "
-  (loop for init-file in
-        (directory-files init-dir nil init-file-regex)
-        do (progn
-             (load init-file)
-             (message (concat "Loaded this file: " init-file)))))
+  (cl-loop for init-file in (directory-files init-dir t init-file-regex)
+           do (progn
+                (load-file init-file)
+                (message "Loaded this file: %s" (file-name-nondirectory init-file)))))
 
 ; fontify some keywords: '@todo' 'FIXME' 'XXX'
 (defun fontify-at-todo ()
@@ -200,11 +199,15 @@
 ;; *unless* it's already running
 
 (require 'server)
-(unless (server-running-p)
+(unless (or noninteractive (server-running-p))
+  (condition-case err
+      (progn
         (server-start)
-  ;; When opening a buffer from emacsclient, don't prompt when it is killed
+        ;; When opening a buffer from emacsclient, don't prompt when it is killed
         (remove-hook 'kill-buffer-query-functions
                      'server-kill-buffer-query-function))
+    (error
+     (message "server-start failed: %S" err))))
 
 ;; Enable recursive minibuffer
 (setq enable-recursive-minibuffers t)
@@ -266,7 +269,11 @@
 ;(defvar myFont "-adobe-courier-medium-r-normal--17-120-100-100-m-100-iso10646-1")
 ;(defvar myFont ":-unknown-Droid Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
 
-(safe-wrap (set-default-font myFont))
+(when (and (boundp 'myFont) myFont)
+  (safe-wrap
+   (if (fboundp 'set-default-font)
+       (set-default-font myFont)
+     (set-face-attribute 'default nil :font myFont))))
 
 ;; If region is active and text is inserted, kill region
 (delete-selection-mode +1)
@@ -418,40 +425,6 @@
 (require 'epa-file)
 (setq epa-file-cache-passphrase-for-symmetric-encryption t)
 
-
-;; When trying to kill a dirty buffer, prompt
-;; to save, diff, or kill
-;; from http://stackoverflow.com/questions/331569/diff-save-or-kill-when-killing-buffers-in-emacs/334600#334600
-(defadvice kill-buffer (around my-kill-buffer-check disable) ;; change disable->activate once this is modified to only work on file-buffers
-  "Prompt when a buffer is about to be killed."
-  (let* ((buffer-file-name (buffer-file-name))
-         backup-file)
-    ;; see 'backup-buffer
-    (if (and (buffer-modified-p)
-             buffer-file-name
-             (file-exists-p buffer-file-name)
-             (setq backup-file (car (find-backup-file-name buffer-file-name))))
-        (let ((answer (completing-read (format "Buffer modified %s, (d)iff, (s)ave, (k)ill? " (buffer-name))
-                                       '("d" "s" "k") nil t)))
-          (cond ((equal answer "d")
-                 (set-buffer-modified-p nil)
-                 (let ((orig-buffer (current-buffer))
-                       (file-to-diff (if (file-newer-than-file-p buffer-file-name backup-file)
-                                         buffer-file-name
-                                       backup-file)))
-                   (set-buffer (get-buffer-create (format "%s last-revision" (file-name-nondirectory file-to-diff))))
-                   (buffer-disable-undo)
-                   (insert-file-contents file-to-diff nil nil nil t)
-                   (set-buffer-modified-p nil)
-                   (setq buffer-read-only t)
-                   (ediff-buffers (current-buffer) orig-buffer)))
-                ((equal answer "k")
-                 (set-buffer-modified-p nil)
-                 ad-do-it)
-                (t
-                 (save-buffer)
-                 ad-do-it)))
-      ad-do-it)))
 
 ;; -----------------
 ;; Major Modes for filename patterns
