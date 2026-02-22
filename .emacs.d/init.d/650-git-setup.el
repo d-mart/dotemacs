@@ -1,28 +1,30 @@
+;; -*- lexical-binding: nil; -*-
 
 ;;; ----------------------
 ;;; Git setup
 ;;; ----------------------
 
-(use-package blamer
-  :ensure nil
-  :defer 20
-  :custom
-  (blamer-idle-time 0.1)
-  (blamer-min-offset 70)
-  :custom-face
-  (blamer-face ((t :foreground "#6a78af"
-                    :background nil
-                    :italic t)))
-  :config
-  (global-blamer-mode nil))
-
-(autoload 'magit-status "magit"
-          "Magit emacs git interface" t)
-(autoload 'magit-blame-mode "magit-blame"
-          "Magit Blame mode" t)
-(autoload 'git-commit-mode "git-commit-mode"
-          "git commit message editing mode" t)
-
+;(use-package blamer
+;  :disabled t
+;  :ensure nil
+;  :defer 20
+;  :custom
+;  (blamer-idle-time 0.1)
+;  (blamer-min-offset 70)
+;  :custom-face
+;  (blamer-face ((t :foreground "#6a78af"
+;                    :background nil
+;                    :italic nil)))
+;  :config
+;  (global-blamer-mode nil))
+;
+;(autoload 'magit-status "magit"
+;          "Magit emacs git interface" t)
+;(autoload 'magit-blame-mode "magit-blame"
+;          "Magit Blame mode" t)
+;(autoload 'git-commit-mode "git-commit-mode"
+;          "git commit message editing mode" t)
+;
 ;; ------------------
 ;; Keyboard macro to get story number from branch name
 ;; in COMMIT_MSG buffers and insert it at the begginging

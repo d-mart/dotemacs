@@ -9,7 +9,7 @@
   (message "Loaded dm-sh-mode-settings"))
 
 (defun dm-sh-mode-keybindings ()
-  (define-key sh-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
+  (define-key sh-mode-map (kbd "C-c C-c") 'dm/comment-or-uncomment-region)
   (define-key sh-mode-map (kbd "C-c C-e") 'sh-send-line-or-region))
 
 

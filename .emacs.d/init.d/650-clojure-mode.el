@@ -6,8 +6,8 @@
 (use-package clojure-mode)
 
 (defun dm/clojure-mode-keykindings ()
-  (define-key clojure-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
-  (define-key clojure-mode-map (kbd "C-c #")   'comment-or-uncomment-region))
+  (define-key clojure-mode-map (kbd "C-c C-c") 'dm/comment-or-uncomment-region)
+  (define-key clojure-mode-map (kbd "C-c #")   'dm/comment-or-uncomment-region))
 
 (defun dm/clojure-mode-hook ())
 

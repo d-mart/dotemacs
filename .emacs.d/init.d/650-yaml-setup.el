@@ -8,8 +8,8 @@
 
 ;; yaml-mode keybindings
 (defun my-yaml-mode-keybindings ()
-  (define-key yaml-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
-  (define-key yaml-mode-map (kbd "C-c #")   'comment-or-uncomment-region))
+  (define-key yaml-mode-map (kbd "C-c C-c") 'dm/comment-or-uncomment-region)
+  (define-key yaml-mode-map (kbd "C-c #")   'dm/comment-or-uncomment-region))
 
 (add-hook 'yaml-mode-hook 'my-yaml-mode-keybindings)
 (add-hook 'yaml-mode-hook 'dm/programming-mode-hook)

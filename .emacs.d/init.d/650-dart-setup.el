@@ -17,8 +17,8 @@
   (insert "debugDumpApp(); // XXXXXXXXXXXXXXXXXXXXXXXXXXX"))
 
 (defun dm/dart-mode-keybindings ()
-  (define-key dart-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
-  (define-key dart-mode-map (kbd "C-c #")   'comment-or-uncomment-region)
+  (define-key dart-mode-map (kbd "C-c C-c") 'dm/comment-or-uncomment-region)
+  (define-key dart-mode-map (kbd "C-c #")   'dm/comment-or-uncomment-region)
   (define-key dart-mode-map (kbd "C-c h")   'highlight-thing-mode)
   (define-key dart-mode-map (kbd "C-c i")   'dm/dart-insert-dump)
   (define-key dart-mode-map (kbd "C-c C-d") 'dm/dart-insert-dump))

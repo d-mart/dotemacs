@@ -22,16 +22,17 @@
 ;(define-key inf-ruby-mode-map    (kbd "M-d") 'dm/toggle-rspec-comp-or-inf-mode)
 
 ;; use bash for running rspec
-(defadvice rspec-compile (around rspec-compile-around)
-  "Use BASH shell for running the specs because of ZSH issues."
+(defun dm/rspec-compile-advice (orig-fn &rest args)
+  "Use Bash for running specs because of Zsh issues."
   (let ((shell-file-name "/bin/bash"))
-    ad-do-it))
-(ad-activate 'rspec-compile)
+    (apply orig-fn args)))
+
+(advice-add 'rspec-compile :around #'dm/rspec-compile-advice)
 
 ;; Ruby-mode keybindings
 (defun my-ruby-mode-keybindings ()
-  (define-key ruby-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
-  (define-key ruby-mode-map (kbd "C-c #")   'comment-or-uncomment-region)
+  (define-key ruby-mode-map (kbd "C-c C-c") 'dm/comment-or-uncomment-region)
+  (define-key ruby-mode-map (kbd "C-c #")   'dm/comment-or-uncomment-region)
   (define-key ruby-mode-map (kbd "C-c t")   'ruby-compilation-this-buffer)
   (define-key ruby-mode-map (kbd "C-c r c") 'ruby-compilation-run)
   (define-key ruby-mode-map (kbd "C-c C-r") 'ruby-compilation-rake)

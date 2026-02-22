@@ -5,23 +5,18 @@
 ;;;
 (defun dm/programming-mode-hook ()
   (message "running dm/programming-mode-hook")
-  (linum-mode 1)
-  (hlinum-activate)
+  (display-line-numbers-mode 1)
   (hl-line-mode 1)
   (sml-modeline-mode t)
   ;;; TODO (rainbow-delimiters-mode t)
   (fontify-at-todo)
   (highlight-numbers-mode))
 
-(setq linum-format "%d|")
-
-
 (defun dm/programming-mode-keybindings ()
-  (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region))
+  (local-set-key (kbd "C-c C-c") 'dm/comment-or-uncomment-region))
 
-(defadvice electric-newline-and-maybe-indent (before eol-before-electric-newline ())
-  "move to the end of the current line before inserting a new line before
-   instead of breaking the current line"
+(defun dm/eol-before-electric-newline (&rest _args)
+  "Move to end of line before running `electric-newline-and-maybe-indent'."
   (end-of-line))
 
-(ad-activate 'electric-newline-and-maybe-indent)
+(advice-add 'electric-newline-and-maybe-indent :before #'dm/eol-before-electric-newline)

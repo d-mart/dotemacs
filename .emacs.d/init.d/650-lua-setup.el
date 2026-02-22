@@ -6,8 +6,8 @@
 (use-package lua-mode)
 
 (defun dm/lua-mode-keykindings ()
-  (define-key lua-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
-  (define-key lua-mode-map (kbd "C-c #")   'comment-or-uncomment-region))
+  (define-key lua-mode-map (kbd "C-c C-c") 'dm/comment-or-uncomment-region)
+  (define-key lua-mode-map (kbd "C-c #")   'dm/comment-or-uncomment-region))
 
 (defun dm/lua-mode-hook ())
 

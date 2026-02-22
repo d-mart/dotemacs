@@ -333,15 +333,12 @@
 (setq frame-title-format '(buffer-file-name "emacs - %f" ("emacs - %b")))
 
 ;; make split-window-vertically put next buffer in new window
-(defadvice split-window-vertically
-  (after my-window-splitting-advice first () activate)
+(defun my-window-splitting-advice (&rest _args)
   (set-window-buffer (next-window) (other-buffer)))
-(defadvice split-window-right
-  (after my-window-splitting-advice first () activate)
-  (set-window-buffer (next-window) (other-buffer)))
-(defadvice split-window-below
-  (after my-window-splitting-advice first () activate)
-  (set-window-buffer (next-window) (other-buffer)))
+
+(dolist (split-fn '(split-window-vertically split-window-right split-window-below))
+  (when (fboundp split-fn)
+    (advice-add split-fn :after #'my-window-splitting-advice)))
 
 ;;; ------------
 ;;; Programming major mode hooks
@@ -379,12 +376,13 @@
 (setq-default tab-width 4)
 
 ;; hint for comments
-(defadvice comment-or-uncomment-region (before slick-comment activate compile)
-  "When called interactively with no active region, comment a single line instead."
-  (interactive
-   (if mark-active (list (region-beginning) (region-end))
-     (list (line-beginning-position)
-           (line-beginning-position 2)))))
+(defun dm/comment-or-uncomment-region ()
+  "Comment/uncomment the active region, or the current line if no region is active."
+  (interactive)
+  (if (use-region-p)
+      (comment-or-uncomment-region (region-beginning) (region-end))
+    (comment-or-uncomment-region (line-beginning-position)
+                                 (line-beginning-position 2))))
 
 
 ;; -----------------
@@ -402,7 +400,7 @@
 (defalias 'dbf  'diff-buffer-with-file)
 (defalias 'dfb  'diff-buffer-with-file)
 (defalias 'ar   'align-regexp)
-(defalias 'cr   'comment-or-uncomment-region)
+(defalias 'cr   'dm/comment-or-uncomment-region)
 (defalias 'wd   'wdired-change-to-wdired-mode)
 (defalias 'reb  're-builder)
 (defalias 'tde  'toggle-debug-on-error)

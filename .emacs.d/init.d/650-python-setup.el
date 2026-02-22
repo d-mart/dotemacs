@@ -1,10 +1,11 @@
+;; -*- lexical-binding: nil; -*-
 ;;;
 ;;; Configuration and mode customization for python
 ;;;
 
 ;; python-mode keybindings
 (defun dm/python-mode-keybindings ()
-  (define-key python-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
+  (define-key python-mode-map (kbd "C-c C-c") 'dm/comment-or-uncomment-region)
   (define-key python-mode-map (kbd "C-c C-d") 'dm/python-insert-debugger))
 
 (add-hook 'python-mode-hook 'dm/programming-mode-hook)

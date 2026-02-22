@@ -9,6 +9,10 @@
   (("M-z" . zzz-up-to-char)
    ("M-Z" . zzz-to-char)))
 
+;; Prevent typographic quote substitution in buffers.
+(when (fboundp 'electric-quote-mode)
+  (electric-quote-mode -1))
+
 
 ;; ----------------
 ;; Cursor setup

@@ -5,4 +5,11 @@ transient/
 .emacs.d/local-init.d/*.el
 .emacs.d/eln-cache/
 .emacs.d/host-overrides.el
+
+# AI coding agent files
 .aider*
+.claude/
+.cursorrules
+.cursor/
+.github/copilot-instructions.md
+.copilot/

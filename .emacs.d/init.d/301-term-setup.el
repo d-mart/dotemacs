@@ -46,13 +46,15 @@
 ;; Improvements from http://emacs-journey.blogspot.com/2012/06/improving-ansi-term.html
 ;; Close term window after shell process exits
 ;; ----------------
-(defadvice term-sentinel (around my-advice-term-sentinel (proc msg))
+(defun dm/term-sentinel-advice (orig-fn proc msg)
   (if (memq (process-status proc) '(signal exit))
       (let ((buffer (process-buffer proc)))
-        ad-do-it
-        (kill-buffer buffer))
-    ad-do-it))
-(ad-activate 'term-sentinel)
+        (funcall orig-fn proc msg)
+        (when (buffer-live-p buffer)
+          (kill-buffer buffer)))
+    (funcall orig-fn proc msg)))
+
+(advice-add 'term-sentinel :around #'dm/term-sentinel-advice)
 
 ;; -----------------
 ;; some themes set an 'undefined' term which doesn't seem to be valid anymore

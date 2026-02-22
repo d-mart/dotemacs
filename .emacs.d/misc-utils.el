@@ -267,7 +267,7 @@ by using nxml's indentation rules."
 ; Search next thing at point, like '*' in vim
 (defun xah-search-current-word ()
   "Call `isearch' on current word or text selection.
-“word” here is A to Z, a to z, and hyphen 「-」 and underline 「_」, independent of syntax table.
+"word" here is A to Z, a to z, and hyphen "-" and underscore "_", independent of syntax table.
 URL `http://ergoemacs.org/emacs/modernization_isearch.html'
 Version 2015-04-09"
   (interactive)

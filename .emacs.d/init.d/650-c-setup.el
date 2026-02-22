@@ -14,7 +14,7 @@
 
 ;; C-mode keybindings
 (defun my-c-mode-keybindings ()
-  (define-key c-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region))
+  (define-key c-mode-map (kbd "C-c C-c") 'dm/comment-or-uncomment-region))
 (add-hook 'c-mode-common-hook 'my-c-mode-keybindings)
 
 (add-hook 'c-mode-common-hook (lambda () (setq comment-start "// "

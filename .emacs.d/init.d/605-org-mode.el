@@ -104,7 +104,7 @@
 
 (defun dm/org-mode-hook ()
   (message "running dm/org-mode-hook")
-  (linum-mode -1))
+  (display-line-numbers-mode -1))
 
 (defun dm/org-daily ()
   (interactive)
