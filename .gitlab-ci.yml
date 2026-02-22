@@ -1,28 +1,15 @@
 image: ubuntu:latest
 
+stages:
+  - test
+
 before_script:
-  - echo "Starting CI job for dotemacs install"
+  - apt-get update
+  - apt-get install -y emacs-nox
 
-after_script:
-  - echo "After script section"
-  - echo "For example you might do some cleanup here"
-
-build1:
-  stage: build
-  script:
-    - apt-get update
-    - apt-get install -y emacs-nox
-    - pwd
-    - ls -l
-    #- deploy.sh -l
-    #- deploy-cask.sh
-
-test1:
+emacs-config-tests:
   stage: test
   script:
-    - emacs --batch --eval '(message "made it")'
-
-#deploy1:
-#  stage: deploy
-#  script:
-#    - echo "Do your deploy here"
+    - emacs --version
+    - emacs -Q --batch -l test/smoke-parse-config.el
+    - emacs -Q --batch -L test -l test/run-tests.el
